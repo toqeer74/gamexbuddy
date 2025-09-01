@@ -27,7 +27,7 @@ const Footer = () => {
               <li><Link to="/playstation-hub" className="hover:text-cyan-300 transition-colors">PlayStation Hub</Link></li>
               <li><Link to="/xbox-hub" className="hover:text-cyan-300 transition-colors">Xbox Hub</Link></li>
               <li><Link to="/android-hub" className="hover:text-cyan-300 transition-colors">Android Hub</Link></li>
-              {/* iOS Hub is optional, can be added here if desired */}
+              <li><Link to="/ios-hub" className="hover:text-cyan-300 transition-colors">iOS Hub</Link></li>
             </ul>
           </div>
           <div>

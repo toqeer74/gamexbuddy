@@ -29,6 +29,7 @@ const GuideDetail = lazy(() => import("./pages/guides/GuideDetail"));
 const GuidesIndex = lazy(() => import("./pages/guides/GuidesIndex"));
 const NewsIndex = lazy(() => import("./pages/news/NewsIndex"));
 const NewsTag = lazy(() => import("./pages/news/NewsTag"));
+import NewsFeedSkeleton from "@/components/NewsFeedSkeleton";
 
 const queryClient = new QueryClient();
 
@@ -61,8 +62,8 @@ const App = () => (
             <Route path="/xbox-hub" element={<XboxHub />} />
             <Route path="/android-hub" element={<AndroidHub />} />
             <Route path="/ios-hub" element={<IosHub />} /> {/* Changed element from iOSHub to IosHub */}
-            <Route path="/news" element={<NewsIndex />} />
-            <Route path="/news/tag/:tag" element={<NewsTag />} />
+            <Route path="/news" element={<Suspense fallback={<NewsFeedSkeleton />}><NewsIndex /></Suspense>} />
+            <Route path="/news/tag/:tag" element={<Suspense fallback={<NewsFeedSkeleton />}><NewsTag /></Suspense>} />
             <Route path="/guides" element={<GuidesIndex />} />
             <Route path="/guides/:slug" element={<GuideDetail />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

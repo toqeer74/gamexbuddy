@@ -221,3 +221,29 @@
   transform: translateX(-100%); animation: sheen 5s ease-in-out infinite; mix-blend:screen; border-radius:6px;
 }
 @keyframes sheen { 50%{ transform: translateX(100%) } }
+
+/* Animated chips */
+.chips { display:flex; gap:10px; flex-wrap:wrap; margin: 10px 0 18px; }
+.chip {
+  background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14);
+  padding:8px 12px; border-radius:999px; color:#cfd8ff; font-weight:600; font-size:13px;
+  display:inline-flex; align-items:center; gap:8px; cursor:pointer;
+  transition: transform .15s ease, background .2s ease, border-color .2s ease;
+}
+.chip:hover { transform: translateY(-2px); border-color: rgba(143,125,255,.45); }
+.chip--on { background: linear-gradient(90deg,#ff58b3,#8f7dff); color:#fff; border-color: transparent; }
+.chip__dot{ width:10px; height:10px; border-radius:50%; background:#58e0ff; box-shadow:0 0 8px rgba(88,224,255,.6) }
+@keyframes glowPulse { 0%,100%{box-shadow:0 0 8px rgba(88,224,255,.5)} 50%{box-shadow:0 0 14px rgba(143,125,255,.7)} }
+.chip--on .chip__dot{ animation: glowPulse 1.6s ease-in-out infinite }
+
+/* Skeleton shimmer */
+.skel-grid{ display:grid; gap:18px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.skel-card{ height: 240px; border-radius:18px; overflow:hidden; position:relative; background: rgba(255,255,255,.06) }
+.skel-line{ height:12px; width: 60%; margin:8px 14px; border-radius:8px; background: rgba(255,255,255,.12) }
+.skel-badge{ height:18px; width:80px; margin:12px 14px 6px; border-radius:999px; background: rgba(255,255,255,.12) }
+.skel-shimmer:before{
+  content:""; position:absolute; inset:0; background:
+   linear-gradient(120deg, transparent 0%, rgba(255,255,255,.08) 40%, transparent 70%);
+  transform: translateX(-100%); animation: shimmer 1.2s linear infinite;
+}
+@keyframes shimmer{ to{ transform: translateX(100%) } }

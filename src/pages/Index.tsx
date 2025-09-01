@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Gamepad2, Blocks, Swords } from "lucide-react";
+import { fetchRockstarNews, fetchRedditMemes } from "@/lib/api"; // Import API functions
 
 interface NewsHighlight {
   id: string;
@@ -36,74 +37,33 @@ interface CommunityHighlight {
 }
 
 const Index = () => {
-  // Placeholder for GTA6 release date (example: December 1, 2025)
-  const gta6ReleaseDate = "2025-12-01T00:00:00Z";
+  const [newsHighlights, setNewsHighlights] = React.useState<NewsHighlight[]>([]);
+  const [communityHighlights, setCommunityHighlights] = React.useState<CommunityHighlight[]>([]);
+  const [email, setEmail] = React.useState("");
+  const [telegramOptIn, setTelegramOptIn] = React.useState(false);
 
-  // Placeholder news data
-  const newsHighlights: NewsHighlight[] = [
-    {
-      id: "1",
-      title: "Rockstar Confirms GTA6 Release Window",
-      description: "Official announcement details the highly anticipated launch period.",
-      imageUrl: "https://via.placeholder.com/600x338/000000/FFFFFF?text=GTA6+News+1",
-      link: "/gta6-hub",
-      isOfficial: true,
-    },
-    {
-      id: "2",
-      title: "New Trailer Breakdown: What You Missed!",
-      description: "Deep dive into the latest GTA6 trailer's hidden details and Easter eggs.",
-      imageUrl: "https://via.placeholder.com/600x338/000000/FFFFFF?text=GTA6+News+2",
-      link: "/gta6-hub",
-      isOfficial: false,
-    },
-    {
-      id: "3",
-      title: "Community Reacts to Vice City Return",
-      description: "Fans are ecstatic about the return to the iconic Vice City setting.",
-      imageUrl: "https://via.placeholder.com/600x338/000000/FFFFFF?text=GTA6+News+3",
-      link: "/gta6-hub",
-      isOfficial: false,
-    },
-  ];
+  React.useEffect(() => {
+    const loadData = async () => {
+      const news = await fetchRockstarNews();
+      setNewsHighlights(news.slice(0, 3)); // Display top 3 news items
 
-  // Placeholder community content data
-  const communityHighlights: CommunityHighlight[] = [
-    {
-      id: "1",
-      title: "Top 5 Gaming Memes This Week",
-      description: "Hilarious memes from the gaming community!",
-      imageUrl: "https://via.placeholder.com/400x225/000000/FFFFFF?text=Meme+1",
-      link: "/community",
-      type: "meme",
-      xp: 150,
-      isTrending: true,
-      authorName: "MemeLord",
-      authorAvatarUrl: "https://via.placeholder.com/32/FF0000/FFFFFF?text=ML",
-    },
-    {
-      id: "2",
-      title: "Are You a True Gamer? Take Our Quiz!",
-      description: "Test your knowledge with our latest gaming quiz.",
-      imageUrl: "https://via.placeholder.com/400x225/000000/FFFFFF?text=Quiz+1",
-      link: "/community",
-      type: "quiz",
-      xp: 200,
-      authorName: "QuizMaster",
-      authorAvatarUrl: "https://via.placeholder.com/32/00FF00/FFFFFF?text=QM",
-    },
-    {
-      id: "3",
-      title: "Discussion: What's Your Most Anticipated Game?",
-      description: "Join the debate and share your thoughts!",
-      imageUrl: "https://via.placeholder.com/400x225/000000/FFFFFF?text=Discussion+1",
-      link: "/community",
-      type: "discussion",
-      xp: 100,
-      authorName: "GameTalker",
-      authorAvatarUrl: "https://via.placeholder.com/32/0000FF/FFFFFF?text=GT",
-    },
-  ];
+      const memes = await fetchRedditMemes();
+      setCommunityHighlights(memes.slice(0, 3)); // Display top 3 memes
+    };
+    loadData();
+  }, []);
+
+  const gta6ReleaseDate = "2025-12-01T00:00:00Z"; // Placeholder for GTA6 release date
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Newsletter Signup:", { email, telegramOptIn });
+    alert("Thank you for signing up! (Check console for details)");
+    // In a real application, you would send this data to a backend service
+    // like Mailchimp, Brevo, or MailerLite here.
+    setEmail("");
+    setTelegramOptIn(false);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -192,7 +152,7 @@ const Index = () => {
               </p>
             </CardHeader>
             <CardContent>
-              <form className="space-y-4">
+              <form onSubmit={handleNewsletterSubmit} className="space-y-4">
                 <div>
                   <Label htmlFor="email" className="text-left block mb-1 text-primary">Email Address</Label>
                   <Input
@@ -202,10 +162,18 @@ const Index = () => {
                     className="mt-1 rounded-lg border-2 border-cyan-500 bg-background text-cyan-300
                                focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-background
                                shadow-inner shadow-cyan-500/20"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Checkbox id="telegram-optin" className="border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground" />
+                  <Checkbox
+                    id="telegram-optin"
+                    className="border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+                    checked={telegramOptIn}
+                    onCheckedChange={(checked) => setTelegramOptIn(!!checked)}
+                  />
                   <Label htmlFor="telegram-optin" className="text-muted-foreground">
                     Opt-in for Telegram updates (optional)
                   </Label>

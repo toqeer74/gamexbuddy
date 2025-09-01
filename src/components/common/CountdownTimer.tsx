@@ -63,7 +63,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
 
     timerComponents.push(
       <div key={interval} className="flex flex-col items-center mx-2">
-        <span className={`text-5xl md:text-7xl font-mono font-extrabold neon-glow ${neonColorClass}`}>
+        <span className={`text-5xl md:text-7xl font-mono font-extrabold neon-text-glow ${neonColorClass}`}>
           {String(timeLeft[interval as keyof typeof timeLeft]).padStart(2, '0')}
         </span>
         <span className="text-xl font-medium block text-white opacity-80 uppercase tracking-widest">{label}</span>

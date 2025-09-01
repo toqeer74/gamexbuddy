@@ -46,7 +46,7 @@ const CommunityPage = () => {
 
   return (
     <div className="container py-8 min-h-[calc(100vh-14rem)]">
-      <h1 className="text-4xl font-bold mb-6 text-center">Community Hub</h1>
+      <h1 className="text-4xl font-bold mb-6 text-center neon-text-glow">Community Hub</h1>
       <p className="text-lg text-center text-muted-foreground mb-12">
         Connect with fellow gamers, share memes, and join discussions!
       </p>

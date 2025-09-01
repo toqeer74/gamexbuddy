@@ -103,3 +103,7 @@
 .neon-glow {
   text-shadow: 0 0 5px #fff, 0 0 10px currentColor, 0 0 20px currentColor;
 }
+
+.neon-text-glow {
+  text-shadow: 0 0 8px currentColor, 0 0 15px currentColor, 0 0 25px currentColor;
+}

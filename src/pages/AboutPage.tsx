@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 const AboutPage = () => {
   return (
     <div className="container py-16 min-h-[calc(100vh-14rem)]"> {/* Adjusted min-height to account for Navbar and Footer */}
-      <h1 className="text-5xl font-extrabold text-center mb-12 text-primary drop-shadow-lg">
+      <h1 className="text-5xl font-extrabold text-center mb-12 text-primary drop-shadow-lg neon-text-glow">
         About GamexBuddy
       </h1>
 
@@ -15,7 +15,7 @@ const AboutPage = () => {
                        hover:shadow-purple-500/70 hover:drop-shadow-[0_0_20px_rgba(168,85,247,0.9)] transition-all duration-300">
           <CardHeader className="flex flex-col items-center text-center">
             <Users className="h-12 w-12 text-purple-400 mb-4 neon-glow" />
-            <CardTitle className="text-2xl font-bold">Our Mission</CardTitle>
+            <CardTitle className="text-2xl font-bold neon-text-glow">Our Mission</CardTitle>
           </CardHeader>
           <CardContent className="text-center text-gray-300">
             To create the ultimate community hub for gamers, providing the latest news, tools, and a vibrant space for discussion and connection.
@@ -26,7 +26,7 @@ const AboutPage = () => {
                        hover:shadow-pink-500/70 hover:drop-shadow-[0_0_20px_rgba(236,72,153,0.9)] transition-all duration-300">
           <CardHeader className="flex flex-col items-center text-center">
             <Rocket className="h-12 w-12 text-pink-400 mb-4 neon-glow" />
-            <CardTitle className="text-2xl font-bold">Our Vision</CardTitle>
+            <CardTitle className="text-2xl font-bold neon-text-glow">Our Vision</CardTitle>
           </CardHeader>
           <CardContent className="text-center text-gray-300">
             To be the go-to platform for all things gaming, fostering a passionate and engaging environment for players worldwide.
@@ -37,7 +37,7 @@ const AboutPage = () => {
                        hover:shadow-cyan-500/70 hover:drop-shadow-[0_0_20px_rgba(0,255,255,0.9)] transition-all duration-300">
           <CardHeader className="flex flex-col items-center text-center">
             <Lightbulb className="h-12 w-12 text-cyan-400 mb-4 neon-glow" />
-            <CardTitle className="text-2xl font-bold">Our Values</CardTitle>
+            <CardTitle className="text-2xl font-bold neon-text-glow">Our Values</CardTitle>
           </CardHeader>
           <CardContent className="text-center text-gray-300">
             Community, Innovation, Passion, and Inclusivity. We believe gaming is for everyone.
@@ -46,7 +46,7 @@ const AboutPage = () => {
       </div>
 
       <div className="mt-16 text-center">
-        <h2 className="text-3xl font-bold mb-6 text-primary drop-shadow-lg">Meet the Team</h2>
+        <h2 className="text-3xl font-bold mb-6 text-primary drop-shadow-lg neon-text-glow">Meet the Team</h2>
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
           GamexBuddy is built by a dedicated team of gamers and developers passionate about creating the best possible experience for you.
         </p>

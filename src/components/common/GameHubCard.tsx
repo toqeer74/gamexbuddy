@@ -30,7 +30,7 @@ const GameHubCard: React.FC<GameHubCardProps> = ({ title, imageUrl, link, icon }
               {icon}
             </div>
           )}
-          <CardTitle className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors duration-300 drop-shadow-lg">
+          <CardTitle className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors duration-300 neon-text-glow">
             {title}
           </CardTitle>
         </CardHeader>

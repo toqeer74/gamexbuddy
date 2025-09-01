@@ -25,7 +25,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, description, imageUrl, link,
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end p-4
                         group-hover:from-black/90 group-hover:via-black/60 transition-all duration-300">
           <CardTitle className="text-white text-xl font-bold leading-tight">
-            <Link to={link} className="hover:text-cyan-300 transition-colors duration-200">
+            <Link to={link} className="hover:text-cyan-300 transition-colors duration-200 neon-text-glow">
               {title}
             </Link>
           </CardTitle>

@@ -50,7 +50,7 @@ const CommunityContentCard: React.FC<CommunityContentCardProps> = ({
         )}
         <div>
           <CardTitle className="text-lg font-bold leading-tight text-white">
-            <Link to={link} className="hover:text-primary transition-colors duration-200 hover:text-purple-300 hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.7)]">
+            <Link to={link} className="hover:text-primary transition-colors duration-200 hover:text-purple-300 hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.7)] neon-text-glow">
               {title}
             </Link>
           </CardTitle>

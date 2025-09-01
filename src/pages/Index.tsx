@@ -11,7 +11,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Gamepad2, Blocks, Swords, Monitor, Gamepad, Smartphone, Apple, MessageSquare } from "lucide-react";
+import { Gamepad2, Monitor, Gamepad, Smartphone, Apple, MessageSquare } from "lucide-react";
 import { fetchRockstarNews, fetchRedditMemes } from "@/lib/api";
 
 interface NewsHighlight {
@@ -79,7 +79,7 @@ const Index = () => {
         ></div>
 
         <div className="relative z-10 container">
-          <h1 className="text-6xl md:text-7xl font-extrabold text-white drop-shadow-lg animate-neon-flicker">
+          <h1 className="text-6xl md:text-7xl font-extrabold text-white drop-shadow-lg animate-neon-flicker neon-text-glow">
             GamexBuddy
           </h1>
           <p className="mt-4 text-xl text-gray-200 drop-shadow-md">
@@ -109,7 +109,7 @@ const Index = () => {
 
       {/* Latest News */}
       <section className="container py-16 bg-gradient-to-b from-gray-900 to-gray-950">
-        <h2 className="text-4xl font-bold text-center mb-12 text-white drop-shadow-lg">Latest News Highlights</h2>
+        <h2 className="text-4xl font-bold text-center mb-12 text-white drop-shadow-lg neon-text-glow">Latest News Highlights</h2>
         <HorizontalCarousel className="max-w-full mx-auto" autoplay={true} interval={5000}>
           {newsHighlights.map((news) => (
             <NewsCard
@@ -127,7 +127,7 @@ const Index = () => {
       {/* Quick Links to Game Hubs */}
       <section className="bg-gradient-to-b from-gray-950 to-black py-16">
         <div className="container text-center">
-          <h2 className="text-4xl font-bold mb-12 text-white drop-shadow-lg">Explore Our Game Hubs</h2>
+          <h2 className="text-4xl font-bold mb-12 text-white drop-shadow-lg neon-text-glow">Explore Our Game Hubs</h2>
           <div className="flex flex-wrap justify-center gap-8">
             <GameHubCard
               title="GTA6 Hub"
@@ -172,7 +172,7 @@ const Index = () => {
       {/* Community Preview */}
       <section className="bg-gradient-to-b from-black to-gray-950 text-white py-16">
         <div className="container text-center">
-          <h2 className="text-4xl font-bold mb-12 text-white drop-shadow-lg">From Our Community</h2>
+          <h2 className="text-4xl font-bold mb-12 text-white drop-shadow-lg neon-text-glow">From Our Community</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {communityHighlights.map((item) => (
               <CommunityContentCard
@@ -215,7 +215,7 @@ const Index = () => {
           ></div>
           <div className="relative z-10">
             <CardHeader className="text-center">
-              <CardTitle className="text-3xl font-bold mb-4 text-white neon-glow">Join Our Newsletter!</CardTitle>
+              <CardTitle className="text-3xl font-bold mb-4 text-white neon-text-glow">Join Our Newsletter!</CardTitle>
               <p className="text-gray-300 mb-4">
                 Get the latest gaming news, updates, and exclusive content directly to your inbox.
               </p>

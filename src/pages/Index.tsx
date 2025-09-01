@@ -5,6 +5,7 @@ import TrailerEmbed from "@/components/common/TrailerEmbed";
 import NewsCard from "@/components/common/NewsCard";
 import GameHubCard from "@/components/common/GameHubCard";
 import CommunityContentCard from "@/components/common/CommunityContentCard";
+import HorizontalCarousel from "@/components/common/HorizontalCarousel"; // Import the new carousel
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -45,7 +46,7 @@ const Index = () => {
   React.useEffect(() => {
     const loadData = async () => {
       const news = await fetchRockstarNews();
-      setNewsHighlights(news.slice(0, 3)); // Display top 3 news items
+      setNewsHighlights(news.slice(0, 6)); // Display more news items for carousel
 
       const memes = await fetchRedditMemes();
       setCommunityHighlights(memes.slice(0, 3)); // Display top 3 memes
@@ -68,38 +69,45 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
-      <section className="relative text-center py-20 bg-gradient-to-br from-purple-800 via-pink-600 to-cyan-600 text-white overflow-hidden">
-        {/* Background glow effect - using a placeholder image for now */}
+      <section className="relative min-h-screen flex flex-col justify-center items-center text-center bg-gradient-to-br from-pink-600 via-purple-700 to-cyan-700 overflow-hidden py-20">
+        {/* Glow background or GTA skyline */}
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: "url('https://via.placeholder.com/1920x1080/000000/FFFFFF?text=Vice+City+Skyline')" }}
+          className="absolute inset-0 bg-cover bg-center opacity-10 blur-xl"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1612287235008-377e72169f46?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" }}
         ></div>
 
         <div className="relative z-10 container">
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">
+          <h1 className="text-6xl md:text-7xl font-extrabold text-white drop-shadow-lg">
             GamexBuddy
           </h1>
-          <p className="text-lg md:text-xl mb-8 text-gray-200">
-            Stay updated with <span className="font-bold text-pink-400">GTA6</span>, explore hubs, and join the community.
+          <p className="mt-4 text-xl text-gray-200">
+            Your ultimate <span className="text-pink-400 font-bold">GTA6</span> & gaming hub
           </p>
 
           {/* Countdown */}
-          <div className="mb-10">
+          <div className="mt-8 mb-10">
             <CountdownTimer targetDate={gta6ReleaseDate} />
           </div>
 
           {/* Trailer */}
-          <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl backdrop-blur bg-white/10 border border-white/20
+          <div className="mt-12 relative z-10 max-w-4xl w-full mx-auto backdrop-blur bg-white/10 rounded-2xl border border-white/20 shadow-xl
                         hover:shadow-cyan-500/70 hover:drop-shadow-[0_0_25px_rgba(0,255,255,0.9)] transition-all duration-300">
             <TrailerEmbed youtubeId="QdBZY2fkU-0" title="GTA6 Official Trailer" />
           </div>
+
+          {/* CTA */}
+          <Link to="/community">
+            <Button className="mt-10 px-8 py-3 rounded-full bg-pink-500 text-white font-bold shadow-lg hover:bg-pink-600 transition transform hover:scale-105">
+              Join the Community
+            </Button>
+          </Link>
         </div>
       </section>
 
-      {/* News Highlights */}
+      {/* Latest News */}
       <section className="container py-16">
         <h2 className="text-4xl font-bold text-center mb-12">Latest News Highlights</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <HorizontalCarousel className="max-w-full mx-auto">
           {newsHighlights.map((news) => (
             <NewsCard
               key={news.id}
@@ -110,7 +118,7 @@ const Index = () => {
               isOfficial={news.isOfficial}
             />
           ))}
-        </div>
+        </HorizontalCarousel>
       </section>
 
       {/* Quick Links to Game Hubs */}
@@ -140,68 +148,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Newsletter Signup */}
-      <section className="container py-16">
-        <Card className="max-w-2xl mx-auto p-8 bg-card shadow-lg relative overflow-hidden rounded-xl">
-          {/* Faded gaming background image */}
-          <div
-            className="absolute inset-0 opacity-10 z-0"
-            style={{
-              backgroundImage: "url('https://via.placeholder.com/800x400/000000/FFFFFF?text=Pixel+Pattern')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          ></div>
-          <div className="relative z-10">
-            <CardHeader className="text-center">
-              <CardTitle className="text-3xl font-bold mb-4">Join Our Newsletter!</CardTitle>
-              <p className="text-muted-foreground">
-                Get the latest gaming news, updates, and exclusive content directly to your inbox.
-              </p>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleNewsletterSubmit} className="space-y-4">
-                <div>
-                  <Label htmlFor="email" className="text-left block mb-1 text-primary">Email Address</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="enter your command here..."
-                    className="mt-1 rounded-lg border-2 border-cyan-500 bg-background text-cyan-300
-                               focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-background
-                               shadow-inner shadow-cyan-500/20"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="telegram-optin"
-                    className="border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                    checked={telegramOptIn}
-                    onCheckedChange={(checked) => setTelegramOptIn(!!checked)}
-                  />
-                  <Label htmlFor="telegram-optin" className="text-muted-foreground">
-                    Opt-in for Telegram updates (optional)
-                  </Label>
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full rounded-lg text-lg py-3 bg-green-600 hover:bg-green-700 transition-all duration-300
-                             shadow-lg shadow-green-600/50 hover:shadow-xl hover:shadow-green-700/70
-                             drop-shadow-[0_0_10px_rgba(34,197,94,0.7)]"
-                >
-                  Start
-                </Button>
-              </form>
-            </CardContent>
-          </div>
-        </Card>
-      </section>
-
       {/* Community Preview */}
-      <section className="bg-muted py-16">
+      <section className="bg-gray-900 text-white py-16"> {/* Dark background for community */}
         <div className="container text-center">
           <h2 className="text-4xl font-bold mb-12">From Our Community</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -221,6 +169,66 @@ const Index = () => {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Newsletter Signup */}
+      <section className="container py-16">
+        <Card className="max-w-2xl mx-auto p-8 bg-white/10 backdrop-blur-md shadow-lg relative overflow-hidden rounded-xl border border-white/20">
+          {/* Faded gaming background image */}
+          <div
+            className="absolute inset-0 opacity-10 z-0"
+            style={{
+              backgroundImage: "url('https://via.placeholder.com/800x400/000000/FFFFFF?text=Pixel+Pattern')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          ></div>
+          <div className="relative z-10">
+            <CardHeader className="text-center">
+              <CardTitle className="text-3xl font-bold mb-4 text-white">Join Our Newsletter!</CardTitle>
+              <p className="text-gray-300">
+                Get the latest gaming news, updates, and exclusive content directly to your inbox.
+              </p>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleNewsletterSubmit} className="space-y-4">
+                <div>
+                  <Label htmlFor="email" className="text-left block mb-1 text-cyan-300">Email Address</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="enter your email here..."
+                    className="mt-1 rounded-lg border-2 border-cyan-500 bg-background/20 text-cyan-300
+                               focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-background
+                               shadow-inner shadow-cyan-500/20 placeholder:text-cyan-300/70"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="telegram-optin"
+                    className="border-cyan-500 data-[state=checked]:bg-cyan-500 data-[state=checked]:text-white"
+                    checked={telegramOptIn}
+                    onCheckedChange={(checked) => setTelegramOptIn(!!checked)}
+                  />
+                  <Label htmlFor="telegram-optin" className="text-gray-300">
+                    Opt-in for Telegram updates (optional)
+                  </Label>
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full rounded-lg text-lg py-3 bg-pink-600 hover:bg-pink-700 transition-all duration-300
+                             shadow-lg shadow-pink-600/50 hover:shadow-xl hover:shadow-pink-700/70
+                             drop-shadow-[0_0_10px_rgba(236,72,153,0.7)]"
+                >
+                  Start
+                </Button>
+              </form>
+            </CardContent>
+          </div>
+        </Card>
       </section>
 
       <MadeWithDyad />

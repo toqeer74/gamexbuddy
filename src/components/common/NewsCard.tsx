@@ -14,8 +14,9 @@ interface NewsCardProps {
 const NewsCard: React.FC<NewsCardProps> = ({ title, description, imageUrl, link, isOfficial = false }) => {
   return (
     <Card className="overflow-hidden relative group cursor-pointer rounded-lg shadow-lg
-                   hover:scale-[1.02] transition-transform duration-300 ease-in-out
-                   hover:ring-2 hover:ring-cyan-500 hover:ring-offset-2 hover:ring-offset-background">
+                   transition-all duration-300 ease-in-out
+                   hover:ring-2 hover:ring-cyan-500 hover:ring-offset-2 hover:ring-offset-background
+                   bg-card/50 backdrop-blur-sm border border-white/20">
       <div className="relative w-full h-48 bg-gray-800">
         {imageUrl && (
           <img src={imageUrl} alt={title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />

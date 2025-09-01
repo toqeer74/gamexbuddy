@@ -37,23 +37,28 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
       return;
     }
 
-    // Assign different neon colors based on interval for variety
     let neonColorClass = "";
+    let label = "";
     switch (interval) {
       case "days":
-        neonColorClass = "text-cyan-400";
+        neonColorClass = "text-cyan-300";
+        label = "DAYS";
         break;
       case "hours":
         neonColorClass = "text-pink-400";
+        label = "HRS";
         break;
       case "minutes":
         neonColorClass = "text-yellow-400";
+        label = "MIN";
         break;
       case "seconds":
         neonColorClass = "text-green-400";
+        label = "SEC";
         break;
       default:
         neonColorClass = "text-white";
+        label = "";
     }
 
     timerComponents.push(
@@ -61,7 +66,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
         <span className={`text-5xl md:text-7xl font-mono font-extrabold neon-glow ${neonColorClass}`}>
           {String(timeLeft[interval as keyof typeof timeLeft]).padStart(2, '0')}
         </span>
-        <span className="text-xl font-medium block text-white opacity-80 uppercase">{interval}</span>
+        <span className="text-xl font-medium block text-white opacity-80 uppercase tracking-widest">{label}</span>
       </div>
     );
   });

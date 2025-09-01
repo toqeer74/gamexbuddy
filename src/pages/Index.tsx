@@ -82,7 +82,8 @@ const Index = () => {
           </p>
           <CountdownTimer targetDate={gta6ReleaseDate} />
           <div className="mt-12 max-w-4xl mx-auto p-4 rounded-xl bg-white/10 backdrop-blur-md shadow-2xl
-                        border border-cyan-500/50 drop-shadow-[0_0_15px_rgba(0,255,255,0.5)]">
+                        border border-cyan-500/50 drop-shadow-[0_0_15px_rgba(0,255,255,0.5)]
+                        hover:shadow-cyan-500/70 hover:drop-shadow-[0_0_25px_rgba(0,255,255,0.9)] transition-all duration-300">
             <TrailerEmbed youtubeId="QdBZY2fkU-0" title="GTA 6 Official Trailer 1" />
           </div>
         </div>
@@ -112,19 +113,19 @@ const Index = () => {
           <div className="flex flex-wrap justify-center gap-8">
             <GameHubCard
               title="GTA6 Hub"
-              imageUrl="https://via.placeholder.com/600x600/FF0000/FFFFFF?text=GTA6+Artwork"
+              imageUrl="https://images.unsplash.com/photo-1612287235008-377e72169f46?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Vice City skyline
               link="/gta6-hub"
               icon={<Gamepad2 size={64} />}
             />
             <GameHubCard
               title="Minecraft Hub"
-              imageUrl="https://via.placeholder.com/600x600/00FF00/FFFFFF?text=Minecraft+Grass"
+              imageUrl="https://images.unsplash.com/photo-1621929798704-0212f827923d?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Pixelated grass block
               link="/minecraft-hub"
               icon={<Blocks size={64} />}
             />
             <GameHubCard
               title="PUBG Hub"
-              imageUrl="https://via.placeholder.com/600x600/FFA500/FFFFFF?text=PUBG+Helmet"
+              imageUrl="https://images.unsplash.com/photo-1586182987400-31e826265b07?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Desert battleground
               link="/pubg-hub"
               icon={<Swords size={64} />}
             />

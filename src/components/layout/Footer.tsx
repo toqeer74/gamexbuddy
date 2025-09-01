@@ -52,6 +52,7 @@ const Footer = () => {
             <h3 className="font-bold text-primary mb-2">Resources</h3>
             <ul className="space-y-1">
               <li><Link to="/tools" className={neonLinkClasses}>Tools</Link></li>
+              <li><Link to="/news" className={neonLinkClasses}>News</Link></li>
               <li><Link to="/guides" className={neonLinkClasses}>Guides</Link></li>
               <li><a href="#" className={neonLinkClasses}>Blog</a></li> {/* Placeholder */}
             </ul>

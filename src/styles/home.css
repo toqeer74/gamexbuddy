@@ -161,3 +161,63 @@
 @keyframes shimmer {
   100% { transform: translateX(100%); }
 }
+
+/* ---------- Global polish ---------- */
+:root { --glass: rgba(21,26,59,.72); --border: rgba(255,255,255,.08); }
+.card-glass { background: var(--glass); border: 1px solid var(--border); border-radius: 16px; backdrop-filter: blur(8px); }
+.reveal { opacity:0; transform: translateY(16px); animation: rev .6s ease both; }
+.reveal:nth-child(2){ animation-delay:.05s } .reveal:nth-child(3){ animation-delay:.1s }
+@keyframes rev { to{ opacity:1; transform:none } }
+
+/* ---------- NewsFeed full-bleed overlay cards ---------- */
+.nf { padding: 48px 0; } .nf__wrap { max-width: 1200px; margin:0 auto; padding:0 20px; }
+.nf__chips { display:flex; gap:10px; flex-wrap:wrap; margin: 10px 0 18px; }
+.nf__chip { background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); padding:8px 12px; border-radius:999px; color:#cfd8ff; font-weight:600; font-size:13px; cursor:pointer; }
+.nf__chip--on { background: linear-gradient(90deg,#ff58b3,#8f7dff); color:#fff; border-color:transparent; }
+.nf__grid { display:grid; gap:18px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.nf__card { position:relative; border-radius:18px; overflow:hidden; isolation:isolate; }
+.nf__img { width:100%; height: 240px; object-fit: cover; display:block; filter: saturate(1.15) contrast(1.05); transition: transform .25s ease; }
+.nf__card:hover .nf__img { transform: scale(1.03); }
+.nf__overlay { position:absolute; inset:auto 0 0 0; padding:14px; background: linear-gradient(180deg,transparent,rgba(0,0,0,.6)); color:#fff; }
+.nf__badges { display:flex; gap:8px; align-items:center; margin-bottom:6px; }
+.badge { font-size: 11px; padding: 6px 10px; border-radius: 999px; border:1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.12); }
+.badge--official { border-color: rgba(255,88,179,.45); background: rgba(255,255,255,.18); color:#ff86c6; }
+.badge--trend { border-color: rgba(179,255,76,.4); background: rgba(179,255,76,.15); color:#b3ff4c; }
+.nf__date { font-size:12px; margin-left:auto; opacity:.8 }
+.nf__title { font-weight:800; font-size:16px; text-shadow: 0 1px 0 rgba(0,0,0,.6) }
+.nf__desc { font-size:13px; opacity:.9; margin-top:4px }
+.nf__btn { display:inline-block; margin-top:8px; padding:10px 12px; border-radius:10px; font-weight:700; background:linear-gradient(90deg,#ff58b3,#8f7dff); color:#fff; text-decoration:none }
+
+/* ---------- Authority marquee ---------- */
+.marquee { overflow:hidden; padding:10px 0; border-top:1px solid rgba(255,255,255,.06); border-bottom:1px solid rgba(255,255,255,.06) }
+.marquee__inner { display:flex; gap:18px; width:max-content; animation: scroll 26s linear infinite }
+@keyframes scroll { from{ transform: translateX(0) } to{ transform: translateX(-50%) } }
+.marquee .tag { color:#cfd8ff; background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14);
+  padding:8px 12px; border-radius:999px; white-space:nowrap; font-weight:600; font-size:13px; display:flex; align-items:center; gap:8px }
+
+/* ---------- Carousel (no dependency) ---------- */
+.carousel { display:flex; gap:14px; overflow:auto; scroll-snap-type:x mandatory; padding-bottom:6px }
+.carousel > * { scroll-snap-align:start }
+.carousel::-webkit-scrollbar { height: 10px }
+.guide-card { min-width: 280px; max-width: 320px }
+
+/* ---------- Hero glows + parallax icons ---------- */
+.hero-glow { position:absolute; inset:0; pointer-events:none; }
+.hero-glow:before, .hero-glow:after{
+  content:""; position:absolute; filter:blur(40px); opacity:.55;
+  background: radial-gradient(500px 180px at 15% 0%, rgba(143,125,255,.45), transparent),
+              radial-gradient(600px 200px at 85% 15%, rgba(88,224,255,.35), transparent)
+}
+.hero-glow:before{ inset:-20% -10% auto -10%; height:60% }
+.hero-glow:after{ inset:auto -10% -20% -10%; height:50% }
+.parallax-icons { position:absolute; inset:0; pointer-events:none; }
+.parallax-icons svg{ position:absolute; opacity:.25; filter: drop-shadow(0 0 10px rgba(88,224,255,.35)) }
+.parallax-icons .i1{ top:12%; left:6% } .parallax-icons .i2{ top:28%; right:10% } .parallax-icons .i3{ bottom:16%; left:8% }
+
+/* ---------- Countdown sheen ---------- */
+.flip__value{ position:relative }
+.flip__value:after{
+  content:""; position:absolute; inset:0; background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.18) 35%, transparent 70%);
+  transform: translateX(-100%); animation: sheen 5s ease-in-out infinite; mix-blend:screen; border-radius:6px;
+}
+@keyframes sheen { 50%{ transform: translateX(100%) } }

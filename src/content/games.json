@@ -1,0 +1,7 @@
+{
+  "featured": [
+    { "slug":"gta6", "name":"GTA 6", "platforms":["PC","PS5","Xbox"], "image":"https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600&auto=format&fit=crop" },
+    { "slug":"minecraft", "name":"Minecraft", "platforms":["PC","Mobile","Console"], "image":"https://images.unsplash.com/photo-1625864250588-8d5aebbb5e10?q=80&w=1600&auto=format&fit=crop" },
+    { "slug":"pubg", "name":"PUBG", "platforms":["PC","Mobile","Console"], "image":"https://images.unsplash.com/photo-1520975922299-7f61d4dc18c5?q=80&w=1600&auto=format&fit=crop" }
+  ]
+}

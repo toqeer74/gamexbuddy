@@ -24,8 +24,11 @@ const Navbar = () => {
           />
         </Link>
         <nav className="hidden md:flex items-center space-x-4">
-          <Link to="/gta6" className={`text-sm font-medium text-white ${neonHoverClasses}`}>
-            GTA6 Hub
+          <Link to="/gta6" className={`text-sm font-medium text-white ${neonHoverClasses}`}>GTA6 Hub</Link>
+          <Link to="/news" className={`text-sm font-medium text-white ${neonHoverClasses}`}>News</Link>
+          <Link to="/guides" className={`text-sm font-medium text-white ${neonHoverClasses}`}>Guides</Link>
+          <Link to="/news" className={`text-sm font-medium text-white ${neonHoverClasses}`}>
+            News
           </Link>
           <Link to="/guides" className={`text-sm font-medium text-white ${neonHoverClasses}`}>
             Guides
@@ -101,13 +104,10 @@ const Navbar = () => {
                   <Link to="/android-hub" className={`text-base font-medium ${neonHoverClasses} pl-2`}>
                     Android Hub
                   </Link>
-                <Link to="/ios-hub" className={`text-base font-medium ${neonHoverClasses} pl-2`}>
-                  iOS Hub
-                </Link>
+                <Link to="/ios-hub" className={`text-base font-medium ${neonHoverClasses} pl-2`}>iOS Hub</Link>
               </div>
-              <Link to="/guides" className={`text-lg font-medium ${neonHoverClasses}`}>
-                Guides
-              </Link>
+              <Link to="/news" className={`text-lg font-medium ${neonHoverClasses}`}>News</Link>
+              <Link to="/guides" className={`text-lg font-medium ${neonHoverClasses}`}>Guides</Link>
               <Link to="/community" className={`text-lg font-medium ${neonHoverClasses}`}>
                 Community
               </Link>

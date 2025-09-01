@@ -8,11 +8,25 @@
     "image": "https://i.ytimg.com/vi/QdBZY2fkU-0/maxresdefault.jpg",
     "official": true,
     "trending": true,
-    "mirror": {
-      "enabled": true,
-      "slug": "gta6-trailer-1",
-      "summary": "Key scenes breakdown, map hints, characters, and soundtrack notes."
-    },
     "tags": ["official", "trailer", "gta6"]
+  },
+  {
+    "id": "minecraft-update",
+    "title": "Minecraft 1.21 Tricky Trials Update",
+    "date": "2024-06-13",
+    "url": "https://www.minecraft.net/en-us",
+    "excerpt": "New mobs, blocks, and trial spawners arrive in the latest update.",
+    "image": "https://images.unsplash.com/photo-1625864250588-8d5aebbb5e10?q=80&w=1600&auto=format&fit=crop",
+    "tags": ["minecraft", "update"]
+  },
+  {
+    "id": "pubg-new-season",
+    "title": "PUBG: New Season Patch Notes",
+    "date": "2024-07-25",
+    "url": "https://pubg.com",
+    "excerpt": "Weapon balance changes and tactical gear updates in Season 26.",
+    "image": "https://images.unsplash.com/photo-1520975922299-7f61d4dc18c5?q=80&w=1600&auto=format&fit=crop",
+    "trending": true,
+    "tags": ["pubg", "patch"]
   }
 ]

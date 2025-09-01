@@ -13,8 +13,7 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center justify-between">
         <Link to="/" className="flex items-center space-x-2 group">
-          <Gamepad2 className={`h-6 w-6 text-primary ${iconNeonClasses}`} />
-          <span className={`font-bold text-lg text-white ${neonHoverClasses}`}>GamexBuddy</span>
+          <img src="/Gamexbuddy-logo-transparent.png" alt="GamexBuddy Logo" className="h-8" />
         </Link>
         <nav className="hidden md:flex items-center space-x-4">
           <Link to="/gta6-hub" className={`text-sm font-medium text-white ${neonHoverClasses}`}>

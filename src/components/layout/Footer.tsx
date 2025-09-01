@@ -14,7 +14,7 @@ const Footer = () => {
 
       <div className="container flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="text-center md:text-left">
-          <p className="text-lg font-bold mb-2">GamexBuddy</p>
+          <img src="/Gamexbuddy-logo-transparent.png" alt="GamexBuddy Logo" className="h-8" />
           <p className="text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} All rights reserved.
           </p>

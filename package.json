@@ -1,6 +1,10 @@
 {
   "name": "gamexbuddy",
+  "type": "module",
   "description": "GamexBuddy - A modern gaming hub for GTA6, PC, PlayStation, Xbox, Android, and community tools",
+  "scripts": {
+    "dev": "vite"
+  },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.0",

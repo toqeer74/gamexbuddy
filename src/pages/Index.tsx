@@ -1,4 +1,5 @@
 import React from "react";
+import { useMouseFollow } from "@/hooks/use-mouse-follow";
 import CountdownTimer from "@/components/common/CountdownTimer";
 import TrailerEmbed from "@/components/common/TrailerEmbed";
 import NewsCard from "@/components/common/NewsCard";
@@ -41,6 +42,23 @@ const Index = () => {
   const [communityHighlights, setCommunityHighlights] = React.useState<CommunityHighlight[]>([]);
   const [email, setEmail] = React.useState("");
   const [telegramOptIn, setTelegramOptIn] = React.useState(false);
+  const { x, y } = useMouseFollow();
+  const logoRef = React.useRef<HTMLImageElement>(null);
+
+  const getGlowStyle = () => {
+    if (!logoRef.current) return {};
+
+    const rect = logoRef.current.getBoundingClientRect();
+    const dx = x - (rect.left + rect.width / 2);
+    const dy = y - (rect.top + rect.height / 2);
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    const glow = Math.max(0, 1 - distance / 300);
+
+    return {
+      filter: `drop-shadow(0 0 ${glow * 20}px rgba(0, 255, 255, ${glow * 0.8}))`,
+    };
+  };
 
   React.useEffect(() => {
     const loadData = async () => {
@@ -79,9 +97,13 @@ const Index = () => {
         ></div>
 
         <div className="relative z-10 container">
-          <h1 className="text-6xl md:text-7xl font-extrabold text-white drop-shadow-lg animate-neon-flicker neon-text-glow">
-            GamexBuddy
-          </h1>
+          <img
+            ref={logoRef}
+            src="/Gamexbuddy-logo-v2-transparent.png"
+            alt="GamexBuddy Logo"
+            className="h-48 transition-all duration-200"
+            style={getGlowStyle()}
+          />
           <p className="mt-4 text-xl text-gray-200 drop-shadow-md">
             Your ultimate <span className="text-pink-400 font-bold neon-glow">GTA6</span> & gaming hub
           </p>

@@ -5,27 +5,40 @@ import { Button } from "@/components/ui/button";
 
 interface GameHubCardProps {
   title: string;
-  imageUrl: string;
+  imageUrl: string; // Now used for background
   link: string;
-  icon?: React.ReactNode;
+  icon?: React.ReactNode; // Optional icon if no image is preferred
 }
 
 const GameHubCard: React.FC<GameHubCardProps> = ({ title, imageUrl, link, icon }) => {
   return (
-    <Link to={link} className="block">
-      <Card className="w-64 h-64 flex flex-col items-center justify-between p-4 text-center hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 ease-in-out group">
-        <CardHeader className="flex flex-col items-center justify-center p-0 pt-4">
-          {icon ? (
-            <div className="mb-4 text-primary group-hover:scale-110 transition-transform duration-300">
+    <Link to={link} className="block perspective-1000">
+      <Card
+        className="relative w-64 h-64 flex flex-col items-center justify-end p-4 text-center overflow-hidden
+                   bg-cover bg-center group rounded-lg shadow-lg
+                   transition-all duration-300 ease-in-out
+                   hover:shadow-xl hover:shadow-primary/30
+                   hover:rotate-y-3 hover:rotate-x-3 hover:scale-105"
+        style={{ backgroundImage: `url(${imageUrl})` }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent group-hover:from-black/90 group-hover:via-black/50 transition-all duration-300"></div>
+        <CardHeader className="relative z-10 flex flex-col items-center justify-center p-0 pt-4">
+          {icon && ( // Render icon only if provided and no background image is sufficient
+            <div className="mb-2 text-white group-hover:scale-110 transition-transform duration-300 drop-shadow-lg">
               {icon}
             </div>
-          ) : (
-            <img src={imageUrl} alt={title} className="w-24 h-24 object-contain mb-4 group-hover:scale-110 transition-transform duration-300" />
           )}
-          <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors duration-300">{title}</CardTitle>
+          <CardTitle className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors duration-300 drop-shadow-lg">
+            {title}
+          </CardTitle>
         </CardHeader>
-        <CardContent className="p-0 pb-4">
-          <Button variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+        <CardContent className="relative z-10 p-0 pb-4 mt-4">
+          <Button
+            variant="outline"
+            className="bg-white/20 text-white border-white/30 backdrop-blur-sm
+                       group-hover:bg-primary group-hover:text-primary-foreground
+                       group-hover:border-primary transition-all duration-300"
+          >
             Explore Hub
           </Button>
         </CardContent>

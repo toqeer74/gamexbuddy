@@ -38,8 +38,8 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
     }
 
     timerComponents.push(
-      <span key={interval} className="text-5xl md:text-6xl font-extrabold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] mx-2">
-        {timeLeft[interval as keyof typeof timeLeft]} <span className="text-xl font-medium block">{interval}</span>
+      <span key={interval} className="text-5xl md:text-7xl font-mono font-extrabold text-cyan-400 drop-shadow-[0_0_15px_rgba(0,255,255,0.7)] mx-2">
+        {timeLeft[interval as keyof typeof timeLeft]} <span className="text-xl font-medium block text-white opacity-80">{interval}</span>
       </span>
     );
   });

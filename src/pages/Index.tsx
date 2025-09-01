@@ -30,6 +30,9 @@ interface CommunityHighlight {
   link: string;
   type: "meme" | "quiz" | "discussion";
   xp?: number;
+  isTrending?: boolean;
+  authorAvatarUrl?: string;
+  authorName?: string;
 }
 
 const Index = () => {
@@ -42,7 +45,7 @@ const Index = () => {
       id: "1",
       title: "Rockstar Confirms GTA6 Release Window",
       description: "Official announcement details the highly anticipated launch period.",
-      imageUrl: "https://via.placeholder.com/400x225/000000/FFFFFF?text=GTA6+News+1",
+      imageUrl: "https://via.placeholder.com/600x338/000000/FFFFFF?text=GTA6+News+1",
       link: "/gta6-hub",
       isOfficial: true,
     },
@@ -50,7 +53,7 @@ const Index = () => {
       id: "2",
       title: "New Trailer Breakdown: What You Missed!",
       description: "Deep dive into the latest GTA6 trailer's hidden details and Easter eggs.",
-      imageUrl: "https://via.placeholder.com/400x225/000000/FFFFFF?text=GTA6+News+2",
+      imageUrl: "https://via.placeholder.com/600x338/000000/FFFFFF?text=GTA6+News+2",
       link: "/gta6-hub",
       isOfficial: false,
     },
@@ -58,7 +61,7 @@ const Index = () => {
       id: "3",
       title: "Community Reacts to Vice City Return",
       description: "Fans are ecstatic about the return to the iconic Vice City setting.",
-      imageUrl: "https://via.placeholder.com/400x225/000000/FFFFFF?text=GTA6+News+3",
+      imageUrl: "https://via.placeholder.com/600x338/000000/FFFFFF?text=GTA6+News+3",
       link: "/gta6-hub",
       isOfficial: false,
     },
@@ -74,6 +77,9 @@ const Index = () => {
       link: "/community",
       type: "meme",
       xp: 150,
+      isTrending: true,
+      authorName: "MemeLord",
+      authorAvatarUrl: "https://via.placeholder.com/32/FF0000/FFFFFF?text=ML",
     },
     {
       id: "2",
@@ -83,6 +89,8 @@ const Index = () => {
       link: "/community",
       type: "quiz",
       xp: 200,
+      authorName: "QuizMaster",
+      authorAvatarUrl: "https://via.placeholder.com/32/00FF00/FFFFFF?text=QM",
     },
     {
       id: "3",
@@ -92,26 +100,32 @@ const Index = () => {
       link: "/community",
       type: "discussion",
       xp: 100,
+      authorName: "GameTalker",
+      authorAvatarUrl: "https://via.placeholder.com/32/0000FF/FFFFFF?text=GT",
     },
   ];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-900 via-purple-800 to-pink-700 py-20 text-white overflow-hidden">
-        <div className="container text-center z-10 relative">
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 drop-shadow-lg">
+      <section className="relative w-full h-[700px] bg-gradient-to-br from-purple-900 via-blue-800 to-pink-700 overflow-hidden flex items-center justify-center">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-20"
+          style={{ backgroundImage: "url('https://via.placeholder.com/1920x1080/000000/FFFFFF?text=Vice+City+Skyline')" }}
+        ></div>
+        <div className="container text-center z-10 relative py-10">
+          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 drop-shadow-lg text-white">
             GamexBuddy: Your Ultimate Gaming Hub
           </h1>
-          <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto opacity-90">
+          <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto opacity-90 text-white">
             Stay updated with GTA6, explore other game hubs, and connect with a vibrant community!
           </p>
           <CountdownTimer targetDate={gta6ReleaseDate} />
-          <div className="mt-12 max-w-4xl mx-auto">
-            <TrailerEmbed youtubeId="QdBZY2fkU-0" title="GTA 6 Official Trailer 1" /> {/* Corrected YouTube ID */}
+          <div className="mt-12 max-w-4xl mx-auto p-4 rounded-xl bg-white/10 backdrop-blur-md shadow-2xl
+                        border border-cyan-500/50 drop-shadow-[0_0_15px_rgba(0,255,255,0.5)]">
+            <TrailerEmbed youtubeId="QdBZY2fkU-0" title="GTA 6 Official Trailer 1" />
           </div>
         </div>
-        <div className="absolute inset-0 bg-black opacity-30 z-0"></div>
       </section>
 
       {/* News Highlights */}
@@ -138,19 +152,19 @@ const Index = () => {
           <div className="flex flex-wrap justify-center gap-8">
             <GameHubCard
               title="GTA6 Hub"
-              imageUrl="https://via.placeholder.com/100x100/FF0000/FFFFFF?text=GTA6"
+              imageUrl="https://via.placeholder.com/600x600/FF0000/FFFFFF?text=GTA6+Artwork"
               link="/gta6-hub"
               icon={<Gamepad2 size={64} />}
             />
             <GameHubCard
               title="Minecraft Hub"
-              imageUrl="https://via.placeholder.com/100x100/00FF00/FFFFFF?text=MC"
+              imageUrl="https://via.placeholder.com/600x600/00FF00/FFFFFF?text=Minecraft+Grass"
               link="/minecraft-hub"
               icon={<Blocks size={64} />}
             />
             <GameHubCard
               title="PUBG Hub"
-              imageUrl="https://via.placeholder.com/100x100/FFA500/FFFFFF?text=PUBG"
+              imageUrl="https://via.placeholder.com/600x600/FFA500/FFFFFF?text=PUBG+Helmet"
               link="/pubg-hub"
               icon={<Swords size={64} />}
             />
@@ -160,12 +174,12 @@ const Index = () => {
 
       {/* Newsletter Signup */}
       <section className="container py-16">
-        <Card className="max-w-2xl mx-auto p-8 bg-card shadow-lg relative overflow-hidden">
+        <Card className="max-w-2xl mx-auto p-8 bg-card shadow-lg relative overflow-hidden rounded-xl">
           {/* Faded gaming background image */}
           <div
             className="absolute inset-0 opacity-10 z-0"
             style={{
-              backgroundImage: "url('https://via.placeholder.com/800x400/000000/FFFFFF?text=Gaming+Pattern')",
+              backgroundImage: "url('https://via.placeholder.com/800x400/000000/FFFFFF?text=Pixel+Pattern')",
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -180,21 +194,29 @@ const Index = () => {
             <CardContent>
               <form className="space-y-4">
                 <div>
-                  <Label htmlFor="email">Email Address</Label>
-                  <Input id="email" type="email" placeholder="your@example.com" className="mt-1 rounded-lg" />
+                  <Label htmlFor="email" className="text-left block mb-1 text-primary">Email Address</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="enter your command here..."
+                    className="mt-1 rounded-lg border-2 border-cyan-500 bg-background text-cyan-300
+                               focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-background
+                               shadow-inner shadow-cyan-500/20"
+                  />
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Checkbox id="telegram-optin" />
-                  <Label htmlFor="telegram-optin">
+                  <Checkbox id="telegram-optin" className="border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground" />
+                  <Label htmlFor="telegram-optin" className="text-muted-foreground">
                     Opt-in for Telegram updates (optional)
                   </Label>
                 </div>
                 <Button
                   type="submit"
-                  className="w-full rounded-lg text-lg py-3 bg-primary hover:bg-primary/90 transition-all duration-300
-                             shadow-lg shadow-primary/50 hover:shadow-xl hover:shadow-primary/70"
+                  className="w-full rounded-lg text-lg py-3 bg-green-600 hover:bg-green-700 transition-all duration-300
+                             shadow-lg shadow-green-600/50 hover:shadow-xl hover:shadow-green-700/70
+                             drop-shadow-[0_0_10px_rgba(34,197,94,0.7)]"
                 >
-                  Subscribe
+                  Start
                 </Button>
               </form>
             </CardContent>
@@ -216,6 +238,9 @@ const Index = () => {
                 link={item.link}
                 type={item.type}
                 xp={item.xp}
+                isTrending={item.isTrending}
+                authorAvatarUrl={item.authorAvatarUrl}
+                authorName={item.authorName}
               />
             ))}
           </div>

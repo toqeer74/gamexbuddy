@@ -22,6 +22,7 @@ const Index = () => {
       description: "Official announcement details the highly anticipated launch period.",
       imageUrl: "https://via.placeholder.com/400x225/000000/FFFFFF?text=GTA6+News+1",
       link: "/gta6-hub",
+      isOfficial: true,
     },
     {
       id: "2",
@@ -29,6 +30,7 @@ const Index = () => {
       description: "Deep dive into the latest GTA6 trailer's hidden details and Easter eggs.",
       imageUrl: "https://via.placeholder.com/400x225/000000/FFFFFF?text=GTA6+News+2",
       link: "/gta6-hub",
+      isOfficial: false,
     },
     {
       id: "3",
@@ -36,13 +38,14 @@ const Index = () => {
       description: "Fans are ecstatic about the return to the iconic Vice City setting.",
       imageUrl: "https://via.placeholder.com/400x225/000000/FFFFFF?text=GTA6+News+3",
       link: "/gta6-hub",
+      isOfficial: false,
     },
   ];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary to-purple-900 py-20 text-white overflow-hidden">
+      <section className="relative bg-gradient-to-br from-blue-900 via-purple-800 to-pink-700 py-20 text-white overflow-hidden">
         <div className="container text-center z-10 relative">
           <h1 className="text-5xl md:text-6xl font-extrabold mb-6 drop-shadow-lg">
             GamexBuddy: Your Ultimate Gaming Hub
@@ -69,6 +72,7 @@ const Index = () => {
               description={news.description}
               imageUrl={news.imageUrl}
               link={news.link}
+              isOfficial={news.isOfficial}
             />
           ))}
         </div>

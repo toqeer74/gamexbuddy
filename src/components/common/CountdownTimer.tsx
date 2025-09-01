@@ -38,21 +38,21 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
     }
 
     timerComponents.push(
-      <span key={interval} className="text-4xl font-bold text-primary mx-2">
-        {timeLeft[interval as keyof typeof timeLeft]} {interval}{" "}
+      <span key={interval} className="text-5xl md:text-6xl font-extrabold text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] mx-2">
+        {timeLeft[interval as keyof typeof timeLeft]} <span className="text-xl font-medium block">{interval}</span>
       </span>
     );
   });
 
   return (
     <div className="text-center p-4">
-      <h2 className="text-2xl font-semibold mb-4">GTA6 Countdown</h2>
+      <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white drop-shadow-md">GTA6 Countdown</h2>
       {timerComponents.length ? (
         <div className="flex justify-center items-baseline">
           {timerComponents}
         </div>
       ) : (
-        <span className="text-xl font-medium text-green-500">The wait is over!</span>
+        <span className="text-3xl font-medium text-green-400 drop-shadow-md">The wait is over!</span>
       )}
     </div>
   );

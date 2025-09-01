@@ -7,7 +7,7 @@ interface CountdownTimerProps {
 const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
   const calculateTimeLeft = () => {
     const difference = +new Date(targetDate) - +new Date();
-    let timeLeft = {};
+    let timeLeft: { days?: number; hours?: number; minutes?: number; seconds?: number } = {};
 
     if (difference > 0) {
       timeLeft = {
@@ -33,7 +33,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
   const timerComponents: JSX.Element[] = [];
 
   Object.keys(timeLeft).forEach((interval) => {
-    if (!timeLeft[interval as keyof typeof timeLeft]) {
+    if (timeLeft[interval as keyof typeof timeLeft] === undefined) {
       return;
     }
 

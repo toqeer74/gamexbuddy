@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { MadeWithDyad } from "@/components/made-with-dyad";
 import { MessageSquare, Twitter, Send, Youtube } from "lucide-react"; // Import Youtube icon
 
 const Footer = () => {
@@ -70,7 +69,6 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      <MadeWithDyad />
     </footer>
   );
 };

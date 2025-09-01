@@ -2,12 +2,28 @@
 
 Welcome to GamexBuddy, your ultimate hub for all things gaming! This application is designed to be a central point for gamers to find the latest news, explore game-specific content, connect with a vibrant community, and access useful tools.
 
-## Project Goals
+## Project Overview
 
-*   **Centralized Gaming Hub**: Provide a single platform for news, game information, and community interaction.
-*   **Engaging User Experience**: Implement modern UI/UX with responsive design, animated elements, and intuitive navigation.
-*   **Community Focus**: Foster a strong community through forums, discussions, and social integration.
-*   **Scalable Architecture**: Build with a modular and maintainable codebase using React, TypeScript, and Tailwind CSS.
+GamexBuddy aims to be the go-to platform for gamers, offering a rich, interactive experience. From the latest news on highly anticipated titles like GTA6 to dedicated hubs for various gaming platforms (PC, PlayStation, Xbox, Android, iOS), a vibrant community section, and handy utility tools, GamexBuddy has you covered.
+
+## Features
+
+*   **GTA6 Hub**: Dedicated section for Grand Theft Auto VI news, trailers, countdowns, and updates.
+*   **Platform Hubs**: Explore content specific to PC, PlayStation, Xbox, Android, and iOS gaming.
+*   **Community**: Engage with fellow gamers through forums, memes, quizzes, and discussions.
+*   **Utility Tools**: Access helpful tools like a "Can My PC Run GTA6?" checker (placeholder), fun quizzes, and a meme generator (coming soon).
+*   **Latest News**: Stay updated with gaming news highlights from official sources and popular communities.
+*   **Responsive Design**: A modern, engaging UI/UX with responsive design, animated elements, and intuitive navigation across all devices.
+
+## Tech Stack
+
+*   **Frontend**: React, TypeScript
+*   **Routing**: React Router
+*   **Styling**: Tailwind CSS, Shadcn/ui components
+*   **Icons**: Lucide React
+*   **Backend**: Supabase (Auth, Database, Edge Functions)
+*   **Build Tool**: Vite
+*   **Deployment**: Vercel
 
 ## Local Development
 
@@ -38,35 +54,9 @@ To get GamexBuddy up and running on your local machine:
     ```
     The application will typically be available at `http://localhost:8080`.
 
-## GitHub Workflow
+## Deployment Notes
 
-*   **Commit often**: Make small, atomic commits with clear messages.
-*   **Push to your branch**: Regularly push your changes to your feature branch.
-*   **Create Pull Requests**: When a feature is complete, open a pull request to merge into `main`.
+This project is configured for deployment on platforms like Vercel. Ensure your environment variables (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`) are correctly set in your deployment environment.
 
-## Supabase Setup
-
-GamexBuddy uses Supabase for backend services, including authentication and database management.
-
-1.  **Create a Supabase Project**: If you haven't already, create a new project on the [Supabase website](https://supabase.com/).
-2.  **Retrieve Credentials**: Find your `Project URL` and `Anon Key` in your Supabase project settings under `API`.
-3.  **Environment Variables**: Add these credentials to your `.env` file as `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
-4.  **Database Schema**: Any database tables or RLS policies will be managed through SQL commands provided by Dyad.
-
-## Tech Stack & Design Approach
-
-*   **Frontend**: React, TypeScript
-*   **Routing**: React Router
-*   **Styling**: Tailwind CSS, Shadcn/ui components
-*   **Icons**: Lucide React
-*   **Backend**: Supabase (Auth, Database, Edge Functions)
-*   **Design Principles**: Responsive, modern, gaming-themed UI with neon accents and glassmorphism effects.
-
-## Key Files
-
-*   `src/App.tsx`: Main application component, handles routing.
-*   `src/pages/Index.tsx`: The landing page, featuring news, game hubs, and community highlights.
-*   `src/components/layout/Navbar.tsx`: Top navigation bar with main links and platform dropdown.
-*   `src/components/layout/Footer.tsx`: Bottom navigation, community links, and social media.
-*   `src/integrations/supabase/client.ts`: Supabase client initialization.
-*   `src/lib/api.ts`: Utility for fetching external data (e.g., Rockstar news, Reddit memes).
+---
+*Built by toqeer*

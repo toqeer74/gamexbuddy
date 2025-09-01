@@ -1,5 +1,4 @@
 import React from "react";
-import { MadeWithDyad } from "@/components/made-with-dyad";
 import CountdownTimer from "@/components/common/CountdownTimer";
 import TrailerEmbed from "@/components/common/TrailerEmbed";
 import NewsCard from "@/components/common/NewsCard";
@@ -260,8 +259,6 @@ const Index = () => {
           </div>
         </Card>
       </section>
-
-      <MadeWithDyad />
     </div>
   );
 };

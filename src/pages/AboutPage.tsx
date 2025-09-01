@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, Rocket, Lightbulb } from "lucide-react";
+import { Users, Rocket, Lightbulb, MessageSquare } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const AboutPage = () => {
   return (
@@ -46,9 +47,40 @@ const AboutPage = () => {
 
       <div className="mt-16 text-center">
         <h2 className="text-3xl font-bold mb-6 text-primary drop-shadow-lg">Meet the Team</h2>
-        <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-          GamexBuddy is built by a dedicated team of gamers and developers passionate about creating the best possible experience for you. More details about our team members coming soon!
+        <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
+          GamexBuddy is built by a dedicated team of gamers and developers passionate about creating the best possible experience for you.
         </p>
+        <div className="flex justify-center gap-8 flex-wrap">
+          {/* Placeholder Team Member 1 */}
+          <div className="flex flex-col items-center">
+            <img
+              src="https://api.dicebear.com/7.x/adventurer/svg?seed=Buddy&flip=true"
+              alt="Team Member Buddy"
+              className="w-24 h-24 rounded-full object-cover border-4 border-purple-500 shadow-lg mb-2"
+            />
+            <p className="font-semibold text-white">Buddy</p>
+            <p className="text-sm text-gray-400">Founder & Lead Dev</p>
+          </div>
+          {/* Placeholder Team Member 2 */}
+          <div className="flex flex-col items-center">
+            <img
+              src="https://api.dicebear.com/7.x/adventurer/svg?seed=Gamer&flip=true"
+              alt="Team Member Gamer"
+              className="w-24 h-24 rounded-full object-cover border-4 border-pink-500 shadow-lg mb-2"
+            />
+            <p className="font-semibold text-white">Gamer</p>
+            <p className="text-sm text-gray-400">Community Manager</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-16 text-center">
+        <a href="https://discord.com" target="_blank" rel="noopener noreferrer">
+          <Button className="px-8 py-3 rounded-full bg-blue-600 text-white font-bold shadow-lg hover:bg-blue-700 transition transform hover:scale-105 flex items-center gap-2
+                             drop-shadow-[0_0_10px_rgba(59,130,246,0.7)] hover:drop-shadow-[0_0_20px_rgba(59,130,246,0.9)]">
+            <MessageSquare className="h-5 w-5" /> Join our Discord
+          </Button>
+        </a>
       </div>
     </div>
   );

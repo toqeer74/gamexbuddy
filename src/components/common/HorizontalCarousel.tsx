@@ -7,9 +7,11 @@ import { cn } from "@/lib/utils";
 interface HorizontalCarouselProps {
   children: React.ReactNode;
   className?: string;
+  autoplay?: boolean;
+  interval?: number; // in milliseconds
 }
 
-const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({ children, className }) => {
+const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({ children, className, autoplay = false, interval = 3000 }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
   const [prevBtnDisabled, setPrevBtnDisabled] = React.useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = React.useState(true);
@@ -32,7 +34,31 @@ const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({ children, class
     onSelect(emblaApi);
     emblaApi.on("reInit", onSelect);
     emblaApi.on("select", onSelect);
-  }, [emblaApi, onSelect]);
+
+    let autoplayTimer: ReturnType<typeof setTimeout>;
+
+    const startAutoplay = () => {
+      if (autoplay) {
+        autoplayTimer = setTimeout(() => {
+          emblaApi.scrollNext();
+        }, interval);
+      }
+    };
+
+    const stopAutoplay = () => {
+      clearTimeout(autoplayTimer);
+    };
+
+    emblaApi.on("pointerDown", stopAutoplay);
+    emblaApi.on("settle", startAutoplay);
+    startAutoplay(); // Start autoplay initially
+
+    return () => {
+      stopAutoplay();
+      emblaApi.off("pointerDown", stopAutoplay);
+      emblaApi.off("settle", startAutoplay);
+    };
+  }, [emblaApi, onSelect, autoplay, interval]);
 
   return (
     <div className={cn("relative", className)}>

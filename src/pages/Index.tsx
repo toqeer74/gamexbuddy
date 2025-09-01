@@ -12,7 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Gamepad2, Blocks, Swords, MessageSquare } from "lucide-react"; // Import MessageSquare for Discord button
+import { Gamepad2, Blocks, Swords, Monitor, Gamepad, Smartphone, Apple, MessageSquare } from "lucide-react"; // Import MessageSquare for Discord button
 import { fetchRockstarNews, fetchRedditMemes } from "@/lib/api";
 
 interface NewsHighlight {
@@ -106,7 +106,7 @@ const Index = () => {
       {/* Latest News */}
       <section className="container py-16">
         <h2 className="text-4xl font-bold text-center mb-12">Latest News Highlights</h2>
-        <HorizontalCarousel className="max-w-full mx-auto">
+        <HorizontalCarousel className="max-w-full mx-auto" autoplay={true} interval={5000}>
           {newsHighlights.map((news) => (
             <NewsCard
               key={news.id}
@@ -132,16 +132,34 @@ const Index = () => {
               icon={<Gamepad2 size={64} />}
             />
             <GameHubCard
-              title="Minecraft Hub"
-              imageUrl="https://images.unsplash.com/photo-1621929798704-0212f827923d?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Pixelated grass block
-              link="/minecraft-hub"
-              icon={<Blocks size={64} />}
+              title="PC Hub"
+              imageUrl="https://images.unsplash.com/photo-1598550463471-689296a1275b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Gaming rig image
+              link="/pc-hub"
+              icon={<Monitor size={64} />}
             />
             <GameHubCard
-              title="PUBG Hub"
-              imageUrl="https://images.unsplash.com/photo-1586182987400-31e826265b07?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Desert battleground
-              link="/pubg-hub"
-              icon={<Swords size={64} />}
+              title="PlayStation Hub"
+              imageUrl="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // DualSense controller
+              link="/playstation-hub"
+              icon={<Gamepad size={64} />}
+            />
+            <GameHubCard
+              title="Xbox Hub"
+              imageUrl="https://images.unsplash.com/photo-1612287235008-377e72169f46?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Green glowing logo background
+              link="/xbox-hub"
+              icon={<Gamepad size={64} />}
+            />
+            <GameHubCard
+              title="Android Hub"
+              imageUrl="https://images.unsplash.com/photo-1612287235008-377e72169f46?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Phone + mobile game screenshot
+              link="/android-hub"
+              icon={<Smartphone size={64} />}
+            />
+            <GameHubCard
+              title="iOS Hub"
+              imageUrl="https://images.unsplash.com/photo-1612287235008-377e72169f46?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Apple logo background
+              link="/ios-hub"
+              icon={<Apple size={64} />}
             />
           </div>
         </div>
@@ -194,8 +212,11 @@ const Index = () => {
           <div className="relative z-10">
             <CardHeader className="text-center">
               <CardTitle className="text-3xl font-bold mb-4 text-white">Join Our Newsletter!</CardTitle>
-              <p className="text-gray-300">
+              <p className="text-gray-300 mb-4">
                 Get the latest gaming news, updates, and exclusive content directly to your inbox.
+              </p>
+              <p className="text-sm text-gray-400 italic">
+                No spam. Only the hottest gaming news.
               </p>
             </CardHeader>
             <CardContent>

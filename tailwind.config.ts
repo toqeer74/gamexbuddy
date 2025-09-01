@@ -97,11 +97,20 @@ export default {
             boxShadow: "0 0 20px rgba(236,72,153,0.9)", // Pulsing shadow
           },
         },
+        "synthwave-pulse": {
+          "0%, 100%": {
+            backgroundPosition: "0% 50%",
+          },
+          "50%": {
+            backgroundPosition: "100% 50%",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "pulse-glow": "pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "synthwave-pulse": "synthwave-pulse 10s ease infinite",
       },
     },
   },

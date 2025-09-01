@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Gamepad2 } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Menu, Gamepad2, ChevronDown, Monitor, Gamepad, Smartphone, Apple } from "lucide-react"; // Changed Playstation, Xbox to Gamepad
 
 const Navbar = () => {
   return (
@@ -16,17 +17,48 @@ const Navbar = () => {
           <Link to="/gta6-hub" className="text-sm font-medium hover:text-primary">
             GTA6 Hub
           </Link>
-          <Link to="/minecraft-hub" className="text-sm font-medium hover:text-primary">
-            Minecraft
-          </Link>
-          <Link to="/pubg-hub" className="text-sm font-medium hover:text-primary">
-            PUBG
-          </Link>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="flex items-center gap-1 text-sm font-medium hover:text-primary">
+                Platforms <ChevronDown className="ml-1 h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-48">
+              <DropdownMenuItem asChild>
+                <Link to="/pc-hub" className="flex items-center gap-2">
+                  <Monitor className="h-4 w-4" /> PC Hub
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/playstation-hub" className="flex items-center gap-2">
+                  <Gamepad className="h-4 w-4" /> PlayStation Hub {/* Using Gamepad */}
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/xbox-hub" className="flex items-center gap-2">
+                  <Gamepad className="h-4 w-4" /> Xbox Hub {/* Using Gamepad */}
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/android-hub" className="flex items-center gap-2">
+                  <Smartphone className="h-4 w-4" /> Android Hub
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/ios-hub" className="flex items-center gap-2">
+                  <Apple className="h-4 w-4" /> iOS Hub
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <Link to="/community" className="text-sm font-medium hover:text-primary">
             Community
           </Link>
           <Link to="/tools" className="text-sm font-medium hover:text-primary">
             Tools
+          </Link>
+          <Link to="/about" className="text-sm font-medium hover:text-primary">
+            About
           </Link>
         </nav>
         <div className="md:hidden">
@@ -42,17 +74,32 @@ const Navbar = () => {
                 <Link to="/gta6-hub" className="text-lg font-medium hover:text-primary">
                   GTA6 Hub
                 </Link>
-                <Link to="/minecraft-hub" className="text-lg font-medium hover:text-primary">
-                  Minecraft
-                </Link>
-                <Link to="/pubg-hub" className="text-lg font-medium hover:text-primary">
-                  PUBG
-                </Link>
+                <div className="flex flex-col space-y-2 pl-4">
+                  <span className="text-lg font-medium text-muted-foreground">Platforms</span>
+                  <Link to="/pc-hub" className="text-base font-medium hover:text-primary pl-2">
+                    PC Hub
+                  </Link>
+                  <Link to="/playstation-hub" className="text-base font-medium hover:text-primary pl-2">
+                    PlayStation Hub
+                  </Link>
+                  <Link to="/xbox-hub" className="text-base font-medium hover:text-primary pl-2">
+                    Xbox Hub
+                  </Link>
+                  <Link to="/android-hub" className="text-base font-medium hover:text-primary pl-2">
+                    Android Hub
+                  </Link>
+                  <Link to="/ios-hub" className="text-base font-medium hover:text-primary pl-2">
+                    iOS Hub
+                  </Link>
+                </div>
                 <Link to="/community" className="text-lg font-medium hover:text-primary">
                   Community
                 </Link>
                 <Link to="/tools" className="text-lg font-medium hover:text-primary">
                   Tools
+                </Link>
+                <Link to="/about" className="text-lg font-medium hover:text-primary">
+                  About
                 </Link>
               </nav>
             </SheetContent>

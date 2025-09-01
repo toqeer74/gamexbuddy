@@ -10,7 +10,12 @@ import MinecraftHub from "./pages/MinecraftHub";
 import PubgHub from "./pages/PubgHub";
 import CommunityPage from "./pages/CommunityPage";
 import ToolsPage from "./pages/ToolsPage";
-import AboutPage from "./pages/AboutPage"; // Import the new AboutPage
+import AboutPage from "./pages/AboutPage";
+import PCHub from "./pages/PCHub";
+import PlayStationHub from "./pages/PlayStationHub";
+import XboxHub from "./pages/XboxHub";
+import AndroidHub from "./pages/AndroidHub";
+import IosHub from "./pages/IosHub"; // Changed import from iOSHub to IosHub
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,7 +34,12 @@ const App = () => (
             <Route path="/pubg-hub" element={<PubgHub />} />
             <Route path="/community" element={<CommunityPage />} />
             <Route path="/tools" element={<ToolsPage />} />
-            <Route path="/about" element={<AboutPage />} /> {/* Add the new AboutPage route */}
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/pc-hub" element={<PCHub />} />
+            <Route path="/playstation-hub" element={<PlayStationHub />} />
+            <Route path="/xbox-hub" element={<XboxHub />} />
+            <Route path="/android-hub" element={<AndroidHub />} />
+            <Route path="/ios-hub" element={<IosHub />} /> {/* Changed element from iOSHub to IosHub */}
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

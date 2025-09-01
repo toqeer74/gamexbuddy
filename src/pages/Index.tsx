@@ -68,23 +68,30 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
-      <section className="relative w-full h-[700px] bg-gradient-to-br from-purple-900 via-blue-800 to-pink-700 overflow-hidden flex items-center justify-center">
+      <section className="relative text-center py-20 bg-gradient-to-br from-purple-800 via-pink-600 to-cyan-600 text-white overflow-hidden">
+        {/* Background glow effect - using a placeholder image for now */}
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{ backgroundImage: "url('https://via.placeholder.com/1920x1080/000000/FFFFFF?text=Vice+City+Skyline')" }}
         ></div>
-        <div className="container text-center z-10 relative py-10">
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 drop-shadow-lg text-white">
-            GamexBuddy: Your Ultimate Gaming Hub
+
+        <div className="relative z-10 container">
+          <h1 className="text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">
+            GamexBuddy
           </h1>
-          <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto opacity-90 text-white">
-            Stay updated with GTA6, explore other game hubs, and connect with a vibrant community!
+          <p className="text-lg md:text-xl mb-8 text-gray-200">
+            Stay updated with <span className="font-bold text-pink-400">GTA6</span>, explore hubs, and join the community.
           </p>
-          <CountdownTimer targetDate={gta6ReleaseDate} />
-          <div className="mt-12 max-w-4xl mx-auto p-4 rounded-xl bg-white/10 backdrop-blur-md shadow-2xl
-                        border border-cyan-500/50 drop-shadow-[0_0_15px_rgba(0,255,255,0.5)]
+
+          {/* Countdown */}
+          <div className="mb-10">
+            <CountdownTimer targetDate={gta6ReleaseDate} />
+          </div>
+
+          {/* Trailer */}
+          <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl backdrop-blur bg-white/10 border border-white/20
                         hover:shadow-cyan-500/70 hover:drop-shadow-[0_0_25px_rgba(0,255,255,0.9)] transition-all duration-300">
-            <TrailerEmbed youtubeId="QdBZY2fkU-0" title="GTA 6 Official Trailer 1" />
+            <TrailerEmbed youtubeId="QdBZY2fkU-0" title="GTA6 Official Trailer" />
           </div>
         </div>
       </section>

@@ -37,16 +37,37 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
       return;
     }
 
+    // Assign different neon colors based on interval for variety
+    let neonColorClass = "";
+    switch (interval) {
+      case "days":
+        neonColorClass = "text-cyan-400";
+        break;
+      case "hours":
+        neonColorClass = "text-pink-400";
+        break;
+      case "minutes":
+        neonColorClass = "text-yellow-400";
+        break;
+      case "seconds":
+        neonColorClass = "text-green-400";
+        break;
+      default:
+        neonColorClass = "text-white";
+    }
+
     timerComponents.push(
-      <span key={interval} className="text-5xl md:text-7xl font-mono font-extrabold text-cyan-400 drop-shadow-[0_0_15px_rgba(0,255,255,0.7)] mx-2">
-        {timeLeft[interval as keyof typeof timeLeft]} <span className="text-xl font-medium block text-white opacity-80">{interval}</span>
-      </span>
+      <div key={interval} className="flex flex-col items-center mx-2">
+        <span className={`text-5xl md:text-7xl font-mono font-extrabold neon-glow ${neonColorClass}`}>
+          {String(timeLeft[interval as keyof typeof timeLeft]).padStart(2, '0')}
+        </span>
+        <span className="text-xl font-medium block text-white opacity-80 uppercase">{interval}</span>
+      </div>
     );
   });
 
   return (
     <div className="text-center p-4">
-      <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white drop-shadow-md">GTA6 Countdown</h2>
       {timerComponents.length ? (
         <div className="flex justify-center items-baseline">
           {timerComponents}

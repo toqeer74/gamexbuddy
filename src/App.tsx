@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { Suspense, lazy } from "react";
 import Layout from "./components/layout/Layout";
+import Analytics from "@/components/Analytics";
 const Index = lazy(() => import("./pages/Index"));
 const Gta6Hub = lazy(() => import("./pages/Gta6Hub"));
 const Gta6Layout = lazy(() => import("./pages/gta6/Gta6Layout"));
@@ -39,6 +40,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <Analytics />
         <Layout>
           <Suspense fallback={<div style={{padding:20}}>Loading…</div>}>
           <Routes>

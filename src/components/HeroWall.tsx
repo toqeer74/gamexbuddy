@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ReactLazy, { Suspense } from "react";
+import { lazy } from "react";
+const YouTubeModal = lazy(() => import("@/components/YouTubeModal"));
 import HeroCountdownPro from "@/components/HeroCountdownPro";
 
 const TRAILERS = [
@@ -11,6 +14,7 @@ const TRAILERS = [
 export default function HeroWall() {
   const targetISO = import.meta.env.VITE_GTA6_DATE || "2026-01-01T00:00:00-05:00";
   const [active, setActive] = useState(TRAILERS[0].id);
+  const [open, setOpen] = useState(false);
 
   return (
     <section className="page-hero" style={{ position: "relative" }}>
@@ -38,22 +42,23 @@ export default function HeroWall() {
           </div>
         </div>
 
-        <div className="hero-media">
+        <div className="hero-media" onClick={() => setOpen(true)} style={{cursor:'pointer'}}>
           <AnimatePresence mode="wait">
-            <motion.iframe
+            <motion.img
               key={active}
               className="w-full h-full"
-              src={`https://www.youtube.com/embed/${active}`}
-              title="Trailer"
+              src={`https://i.ytimg.com/vi/${active}/maxresdefault.jpg`}
+              alt="Trailer preview"
               loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.35 }}
             />
           </AnimatePresence>
+          <div className="tcard__overlay" style={{position:'absolute', inset:0}}>
+            <div className="tcard__play">▶</div>
+          </div>
         </div>
       </div>
 
@@ -64,7 +69,7 @@ export default function HeroWall() {
               key={t.id}
               className="card-glass"
               style={{ minWidth: 220, borderRadius: 14, overflow: "hidden", textAlign: "left" }}
-              onClick={() => setActive(t.id)}
+              onClick={() => { setActive(t.id); setOpen(true); }}
               aria-label={`Play ${t.title}`}
             >
               <img src={t.thumb} alt="" style={{ width: "100%", height: 120, objectFit: "cover" }} />
@@ -73,7 +78,11 @@ export default function HeroWall() {
           ))}
         </div>
       </div>
+      <Suspense fallback={null}>
+        {open && (
+          <YouTubeModal open={open} title="Trailer" youtubeId={active} onClose={() => setOpen(false)} />
+        )}
+      </Suspense>
     </section>
   );
 }
-

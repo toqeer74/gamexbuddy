@@ -3,7 +3,9 @@ import HeroWall from "@/components/HeroWall";
 import GameAuthorityMarquee from "@/components/GameAuthorityMarquee";
 import NewsFeed from "@/components/NewsFeed";
 import MagazineGrid from "@/components/MagazineGrid";
-import GuideCarousel from "@/components/GuideCarousel";
+import React, { lazy, Suspense } from "react";
+import GuideCarouselSkeleton from "@/components/GuideCarouselSkeleton";
+const GuideCarousel = lazy(() => import("@/components/GuideCarousel"));
 
 import "@/styles/home.css";
 
@@ -14,7 +16,9 @@ export default function HomePage() {
       <GameAuthorityMarquee />
       <NewsFeed />
       <MagazineGrid />
-      <GuideCarousel />
+      <Suspense fallback={<GuideCarouselSkeleton />}>
+        <GuideCarousel />
+      </Suspense>
     </>
   );
 }

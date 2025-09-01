@@ -30,9 +30,12 @@ const CommunityContentCard: React.FC<CommunityContentCardProps> = ({
   return (
     <Card className="overflow-hidden relative group cursor-pointer rounded-lg shadow-lg
                    hover:scale-[1.02] transition-transform duration-300 ease-in-out
-                   hover:ring-2 hover:ring-purple-500 hover:ring-offset-2 hover:ring-offset-background">
+                   bg-white/10 backdrop-blur-sm border border-white/20
+                   hover:ring-2 hover:ring-purple-500 hover:ring-offset-2 hover:ring-offset-background
+                   drop-shadow-[0_0_10px_rgba(168,85,247,0.5)] hover:drop-shadow-[0_0_20px_rgba(168,85,247,0.9)]">
       {isTrending && (
-        <Badge className="absolute top-3 left-3 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-semibold shadow-md flex items-center gap-1 z-10">
+        <Badge className="absolute top-3 left-3 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-semibold shadow-md flex items-center gap-1 z-10
+                          drop-shadow-[0_0_8px_rgba(249,115,22,0.7)]">
           <Flame className="h-3 w-3" /> Trending
         </Badge>
       )}
@@ -46,22 +49,23 @@ const CommunityContentCard: React.FC<CommunityContentCardProps> = ({
           <UserCircle2 className="h-8 w-8 text-muted-foreground" />
         )}
         <div>
-          <CardTitle className="text-lg font-bold leading-tight">
+          <CardTitle className="text-lg font-bold leading-tight text-white">
             <Link to={link} className="hover:text-primary transition-colors duration-200">
               {title}
             </Link>
           </CardTitle>
-          <p className="text-xs text-muted-foreground">by {authorName}</p>
+          <p className="text-xs text-gray-300">by {authorName}</p>
         </div>
       </CardHeader>
       <CardContent className="p-4 pt-2 flex flex-col justify-between">
-        <CardDescription className="text-sm text-muted-foreground line-clamp-2 mb-3">{description}</CardDescription>
+        <CardDescription className="text-sm text-gray-400 line-clamp-2 mb-3">{description}</CardDescription>
         <div className="flex justify-between items-center">
-          <Link to={link} className="text-sm text-primary hover:underline font-medium">
+          <Link to={link} className="text-sm text-cyan-300 hover:underline font-medium">
             View {type === "meme" ? "Meme" : type === "quiz" ? "Quiz" : "Discussion"}
           </Link>
           {xp !== undefined && (
-            <Badge className="bg-green-600 text-white text-xs px-2 py-1 rounded-full font-semibold shadow-md drop-shadow-[0_0_5px_rgba(34,197,94,0.5)]">
+            <Badge className="bg-green-600 text-white text-xs px-2 py-1 rounded-full font-semibold shadow-md
+                              drop-shadow-[0_0_8px_rgba(34,197,94,0.7)]">
               XP: {xp}
             </Badge>
           )}

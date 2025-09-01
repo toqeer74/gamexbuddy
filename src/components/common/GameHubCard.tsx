@@ -18,7 +18,9 @@ const GameHubCard: React.FC<GameHubCardProps> = ({ title, imageUrl, link, icon }
                    bg-cover bg-center group rounded-lg shadow-lg
                    transition-all duration-300 ease-in-out
                    hover:shadow-xl hover:shadow-primary/30
-                   hover:rotate-y-3 hover:rotate-x-3 hover:scale-105"
+                   hover:rotate-y-3 hover:rotate-x-3 hover:scale-105
+                   hover:ring-2 hover:ring-cyan-500 hover:ring-offset-2 hover:ring-offset-background
+                   drop-shadow-[0_0_10px_rgba(0,255,255,0.5)] hover:drop-shadow-[0_0_20px_rgba(0,255,255,0.9)]"
         style={{ backgroundImage: `url(${imageUrl})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent group-hover:from-black/90 group-hover:via-black/50 transition-all duration-300"></div>

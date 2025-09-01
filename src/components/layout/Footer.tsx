@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { MadeWithDyad } from "@/components/made-with-dyad";
-import { MessageSquare, Twitter, Send } from "lucide-react"; // Changed Discord to MessageSquare, Telegram to Send
+import { MessageSquare, Twitter, Send } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -24,14 +24,14 @@ const Footer = () => {
         </nav>
 
         <div className="flex space-x-6">
-          <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-500 transition-colors drop-shadow-[0_0_8px_rgba(59,130,246,0.7)]">
-            <MessageSquare size={24} /> {/* Changed to MessageSquare */}
+          <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-500 transition-colors drop-shadow-[0_0_8px_rgba(59,130,246,0.7)] hover:drop-shadow-[0_0_15px_rgba(59,130,246,1)]">
+            <MessageSquare size={24} />
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors drop-shadow-[0_0_8px_rgba(34,211,238,0.7)]">
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors drop-shadow-[0_0_8px_rgba(34,211,238,0.7)] hover:drop-shadow-[0_0_15px_rgba(34,211,238,1)]">
             <Twitter size={24} />
           </a>
-          <a href="https://telegram.org" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-sky-500 transition-colors drop-shadow-[0_0_8px_rgba(14,165,233,0.7)]">
-            <Send size={24} /> {/* Changed to Send */}
+          <a href="https://telegram.org" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-sky-500 transition-colors drop-shadow-[0_0_8px_rgba(14,165,233,0.7)] hover:drop-shadow-[0_0_15px_rgba(14,165,233,1)]">
+            <Send size={24} />
           </a>
         </div>
       </div>

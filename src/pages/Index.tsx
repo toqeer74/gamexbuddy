@@ -173,12 +173,13 @@ const Index = () => {
 
       {/* Newsletter Signup */}
       <section className="container py-16">
-        <Card className="max-w-2xl mx-auto p-8 bg-white/10 backdrop-blur-md shadow-lg relative overflow-hidden rounded-xl border border-white/20">
+        <Card className="max-w-2xl mx-auto p-8 bg-white/10 backdrop-blur-md shadow-lg relative overflow-hidden rounded-xl border border-white/20
+                        drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
           {/* Faded gaming background image */}
           <div
             className="absolute inset-0 opacity-10 z-0"
             style={{
-              backgroundImage: "url('https://via.placeholder.com/800x400/000000/FFFFFF?text=Pixel+Pattern')",
+              backgroundImage: "url('https://images.unsplash.com/photo-1542751371-adc38148e7fd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')", // Blurred GTA-style background
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
@@ -219,9 +220,10 @@ const Index = () => {
                 </div>
                 <Button
                   type="submit"
-                  className="w-full rounded-lg text-lg py-3 bg-pink-600 hover:bg-pink-700 transition-all duration-300
-                             shadow-lg shadow-pink-600/50 hover:shadow-xl hover:shadow-pink-700/70
-                             drop-shadow-[0_0_10px_rgba(236,72,153,0.7)]"
+                  className="w-full rounded-lg text-lg py-3 bg-gradient-to-r from-pink-600 to-cyan-500 text-white font-bold
+                             hover:from-pink-700 hover:to-cyan-600 transition-all duration-300
+                             shadow-lg shadow-pink-600/50 hover:shadow-xl hover:shadow-cyan-500/70
+                             drop-shadow-[0_0_10px_rgba(236,72,153,0.7)] hover:drop-shadow-[0_0_15px_rgba(0,255,255,0.9)]"
                 >
                   Start
                 </Button>

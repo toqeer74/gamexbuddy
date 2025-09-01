@@ -39,7 +39,7 @@ const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({ children, class
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex -ml-4">
           {React.Children.map(children, (child) => (
-            <div className="flex-none min-w-0 pl-4" style={{ flex: "0 0 33.3333%" }}> {/* Adjust width as needed */}
+            <div className="flex-none min-w-0 pl-4 w-full sm:w-1/2 lg:w-1/3"> {/* Adjusted width for responsiveness */}
               {child}
             </div>
           ))}

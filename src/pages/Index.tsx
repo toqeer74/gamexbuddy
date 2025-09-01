@@ -5,7 +5,7 @@ import TrailerEmbed from "@/components/common/TrailerEmbed";
 import NewsCard from "@/components/common/NewsCard";
 import GameHubCard from "@/components/common/GameHubCard";
 import CommunityContentCard from "@/components/common/CommunityContentCard";
-import HorizontalCarousel from "@/components/common/HorizontalCarousel"; // Import the new carousel
+import HorizontalCarousel from "@/components/common/HorizontalCarousel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Gamepad2, Blocks, Swords } from "lucide-react";
-import { fetchRockstarNews, fetchRedditMemes } from "@/lib/api"; // Import API functions
+import { fetchRockstarNews, fetchRedditMemes } from "@/lib/api";
 
 interface NewsHighlight {
   id: string;
@@ -46,28 +46,27 @@ const Index = () => {
   React.useEffect(() => {
     const loadData = async () => {
       const news = await fetchRockstarNews();
-      setNewsHighlights(news.slice(0, 6)); // Display more news items for carousel
+      setNewsHighlights(news.slice(0, 6));
 
       const memes = await fetchRedditMemes();
-      setCommunityHighlights(memes.slice(0, 3)); // Display top 3 memes
+      setCommunityHighlights(memes.slice(0, 3));
     };
     loadData();
   }, []);
 
-  const gta6ReleaseDate = "2025-12-01T00:00:00Z"; // Placeholder for GTA6 release date
+  const gta6ReleaseDate = "2025-12-01T00:00:00Z";
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Newsletter Signup:", { email, telegramOptIn });
     alert("Thank you for signing up! (Check console for details)");
-    // In a real application, you would send this data to a backend service
-    // like Mailchimp, Brevo, or MailerLite here.
     setEmail("");
     setTelegramOptIn(false);
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground"
+         style={{ backgroundImage: "radial-gradient(at 50% 0%, hsl(var(--primary)) 0%, transparent 70%), radial-gradient(at 0% 100%, hsl(var(--secondary)) 0%, transparent 70%)", backgroundAttachment: "fixed" }}>
       {/* Hero Section */}
       <section className="relative min-h-screen flex flex-col justify-center items-center text-center bg-gradient-to-br from-pink-600 via-purple-700 to-cyan-700 overflow-hidden py-20">
         {/* Glow background or GTA skyline */}
@@ -149,7 +148,7 @@ const Index = () => {
       </section>
 
       {/* Community Preview */}
-      <section className="bg-gray-900 text-white py-16"> {/* Dark background for community */}
+      <section className="bg-gray-900 text-white py-16">
         <div className="container text-center">
           <h2 className="text-4xl font-bold mb-12">From Our Community</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

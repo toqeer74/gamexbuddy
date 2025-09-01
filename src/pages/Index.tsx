@@ -12,7 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Gamepad2, Blocks, Swords } from "lucide-react";
+import { Gamepad2, Blocks, Swords, MessageSquare } from "lucide-react"; // Import MessageSquare for Discord button
 import { fetchRockstarNews, fetchRedditMemes } from "@/lib/api";
 
 interface NewsHighlight {
@@ -96,7 +96,7 @@ const Index = () => {
 
           {/* CTA */}
           <Link to="/community">
-            <Button className="mt-10 px-8 py-3 rounded-full bg-pink-500 text-white font-bold shadow-lg hover:bg-pink-600 transition transform hover:scale-105">
+            <Button className="mt-10 px-8 py-3 rounded-full bg-pink-500 text-white font-bold shadow-lg hover:bg-pink-600 transition transform hover:scale-105 animate-pulse-glow">
               Join the Community
             </Button>
           </Link>
@@ -166,6 +166,14 @@ const Index = () => {
                 authorName={item.authorName}
               />
             ))}
+          </div>
+          <div className="mt-12">
+            <a href="https://discord.com" target="_blank" rel="noopener noreferrer">
+              <Button className="px-8 py-3 rounded-full bg-blue-600 text-white font-bold shadow-lg hover:bg-blue-700 transition transform hover:scale-105 flex items-center gap-2
+                                 drop-shadow-[0_0_10px_rgba(59,130,246,0.7)] hover:drop-shadow-[0_0_20px_rgba(59,130,246,0.9)]">
+                <MessageSquare className="h-5 w-5" /> Join our Discord
+              </Button>
+            </a>
           </div>
         </div>
       </section>

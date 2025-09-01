@@ -50,7 +50,7 @@ const CommunityContentCard: React.FC<CommunityContentCardProps> = ({
         )}
         <div>
           <CardTitle className="text-lg font-bold leading-tight text-white">
-            <Link to={link} className="hover:text-primary transition-colors duration-200">
+            <Link to={link} className="hover:text-primary transition-colors duration-200 hover:text-purple-300 hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.7)]">
               {title}
             </Link>
           </CardTitle>
@@ -60,7 +60,7 @@ const CommunityContentCard: React.FC<CommunityContentCardProps> = ({
       <CardContent className="p-4 pt-2 flex flex-col justify-between">
         <CardDescription className="text-sm text-gray-400 line-clamp-2 mb-3">{description}</CardDescription>
         <div className="flex justify-between items-center">
-          <Link to={link} className="text-sm text-cyan-300 hover:underline font-medium">
+          <Link to={link} className="text-sm text-cyan-300 hover:underline font-medium hover:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)]">
             View {type === "meme" ? "Meme" : type === "quiz" ? "Quiz" : "Discussion"}
           </Link>
           {xp !== undefined && (

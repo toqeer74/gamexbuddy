@@ -39,7 +39,8 @@ const GameHubCard: React.FC<GameHubCardProps> = ({ title, imageUrl, link, icon }
             variant="outline"
             className="bg-white/20 text-white border-white/30 backdrop-blur-sm
                        group-hover:bg-primary group-hover:text-primary-foreground
-                       group-hover:border-primary transition-all duration-300"
+                       group-hover:border-primary transition-all duration-300
+                       hover:drop-shadow-[0_0_10px_rgba(0,255,255,0.7)]"
           >
             Explore Hub
           </Button>

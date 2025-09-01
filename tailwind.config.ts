@@ -105,12 +105,25 @@ export default {
             backgroundPosition: "100% 50%",
           },
         },
+        "neon-flicker": {
+          "0%, 19%, 21%, 23%, 25%, 54%, 56%, 100%": {
+            textShadow: "0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #0fa, 0 0 80px #0fa, 0 0 90px #0fa, 0 0 100px #0fa, 0 0 150px #0fa",
+            filter: "brightness(1)",
+            opacity: "1",
+          },
+          "20%, 24%, 55%": {
+            textShadow: "none",
+            filter: "brightness(1.5)",
+            opacity: "0.8",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "pulse-glow": "pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "synthwave-pulse": "synthwave-pulse 10s ease infinite",
+        "neon-flicker": "neon-flicker 1.5s infinite alternate",
       },
     },
   },

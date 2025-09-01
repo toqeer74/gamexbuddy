@@ -11,7 +11,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Gamepad2, Blocks, Swords, Monitor, Gamepad, Smartphone, Apple, MessageSquare } from "lucide-react"; // Import MessageSquare for Discord button
+import { Gamepad2, Blocks, Swords, Monitor, Gamepad, Smartphone, Apple, MessageSquare } from "lucide-react";
 import { fetchRockstarNews, fetchRedditMemes } from "@/lib/api";
 
 interface NewsHighlight {
@@ -64,22 +64,26 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground"
-         style={{ backgroundImage: "radial-gradient(at 50% 0%, hsl(var(--primary)) 0%, transparent 70%), radial-gradient(at 0% 100%, hsl(var(--secondary)) 0%, transparent 70%)", backgroundAttachment: "fixed" }}>
+    <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col justify-center items-center text-center bg-gradient-to-br from-pink-600 via-purple-700 to-cyan-700 overflow-hidden py-20">
-        {/* Glow background or GTA skyline */}
+      <section className="relative min-h-screen flex flex-col justify-center items-center text-center bg-gradient-to-br from-gray-950 via-purple-900 to-blue-900 overflow-hidden py-20">
+        {/* Subtle particle-like background effect */}
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-10 blur-xl"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1612287235008-377e72169f46?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" }}
+          className="absolute inset-0 opacity-20 z-0"
+          style={{
+            backgroundImage: "radial-gradient(circle at 20% 30%, rgba(255,0,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(0,255,255,0.1) 0%, transparent 50%)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            animation: "pulse-glow 10s infinite alternate",
+          }}
         ></div>
 
         <div className="relative z-10 container">
-          <h1 className="text-6xl md:text-7xl font-extrabold text-white drop-shadow-lg">
+          <h1 className="text-6xl md:text-7xl font-extrabold text-white drop-shadow-lg animate-neon-flicker">
             GamexBuddy
           </h1>
-          <p className="mt-4 text-xl text-gray-200">
-            Your ultimate <span className="text-pink-400 font-bold">GTA6</span> & gaming hub
+          <p className="mt-4 text-xl text-gray-200 drop-shadow-md">
+            Your ultimate <span className="text-pink-400 font-bold neon-glow">GTA6</span> & gaming hub
           </p>
 
           {/* Countdown */}
@@ -88,14 +92,15 @@ const Index = () => {
           </div>
 
           {/* Trailer */}
-          <div className="mt-12 relative z-10 max-w-4xl w-full mx-auto backdrop-blur bg-white/10 rounded-2xl border border-white/20 shadow-xl
+          <div className="mt-12 relative z-10 max-w-4xl w-full mx-auto backdrop-blur-md bg-white/5 rounded-2xl border border-white/20 shadow-xl
                         hover:shadow-cyan-500/70 hover:drop-shadow-[0_0_25px_rgba(0,255,255,0.9)] transition-all duration-300">
             <TrailerEmbed youtubeId="QdBZY2fkU-0" title="GTA6 Official Trailer" />
           </div>
 
           {/* CTA */}
           <Link to="/community">
-            <Button className="mt-10 px-8 py-3 rounded-full bg-pink-500 text-white font-bold shadow-lg hover:bg-pink-600 transition transform hover:scale-105 animate-pulse-glow">
+            <Button className="mt-10 px-8 py-3 rounded-full bg-pink-500 text-white font-bold shadow-lg hover:bg-pink-600 transition transform hover:scale-105 animate-pulse-glow
+                               drop-shadow-[0_0_15px_rgba(236,72,153,0.7)] hover:drop-shadow-[0_0_25px_rgba(236,72,153,0.9)]">
               Join the Community
             </Button>
           </Link>
@@ -103,8 +108,8 @@ const Index = () => {
       </section>
 
       {/* Latest News */}
-      <section className="container py-16">
-        <h2 className="text-4xl font-bold text-center mb-12">Latest News Highlights</h2>
+      <section className="container py-16 bg-gradient-to-b from-gray-900 to-gray-950">
+        <h2 className="text-4xl font-bold text-center mb-12 text-white drop-shadow-lg">Latest News Highlights</h2>
         <HorizontalCarousel className="max-w-full mx-auto" autoplay={true} interval={5000}>
           {newsHighlights.map((news) => (
             <NewsCard
@@ -120,9 +125,9 @@ const Index = () => {
       </section>
 
       {/* Quick Links to Game Hubs */}
-      <section className="bg-muted py-16">
+      <section className="bg-gradient-to-b from-gray-950 to-black py-16">
         <div className="container text-center">
-          <h2 className="text-4xl font-bold mb-12">Explore Our Game Hubs</h2>
+          <h2 className="text-4xl font-bold mb-12 text-white drop-shadow-lg">Explore Our Game Hubs</h2>
           <div className="flex flex-wrap justify-center gap-8">
             <GameHubCard
               title="GTA6 Hub"
@@ -165,9 +170,9 @@ const Index = () => {
       </section>
 
       {/* Community Preview */}
-      <section className="bg-gray-900 text-white py-16">
+      <section className="bg-gradient-to-b from-black to-gray-950 text-white py-16">
         <div className="container text-center">
-          <h2 className="text-4xl font-bold mb-12">From Our Community</h2>
+          <h2 className="text-4xl font-bold mb-12 text-white drop-shadow-lg">From Our Community</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {communityHighlights.map((item) => (
               <CommunityContentCard
@@ -196,7 +201,7 @@ const Index = () => {
       </section>
 
       {/* Newsletter Signup */}
-      <section className="container py-16">
+      <section className="container py-16 bg-gradient-to-b from-gray-950 to-gray-900">
         <Card className="max-w-2xl mx-auto p-8 bg-white/10 backdrop-blur-md shadow-lg relative overflow-hidden rounded-xl border border-white/20
                         drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
           {/* Faded gaming background image */}
@@ -210,7 +215,7 @@ const Index = () => {
           ></div>
           <div className="relative z-10">
             <CardHeader className="text-center">
-              <CardTitle className="text-3xl font-bold mb-4 text-white">Join Our Newsletter!</CardTitle>
+              <CardTitle className="text-3xl font-bold mb-4 text-white neon-glow">Join Our Newsletter!</CardTitle>
               <p className="text-gray-300 mb-4">
                 Get the latest gaming news, updates, and exclusive content directly to your inbox.
               </p>
@@ -221,7 +226,7 @@ const Index = () => {
             <CardContent>
               <form onSubmit={handleNewsletterSubmit} className="space-y-4">
                 <div>
-                  <Label htmlFor="email" className="text-left block mb-1 text-cyan-300">Email Address</Label>
+                  <Label htmlFor="email" className="text-left block mb-1 text-cyan-300 neon-glow">Email Address</Label>
                   <Input
                     id="email"
                     type="email"

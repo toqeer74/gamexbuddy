@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { MessageSquare, Twitter, Send, Youtube } from "lucide-react"; // Import Youtube icon
+import { MessageSquare, Twitter, Send, Youtube } from "lucide-react";
 
 const Footer = () => {
+  const neonLinkClasses = "hover:text-cyan-300 transition-colors duration-300";
+  const neonIconClasses = "text-gray-400 hover:text-cyan-300 transition-colors drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] hover:drop-shadow-[0_0_15px_rgba(0,255,255,1)]";
+
   return (
     <footer className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-8">
       {/* Animated Gradient Bar */}
@@ -21,50 +24,50 @@ const Footer = () => {
           <div>
             <h3 className="font-bold text-primary mb-2">Explore Hubs</h3>
             <ul className="space-y-1">
-              <li><Link to="/gta6-hub" className="hover:text-cyan-300 transition-colors">GTA6 Hub</Link></li>
-              <li><Link to="/pc-hub" className="hover:text-cyan-300 transition-colors">PC Hub</Link></li>
-              <li><Link to="/playstation-hub" className="hover:text-cyan-300 transition-colors">PlayStation Hub</Link></li>
-              <li><Link to="/xbox-hub" className="hover:text-cyan-300 transition-colors">Xbox Hub</Link></li>
-              <li><Link to="/android-hub" className="hover:text-cyan-300 transition-colors">Android Hub</Link></li>
-              <li><Link to="/ios-hub" className="hover:text-cyan-300 transition-colors">iOS Hub</Link></li>
+              <li><Link to="/gta6-hub" className={neonLinkClasses}>GTA6 Hub</Link></li>
+              <li><Link to="/pc-hub" className={neonLinkClasses}>PC Hub</Link></li>
+              <li><Link to="/playstation-hub" className={neonLinkClasses}>PlayStation Hub</Link></li>
+              <li><Link to="/xbox-hub" className={neonLinkClasses}>Xbox Hub</Link></li>
+              <li><Link to="/android-hub" className={neonLinkClasses}>Android Hub</Link></li>
+              <li><Link to="/ios-hub" className={neonLinkClasses}>iOS Hub</Link></li>
             </ul>
           </div>
           <div>
             <h3 className="font-bold text-primary mb-2">Community</h3>
             <ul className="space-y-1">
-              <li><Link to="/community" className="hover:text-purple-300 transition-colors">Forums</Link></li>
-              <li><a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="hover:text-purple-300 transition-colors">Discord</a></li>
-              <li><a href="https://telegram.org" target="_blank" rel="noopener noreferrer" className="hover:text-purple-300 transition-colors">Telegram</a></li>
+              <li><Link to="/community" className={neonLinkClasses}>Forums</Link></li>
+              <li><a href="https://discord.com" target="_blank" rel="noopener noreferrer" className={neonLinkClasses}>Discord</a></li>
+              <li><a href="https://telegram.org" target="_blank" rel="noopener noreferrer" className={neonLinkClasses}>Telegram</a></li>
             </ul>
           </div>
           <div>
             <h3 className="font-bold text-primary mb-2">Resources</h3>
             <ul className="space-y-1">
-              <li><Link to="/tools" className="hover:text-pink-300 transition-colors">Tools</Link></li>
-              <li><a href="#" className="hover:text-pink-300 transition-colors">Guides</a></li> {/* Placeholder */}
-              <li><a href="#" className="hover:text-pink-300 transition-colors">Blog</a></li> {/* Placeholder */}
+              <li><Link to="/tools" className={neonLinkClasses}>Tools</Link></li>
+              <li><a href="#" className={neonLinkClasses}>Guides</a></li> {/* Placeholder */}
+              <li><a href="#" className={neonLinkClasses}>Blog</a></li> {/* Placeholder */}
             </ul>
           </div>
           <div>
             <h3 className="font-bold text-primary mb-2">About</h3>
             <ul className="space-y-1">
-              <li><Link to="/about" className="hover:text-yellow-300 transition-colors">About GamexBuddy</Link></li>
-              <li><a href="#" className="hover:text-yellow-300 transition-colors">Contact</a></li> {/* Placeholder */}
+              <li><Link to="/about" className={neonLinkClasses}>About GamexBuddy</Link></li>
+              <li><a href="#" className={neonLinkClasses}>Contact</a></li> {/* Placeholder */}
             </ul>
           </div>
         </div>
 
         <div className="flex space-x-6 mt-6 md:mt-0">
-          <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-500 transition-colors drop-shadow-[0_0_8px_rgba(59,130,246,0.7)] hover:drop-shadow-[0_0_15px_rgba(59,130,246,1)]">
+          <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className={`${neonIconClasses} hover:text-blue-500 drop-shadow-[0_0_8px_rgba(59,130,246,0.7)] hover:drop-shadow-[0_0_15px_rgba(59,130,246,1)]`}>
             <MessageSquare size={24} />
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors drop-shadow-[0_0_8px_rgba(34,211,238,0.7)] hover:drop-shadow-[0_0_15px_rgba(34,211,238,1)]">
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className={`${neonIconClasses} hover:text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.7)] hover:drop-shadow-[0_0_15px_rgba(34,211,238,1)]`}>
             <Twitter size={24} />
           </a>
-          <a href="https://telegram.org" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-sky-500 transition-colors drop-shadow-[0_0_8px_rgba(14,165,233,0.7)] hover:drop-shadow-[0_0_15px_rgba(14,165,233,1)]">
+          <a href="https://telegram.org" target="_blank" rel="noopener noreferrer" className={`${neonIconClasses} hover:text-sky-500 drop-shadow-[0_0_8px_rgba(14,165,233,0.7)] hover:drop-shadow-[0_0_15px_rgba(14,165,233,1)]`}>
             <Send size={24} />
           </a>
-          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-red-600 transition-colors drop-shadow-[0_0_8px_rgba(220,38,38,0.7)] hover:drop-shadow-[0_0_15px_rgba(220,38,38,1)]">
+          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className={`${neonIconClasses} hover:text-red-600 drop-shadow-[0_0_8px_rgba(220,38,38,0.7)] hover:drop-shadow-[0_0_15px_rgba(220,38,38,1)]`}>
             <Youtube size={24} />
           </a>
         </div>

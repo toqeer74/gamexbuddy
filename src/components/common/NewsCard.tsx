@@ -21,6 +21,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, description, imageUrl, link,
         {imageUrl && (
           <img src={imageUrl} alt={title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
         )}
+        {/* Neon hover overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end p-4
                         group-hover:from-black/90 group-hover:via-black/60 transition-all duration-300">
           <CardTitle className="text-white text-xl font-bold leading-tight">
@@ -35,7 +36,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, description, imageUrl, link,
       </div>
       <CardContent className="p-4">
         <CardDescription className="text-sm text-muted-foreground line-clamp-2 mb-3">{description}</CardDescription>
-        <Link to={link} className="text-sm text-primary hover:underline font-medium">
+        <Link to={link} className="text-sm text-primary hover:underline font-medium hover:text-cyan-300 transition-colors duration-200">
           Read More
         </Link>
       </CardContent>

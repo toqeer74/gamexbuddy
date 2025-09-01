@@ -13,11 +13,22 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center justify-between">
         <Link to="/" className="flex items-center space-x-2 group">
-          <img src="/Gamexbuddy-logo-transparent.png" alt="GamexBuddy Logo" className="h-8" />
+          <img
+            src="/Gamexbuddy-logo-transparent.png"
+            alt="GamexBuddy Logo"
+            className="h-8"
+            onError={(e) => {
+              const t = e.currentTarget as HTMLImageElement;
+              if (t.src.endsWith("Gamexbuddy-logo-transparent.png")) t.src = "/placeholder.svg";
+            }}
+          />
         </Link>
         <nav className="hidden md:flex items-center space-x-4">
-          <Link to="/gta6-hub" className={`text-sm font-medium text-white ${neonHoverClasses}`}>
+          <Link to="/gta6" className={`text-sm font-medium text-white ${neonHoverClasses}`}>
             GTA6 Hub
+          </Link>
+          <Link to="/guides" className={`text-sm font-medium text-white ${neonHoverClasses}`}>
+            Guides
           </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -90,13 +101,16 @@ const Navbar = () => {
                   <Link to="/android-hub" className={`text-base font-medium ${neonHoverClasses} pl-2`}>
                     Android Hub
                   </Link>
-                  <Link to="/ios-hub" className={`text-base font-medium ${neonHoverClasses} pl-2`}>
-                    iOS Hub
-                  </Link>
-                </div>
-                <Link to="/community" className={`text-lg font-medium ${neonHoverClasses}`}>
-                  Community
+                <Link to="/ios-hub" className={`text-base font-medium ${neonHoverClasses} pl-2`}>
+                  iOS Hub
                 </Link>
+              </div>
+              <Link to="/guides" className={`text-lg font-medium ${neonHoverClasses}`}>
+                Guides
+              </Link>
+              <Link to="/community" className={`text-lg font-medium ${neonHoverClasses}`}>
+                Community
+              </Link>
                 <Link to="/tools" className={`text-lg font-medium ${neonHoverClasses}`}>
                   Tools
                 </Link>

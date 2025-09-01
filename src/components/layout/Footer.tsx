@@ -14,7 +14,15 @@ const Footer = () => {
 
       <div className="container flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="text-center md:text-left">
-          <img src="/Gamexbuddy-logo-transparent.png" alt="GamexBuddy Logo" className="h-8" />
+          <img
+            src="/Gamexbuddy-logo-transparent.png"
+            alt="GamexBuddy Logo"
+            className="h-8"
+            onError={(e) => {
+              const t = e.currentTarget as HTMLImageElement;
+              if (t.src.endsWith("Gamexbuddy-logo-transparent.png")) t.src = "/placeholder.svg";
+            }}
+          />
           <p className="text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} All rights reserved.
           </p>
@@ -44,7 +52,7 @@ const Footer = () => {
             <h3 className="font-bold text-primary mb-2">Resources</h3>
             <ul className="space-y-1">
               <li><Link to="/tools" className={neonLinkClasses}>Tools</Link></li>
-              <li><a href="#" className={neonLinkClasses}>Guides</a></li> {/* Placeholder */}
+              <li><Link to="/guides" className={neonLinkClasses}>Guides</Link></li>
               <li><a href="#" className={neonLinkClasses}>Blog</a></li> {/* Placeholder */}
             </ul>
           </div>

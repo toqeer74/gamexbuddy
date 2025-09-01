@@ -1,0 +1,18 @@
+[
+  {
+    "id": "2023-trailer-1",
+    "title": "Grand Theft Auto VI — Trailer 1",
+    "date": "2023-12-05",
+    "url": "https://newswire.rockstargames.com/",
+    "excerpt": "Rockstar releases the first official trailer for GTA VI.",
+    "image": "https://i.ytimg.com/vi/QdBZY2fkU-0/maxresdefault.jpg",
+    "official": true,
+    "trending": true,
+    "mirror": {
+      "enabled": true,
+      "slug": "gta6-trailer-1",
+      "summary": "Key scenes breakdown, map hints, characters, and soundtrack notes."
+    },
+    "tags": ["official", "trailer", "gta6"]
+  }
+]

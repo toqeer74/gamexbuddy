@@ -107,3 +107,23 @@
 .neon-text-glow {
   text-shadow: 0 0 8px currentColor, 0 0 15px currentColor, 0 0 25px currentColor;
 }
+
+/* --- RockstarFeed (neon/synth-friendly but lightweight) --- */
+.gx-section { padding: 48px 0; }
+.gx-wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+.gx-h2 { font-weight: 800; font-size: clamp(22px, 2.6vw, 28px); margin: 0 0 18px; filter: drop-shadow(0 0 10px rgba(143,125,255,.45)); }
+.gx-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.gx-card { background: rgba(18,24,42,.7); border: 1px solid rgba(255,255,255,.06); border-radius: 16px; overflow: hidden; backdrop-filter: blur(6px); }
+.gx-imgwrap { display: block; max-height: 180px; overflow: hidden; }
+.gx-imgwrap img { width: 100%; height: auto; display: block; transition: transform .25s ease; }
+.gx-imgwrap:hover img { transform: scale(1.02); }
+.gx-meta { display: flex; align-items: center; gap: 8px; padding: 12px 14px 0; }
+.gx-badge { font-size: 11px; padding: 4px 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.08); }
+.gx-badge--official { border-color: rgba(255,88,179,.45); background: rgba(255,88,179,.18); color: #ff7cc0; }
+.gx-date { font-size: 12px; opacity: .7; }
+.gx-title { padding: 6px 14px 0; font-weight: 700; font-size: 16px; line-height: 1.25; }
+.gx-excerpt { padding: 6px 14px 0; font-size: 14px; opacity: .85; }
+.gx-actions { display: flex; gap: 10px; padding: 14px; }
+.gx-btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 14px; border-radius: 12px; font-weight: 600; background: linear-gradient(90deg,#ff58b3,#8f7dff); color: #fff; text-decoration: none; }
+.gx-btn--soft { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); }
+.gx-btn:hover { opacity: .95; }

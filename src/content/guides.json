@@ -1,0 +1,122 @@
+[
+  {
+    "slug": "best-controllers",
+    "title": "Best Controllers for GTA & PC",
+    "intro": "Our top picks for precision, back buttons, and low-latency wireless across PC and consoles.",
+    "items": [
+      {
+        "name": "Xbox Elite Series 2",
+        "image": "https://images.unsplash.com/photo-1605901309584-818e25960a8b?q=80&w=1200&auto=format&fit=crop",
+        "price": "$179",
+        "pros": ["Adjustable-tension sticks", "Back paddles", "Great build"],
+        "cons": ["Premium price", "Heavier"],
+        "affiliateUrl": "https://example.com/elite2",
+        "rating": 4.7,
+        "specs": { "weight": "345g", "battery": "40h", "latency": "Low", "connectivity": "BT/2.4G/USB", "size": "Standard" },
+        "verdict": "Best Overall"
+      },
+      {
+        "name": "DualSense (PS5)",
+        "image": "https://images.unsplash.com/photo-1606813907291-76b1b03e0825?q=80&w=1200&auto=format&fit=crop",
+        "price": "$69",
+        "pros": ["Haptics & adaptive triggers", "Comfort"],
+        "cons": ["PC support varies"],
+        "affiliateUrl": "https://example.com/dualsense",
+        "rating": 4.5,
+        "specs": { "weight": "280g", "battery": "6-12h", "latency": "Low", "connectivity": "BT/USB", "size": "Standard" },
+        "verdict": "Best PS5"
+      },
+      {
+        "name": "Razer Wolverine V2 Pro",
+        "image": "https://images.unsplash.com/photo-1657907991011-1a9b3f92b2c8?q=80&w=1200&auto=format&fit=crop",
+        "price": "$249",
+        "pros": ["Mecha-tactile buttons", "Back buttons"],
+        "cons": ["Wired preferred", "Price"],
+        "affiliateUrl": "https://example.com/wolverine",
+        "rating": 4.2,
+        "specs": { "weight": "274g", "battery": "USB/Wireless", "latency": "Lowest (wired)", "connectivity": "2.4G/USB", "size": "Standard" },
+        "verdict": "Esports Choice"
+      }
+    ]
+  },
+  {
+    "slug": "headsets",
+    "title": "Headsets: Footstep Clarity Tier List",
+    "intro": "Crisp directional audio for shooters and open-world immersion.",
+    "items": [
+      {
+        "name": "HyperX Cloud II",
+        "image": "https://images.unsplash.com/photo-1519677100203-a0e668c92439?q=80&w=1200&auto=format&fit=crop",
+        "price": "$79",
+        "pros": ["Comfort", "Value"],
+        "cons": ["Mic is OK"],
+        "affiliateUrl": "https://example.com/cloud2",
+        "rating": 4.4,
+        "specs": { "weight": "275g", "battery": "Wired", "latency": "0ms (wired)", "connectivity": "3.5mm/USB", "size": "Over-ear" },
+        "verdict": "Great Value"
+      },
+      {
+        "name": "SteelSeries Arctis Nova 7",
+        "image": "https://images.unsplash.com/photo-1599669454699-248893623440?q=80&w=1200&auto=format&fit=crop",
+        "price": "$179",
+        "pros": ["Multi-platform", "Balanced sound"],
+        "cons": ["Bass-lite"],
+        "affiliateUrl": "https://example.com/nova7",
+        "rating": 4.6,
+        "specs": { "weight": "323g", "battery": "38h", "latency": "Low", "connectivity": "BT/2.4G/USB", "size": "Over-ear" },
+        "verdict": "Best Wireless"
+      },
+      {
+        "name": "Sony INZONE H7",
+        "image": "https://images.unsplash.com/photo-1600697395546-43fd0f3f8c36?q=80&w=1200&auto=format&fit=crop",
+        "price": "$229",
+        "pros": ["Comfort", "Spatial support"],
+        "cons": ["Price"],
+        "affiliateUrl": "https://example.com/inzoneh7",
+        "rating": 4.3,
+        "specs": { "weight": "325g", "battery": "40h", "latency": "Low", "connectivity": "BT/2.4G/USB", "size": "Over-ear" },
+        "verdict": "Comfort Pick"
+      }
+    ]
+  },
+  {
+    "slug": "monitors",
+    "title": "Monitors for Competitive Play",
+    "intro": "Fast panels with excellent motion clarity for PC and next-gen consoles.",
+    "items": [
+      {
+        "name": "BenQ Zowie XL2546K",
+        "image": "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=1200&auto=format&fit=crop",
+        "price": "$399",
+        "pros": ["240Hz", "DyAc+ clarity"],
+        "cons": ["TN colors"],
+        "affiliateUrl": "https://example.com/xl2546k",
+        "rating": 4.6,
+        "specs": { "panel": "TN", "hz": "240Hz", "latency": "Very Low", "size": "24.5\"" },
+        "verdict": "Pro Favorite"
+      },
+      {
+        "name": "LG 27GP850",
+        "image": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?q=80&w=1200&auto=format&fit=crop",
+        "price": "$299",
+        "pros": ["Nano-IPS", "Fast response"],
+        "cons": ["IPS glow potential"],
+        "affiliateUrl": "https://example.com/27gp850",
+        "rating": 4.5,
+        "specs": { "panel": "IPS", "hz": "180Hz", "latency": "Low", "size": "27\"" },
+        "verdict": "Balanced Pick"
+      },
+      {
+        "name": "AOC 24G2",
+        "image": "https://images.unsplash.com/photo-1527443224154-c4f2a1e792f6?q=80&w=1200&auto=format&fit=crop",
+        "price": "$129",
+        "pros": ["Value", "Colors"],
+        "cons": ["Stand wobble"],
+        "affiliateUrl": "https://example.com/24g2",
+        "rating": 4.4,
+        "specs": { "panel": "IPS", "hz": "144Hz", "latency": "Moderate", "size": "24\"" },
+        "verdict": "Budget Gem"
+      }
+    ]
+  }
+]

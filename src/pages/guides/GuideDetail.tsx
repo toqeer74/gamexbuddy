@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import guides from "@/content/guides.json";
+import AffiliateLink from "@/components/AffiliateLink";
 
 type Guide = {
   slug: string;
@@ -81,7 +82,7 @@ export default function GuideDetail(){
                   <td>{it.price || '-'}</td>
                   <td>
                     {it.affiliateUrl ? (
-                      <a className="gx-btn" href={it.affiliateUrl} target="_blank" rel="noopener noreferrer">Check Price</a>
+                      <AffiliateLink href={it.affiliateUrl}>Check Price</AffiliateLink>
                     ) : null}
                   </td>
                 </tr>

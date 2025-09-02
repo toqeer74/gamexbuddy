@@ -6,10 +6,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { Suspense, lazy } from "react";
 import Layout from "./components/layout/Layout";
 import Analytics from "@/components/Analytics";
+import RouteHandler from "@/components/RouteHandler";
 const Index = lazy(() => import("./pages/Index"));
 const Gta6Hub = lazy(() => import("./pages/Gta6Hub"));
 const Gta6Layout = lazy(() => import("./pages/gta6/Gta6Layout"));
 const Gta6Index = lazy(() => import("./pages/gta6/Index"));
+const NewsMirror = lazy(() => import("./pages/gta6/NewsMirror"));
 const ReleaseDate = lazy(() => import("./pages/gta6/ReleaseDate"));
 const Editions = lazy(() => import("./pages/gta6/Editions"));
 const MapPage = lazy(() => import("./pages/gta6/Map"));
@@ -17,8 +19,10 @@ const Characters = lazy(() => import("./pages/gta6/Characters"));
 const FAQs = lazy(() => import("./pages/gta6/FAQs"));
 const MinecraftHub = lazy(() => import("./pages/MinecraftHub"));
 const PubgHub = lazy(() => import("./pages/PubgHub"));
+const FortniteHub = lazy(() => import("./pages/FortniteHub"));
 const CommunityPage = lazy(() => import("./pages/CommunityPage"));
 const ToolsPage = lazy(() => import("./pages/ToolsPage"));
+const PriceTracker = lazy(() => import("./pages/tools/PriceTracker"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const PCHub = lazy(() => import("./pages/PCHub"));
 const PlayStationHub = lazy(() => import("./pages/PlayStationHub"));
@@ -43,6 +47,7 @@ const App = () => (
         <Analytics />
         <Layout>
           <Suspense fallback={<div style={{padding:20}}>Loading…</div>}>
+          <RouteHandler />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/gta6-hub" element={<Gta6Index />} />
@@ -53,11 +58,14 @@ const App = () => (
               <Route path="map" element={<MapPage />} />
               <Route path="characters" element={<Characters />} />
               <Route path="faqs" element={<FAQs />} />
+              <Route path="news/:slug" element={<NewsMirror />} />
             </Route>
             <Route path="/minecraft-hub" element={<MinecraftHub />} />
             <Route path="/pubg-hub" element={<PubgHub />} />
+            <Route path="/fortnite-hub" element={<FortniteHub />} />
             <Route path="/community" element={<CommunityPage />} />
             <Route path="/tools" element={<ToolsPage />} />
+            <Route path="/tools/price-tracker" element={<PriceTracker />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/pc-hub" element={<PCHub />} />
             <Route path="/playstation-hub" element={<PlayStationHub />} />

@@ -15,7 +15,7 @@ export default function YouTubeModal({
   return (
     <div className="ytm" role="dialog" aria-modal="true" aria-label={title} onClick={onClose}>
       <div className="ytm__panel" onClick={(e) => e.stopPropagation()}>
-        <button className="ytm__close" aria-label="Close" onClick={onClose}>✕</button>
+        <button className="ytm__close" aria-label="Close" onClick={onClose}>×</button>
         <div className="ytm__ratio">
           <iframe
             src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1`}

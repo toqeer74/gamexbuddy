@@ -12,11 +12,31 @@ function setTag(attr: string, name: string, content: string) {
 }
 
 export default function Seo({
-  title,
-  description,
+  title: T,
+  description: D,
   image,
-  url
-}: { title: string; description?: string; image?: string; url?: string }) {
+  url,
+  path
+}: { title?: string; description?: string; image?: string; url?: string, path?: string }) {
+  let title = T;
+  let description = D;
+
+  if (path) {
+    if (path.startsWith('/news')) {
+      title = 'News';
+      description = 'Latest news and updates';
+    } else if (path.startsWith('/guides')) {
+      title = 'Guides';
+      description = 'In-depth guides and tutorials';
+    } else if (path.startsWith('/community')) {
+      title = 'Community';
+      description = 'Join the community and discussions';
+    } else if (path.startsWith('/tools')) {
+      title = 'Tools';
+      description = 'Helpful tools and resources';
+    }
+  }
+
   useEffect(() => {
     if (title) document.title = title;
     if (description) setTag('name', 'description', description);
@@ -32,4 +52,3 @@ export default function Seo({
   }, [title, description, image, url]);
   return null;
 }
-

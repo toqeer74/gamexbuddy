@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Menu, Gamepad2, ChevronDown, Monitor, Gamepad, Smartphone, Apple } from "lucide-react";
+import AuthWidget from "@/components/AuthWidget";
 
 const Navbar = () => {
   const neonHoverClasses = "hover:text-cyan-300 hover:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] transition-all duration-300";
@@ -77,6 +78,9 @@ const Navbar = () => {
             About
           </Link>
         </nav>
+        <div className="hidden md:flex items-center space-x-2">
+          <AuthWidget />
+        </div>
         <div className="md:hidden">
           <Sheet>
             <SheetTrigger asChild>

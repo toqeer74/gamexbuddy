@@ -1,7 +1,7 @@
-import React, { useMemo, useState, useEffect, Suspense, lazy } from "react";
+import React, { useMemo, useState, useEffect, Suspense } from "react";
 import { motion } from "framer-motion";
 import data from "@/content/gta6/trailers.json";
-const YouTubeModal = lazy(() => import("@/components/YouTubeModal"));
+import TrailerModal from "@/components/TrailerModal";
 
 type Trailer = {
   id: string;
@@ -20,10 +20,12 @@ function fmt(d: string) {
 
 export default function TrailerWallPro() {
   const items = useMemo(() => (data as Trailer[]).sort((a, b) => +new Date(b.date) - +new Date(a.date)), []);
-  const [active, setActive] = useState<Trailer | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setActive(null); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsModalOpen(false);
+    };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, []);
@@ -37,7 +39,7 @@ export default function TrailerWallPro() {
             <motion.button
               key={t.id}
               type="button"
-              onClick={() => setActive(t)}
+              onClick={() => setIsModalOpen(true)}
               className={`card parallax`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -64,16 +66,12 @@ export default function TrailerWallPro() {
           ))}
         </div>
       </div>
-      {active && (
+      {isModalOpen && (
         <Suspense fallback={null}>
-          <YouTubeModal
-            open={!!active}
-            title={active.title}
-            youtubeId={active.youtubeId}
-            onClose={() => setActive(null)}
-          />
+          <TrailerModal onClose={() => setIsModalOpen(false)} />
         </Suspense>
       )}
     </section>
   );
 }
+

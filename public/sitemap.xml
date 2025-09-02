@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://gamexbuddy.com/</loc></url>
-  <url><loc>https://gamexbuddy.com/news</loc></url>
-  <url><loc>https://gamexbuddy.com/guides</loc></url>
+  <url><loc>https://gamexbuddy.com/gta6-hub</loc></url>
+  <url><loc>https://gamexbuddy.com/gta6</loc></url>
+  <url><loc>https://gamexbuddy.com/gta6/release-date</loc></url>
+  <url><loc>https://gamexbuddy.com/gta6/editions</loc></url>
+  <url><loc>https://gamexbuddy.com/gta6/map</loc></url>
+  <url><loc>https://gamexbuddy.com/gta6/characters</loc></url>
+  <url><loc>https://gamexbuddy.com/gta6/faqs</loc></url>
+  <url><loc>https://gamexbuddy.com/minecraft-hub</loc></url>
+  <url><loc>https://gamexbuddy.com/pubg-hub</loc></url>
   <url><loc>https://gamexbuddy.com/community</loc></url>
   <url><loc>https://gamexbuddy.com/tools</loc></url>
-  <url><loc>https://gamexbuddy.com/gta6</loc></url>
+  <url><loc>https://gamexbuddy.com/about</loc></url>
+  <url><loc>https://gamexbuddy.com/pc-hub</loc></url>
+  <url><loc>https://gamexbuddy.com/playstation-hub</loc></url>
+  <url><loc>https://gamexbuddy.com/xbox-hub</loc></url>
+  <url><loc>https://gamexbuddy.com/android-hub</loc></url>
+  <url><loc>https://gamexbuddy.com/ios-hub</loc></url>
+  <url><loc>https://gamexbuddy.com/news</loc></url>
+  <url><loc>https://gamexbuddy.com/guides</loc></url>
 </urlset>

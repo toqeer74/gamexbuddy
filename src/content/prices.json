@@ -1,0 +1,7 @@
+[
+  { "id":"p1", "title":"Grand Theft Auto V (PC)", "platform":"PC", "store":"Amazon", "price":19.99, "url":"https://www.amazon.com/dp/B00KATFQXU?tag=your-aff-id" },
+  { "id":"p2", "title":"Grand Theft Auto V (PS5)", "platform":"PS5", "store":"Amazon", "price":29.99, "url":"https://www.amazon.com/dp/B09QHF34YT?tag=your-aff-id" },
+  { "id":"p3", "title":"GTA V Premium Edition (PC)", "platform":"PC", "store":"InstantGaming", "price":12.50, "url":"https://www.instant-gaming.com/en/your-aff-link" },
+  { "id":"p4", "title":"PUBG: BATTLEGROUNDS (PC)", "platform":"PC", "store":"InstantGaming", "price":3.99, "url":"https://www.instant-gaming.com/en/your-aff-link" }
+]
+

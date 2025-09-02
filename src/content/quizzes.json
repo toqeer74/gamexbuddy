@@ -1,0 +1,19 @@
+[
+  {
+    "slug": "gta-basics",
+    "title": "GTA VI Basics",
+    "questions": [
+      { "q": "GTA VI is set primarily in which state (teased/rumored)?", "options": ["San Andreas", "Vice State", "Liberty State"], "a": 1 },
+      { "q": "Which series entry first introduced Trevor Phillips?", "options": ["GTA IV", "GTA V", "GTA VI"], "a": 1 }
+    ]
+  },
+  {
+    "slug": "pc-hardware",
+    "title": "PC Hardware 101",
+    "questions": [
+      { "q": "Which affects frame pacing most?", "options": ["CPU", "SSD", "Case"], "a": 0 },
+      { "q": "Best upgrade for 1% lows?", "options": ["GPU", "CPU", "RGB"], "a": 1 }
+    ]
+  }
+]
+

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { addXp } from "@/lib/xp";
 
 export default function NewsletterGlow() {
   const [email, setEmail] = useState("");
@@ -21,6 +22,7 @@ export default function NewsletterGlow() {
     setLoading(false);
     setOk(true);
     trackNewsletterSubmit(email, "NewsletterGlow");
+    try { await addXp(50); } catch {}
   }
 
   return (

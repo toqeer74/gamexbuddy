@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { Suspense, lazy } from "react";
 import Layout from "./components/layout/Layout";
+import { AuthProvider } from "@/lib/AuthProvider";
 import Analytics from "@/components/Analytics";
 import RouteHandler from "@/components/RouteHandler";
 const Index = lazy(() => import("./pages/Index"));
@@ -34,6 +35,8 @@ const GuideDetail = lazy(() => import("./pages/guides/GuideDetail"));
 const GuidesIndex = lazy(() => import("./pages/guides/GuidesIndex"));
 const NewsIndex = lazy(() => import("./pages/news/NewsIndex"));
 const NewsIndexDb = lazy(() => import("./pages/news/NewsIndexDb"));
+const Login = lazy(() => import("./pages/auth/Login"));
+const Callback = lazy(() => import("./pages/auth/Callback"));
 const NewsTag = lazy(() => import("./pages/news/NewsTag"));
 const NewsDetail = lazy(() => import("./pages/news/NewsDetail"));
 const GuideMDXDetail = lazy(() => import("./pages/guides/GuideMDXDetail"));
@@ -43,10 +46,14 @@ const Settings = lazy(() => import("./pages/Settings"));
 const ReviewDetail = lazy(() => import("./pages/reviews/ReviewDetail"));
 const Search = lazy(() => import("./pages/Search"));
 const Editor = lazy(() => import("./pages/admin/Editor"));
+const AdminPicks = lazy(() => import("./pages/admin/Picks"));
+import AdminGuard from "@/pages/admin/Guard";
 const ProfilePage = lazy(() => import("./pages/profile/ProfilePage"));
 import NewsFeedSkeleton from "@/components/NewsFeedSkeleton";
 import GuideSkeleton from "@/components/GuideSkeleton";
 import { USE_DB_NEWS } from "@/config/flags";
+const GameList = lazy(() => import("./pages/games/GameList"));
+const GameDetail = lazy(() => import("./pages/games/GameDetail"));
 
 const queryClient = new QueryClient();
 
@@ -56,11 +63,14 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <AuthProvider>
         <Analytics />
         <Layout>
           <Suspense fallback={<div style={{padding:20}}>Loading…</div>}>
           <RouteHandler />
           <Routes>
+            <Route path="/auth/login" element={<Login />} />
+            <Route path="/auth/callback" element={<Callback />} />
             <Route path="/" element={<Index />} />
             <Route path="/gta6-hub" element={<Gta6Index />} />
             <Route path="/gta6" element={<Gta6Layout />}>
@@ -92,8 +102,11 @@ const App = () => (
             <Route path="/guides/:slug" element={<Suspense fallback={<GuideSkeleton />}><GuideMDXDetail /></Suspense>} />
             <Route path="/guides/json/:slug" element={<Suspense fallback={<GuideSkeleton />}><GuideDetail /></Suspense>} />
             <Route path="/guides/mdx/:slug" element={<Suspense fallback={<GuideSkeleton />}><GuideMDXDetail /></Suspense>} />
+            <Route path="/games" element={<GameList />} />
+            <Route path="/games/:slug" element={<GameDetail />} />
             <Route path="/admin/moderation" element={<ModerationQueue />} />
             <Route path="/admin/editor" element={<Editor />} />
+            <Route path="/admin/picks" element={<Suspense fallback={<div style={{padding:20}}>Loading...</div>}><AdminGuard><AdminPicks /></AdminGuard></Suspense>} />
             <Route path="/plus/success" element={<PlusSuccess />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/reviews/:slug" element={<ReviewDetail />} />
@@ -103,6 +116,7 @@ const App = () => (
           </Routes>
           </Suspense>
         </Layout>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

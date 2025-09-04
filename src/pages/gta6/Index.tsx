@@ -31,6 +31,18 @@ const Gta6Index: React.FC = () => {
         <link rel="canonical" href={canonical("/gta6")} />
         <meta name="description" content="Countdown, trailers, and official GTA VI updates." />
         <script type="application/ld+json">{JSON.stringify({"@context":"https://schema.org","@type":"CollectionPage","name":"GTA 6 Hub","url": canonical("/gta6"),"mainEntity":{"@type":"ItemList","itemListElement": ((data as any[]).filter(n=>n.official).slice(0,10)).map((n:any,idx:number)=>({"@type":"ListItem","position":idx+1,"url":n.url,"name":n.title}))}})}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context":"https://schema.org","@type":"CollectionPage",
+          name:"GTA6 Hub",url:"https://gamexbuddy.com/gta6",
+          about:["Grand Theft Auto VI","Rockstar Games"],
+          hasPart:[
+            {"@type":"WebPage","name":"Release Date","url":"https://gamexbuddy.com/gta6/release-date"},
+            {"@type":"WebPage","name":"Editions","url":"https://gamexbuddy.com/gta6/editions"},
+            {"@type":"WebPage","name":"Map & Setting","url":"https://gamexbuddy.com/gta6/map"},
+            {"@type":"WebPage","name":"Characters","url":"https://gamexbuddy.com/gta6/characters"},
+            {"@type":"WebPage","name":"FAQs","url":"https://gamexbuddy.com/gta6/faqs"}
+          ]
+        })}</script>
       </Helmet>
       <div className="space-y-8">
       <div className="text-center">

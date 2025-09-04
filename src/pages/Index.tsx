@@ -5,6 +5,7 @@ import { canonical } from "@/lib/seo";
 
 import HeroWall from "@/components/HeroWall";
 import GameAuthorityMarquee from "@/components/GameAuthorityMarquee";
+import RecommendedGames from "@/components/RecommendedGames";
 import NewsFeed from "@/components/NewsFeed";
 import MagazineGrid from "@/components/MagazineGrid";
 import GuideCarouselSkeleton from "@/components/GuideCarouselSkeleton";
@@ -70,6 +71,7 @@ export default function HomePage() {
       <HeroWall />
       <GameAuthorityMarquee />
       <TrendingStrip />
+      <RecommendedGames />
       <NewsFeed />
       <MagazineGrid />
 

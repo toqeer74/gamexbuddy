@@ -60,3 +60,92 @@ This project is configured for deployment on platforms like Vercel. Ensure your 
 
 ---
 *Built by toqeer*
+
+### Admin Picks (curated recommendations)
+
+An internal page exists at `/admin/picks` to manage the curated list in `public.recommended_games`.
+
+- Drag-and-drop to reorder (ranks saved as 1..N)
+- Edit badges inline (e.g., "Top Pick", "Editor’s Choice", "🔥 Hot Deal", "💸 Great Price")
+- Add by slug, or remove an entry
+
+Data model joins `recommended_games` to `games` for titles/covers and writes back via `upsert`.
+
+Important: This page is not protected in this repo by default. Ensure you add auth/role protection before exposing it publicly.
+
+## Environment Variables
+
+Never commit `.env*` files. Keep secrets out of version control. Frontend uses Vite env vars (VITE_*) provided by your host; Edge Functions use Supabase secrets.
+
+### Frontend (.env.local — not committed)
+Set these in your hosting provider or a local `.env.local` file:
+
+```
+VITE_SUPABASE_URL=
+VITE_SUPABASE_ANON_KEY=
+```
+
+### Edge Functions (Supabase secrets)
+Set these in your Supabase project (Dashboard → Edge Functions → Secrets):
+
+- SUPABASE_URL
+- SUPABASE_SERVICE_ROLE_KEY
+- RAWG_API_KEY
+- CHEAPSHARK_BASE (optional, default: https://www.cheapshark.com/api/1.0)
+
+#### One-time setup commands
+```
+supabase storage create-bucket media --public=false
+supabase functions deploy sync-games
+supabase secrets set SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... RAWG_API_KEY=...
+```
+
+## Auth Setup (Supabase)
+
+Add these Redirect URLs in Supabase Auth settings:
+
+```
+http://localhost:5173/auth/callback
+https://gamexbuddy.com/auth/callback
+```
+
+Grant editor rights (example):
+
+```
+update public.profiles set is_editor = true where id = '<USER_UUID>';
+```
+
+Notes:
+- `/admin/picks` requires login and an editor or moderator role.
+- Never expose the service_role key in the client; only Edge Functions should use it.
+
+## Deploy to Netlify (GitHub)
+
+Build settings
+- Build command: `pnpm build`
+- Publish directory: `dist`
+
+Environment variables (add in Netlify Site settings → Build & deploy → Environment)
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
+- Optional: `VITE_ADMIN_TOKEN` (only if using token guard)
+
+SPA fallback redirect (already included in `netlify.toml`)
+```
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+```
+
+Functions proxy (replace YOUR-PROJECT with your Supabase project ref)
+```
+[[redirects]]
+  from = "/functions/*"
+  to = "https://YOUR-PROJECT.functions.supabase.co/:splat"
+  status = 200
+  force = true
+```
+
+Deploy Previews
+- Netlify will build every pull request automatically and provide a unique preview URL for review.

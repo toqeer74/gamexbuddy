@@ -1,0 +1,20 @@
+name: Deal Radar Nightly
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger deal-radar
+        env:
+          DEAL_RADAR_URL: ${{ secrets.DEAL_RADAR_URL }}
+          DEAL_RADAR_TOKEN: ${{ secrets.DEAL_RADAR_TOKEN }}
+        run: |
+          curl -X POST "$DEAL_RADAR_URL" \
+            -H "Authorization: Bearer $DEAL_RADAR_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{"pageSize":200,"maxPages":5}'
+

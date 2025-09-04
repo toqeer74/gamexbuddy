@@ -158,3 +158,6 @@ link#favicon { filter: invert(1) brightness(0); }
   background-color: #58e0ff;
   box-shadow: 0 0 8px rgba(88, 224, 255, 0.7);
 }
+
+/* Card hover glow */
+.card-glass:hover { box-shadow: 0 10px 40px rgba(140,234,255,.15), 0 0 0 1px rgba(255,255,255,.08) inset; }

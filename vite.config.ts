@@ -4,9 +4,14 @@ import path from "path";
 
 export default defineConfig(() => ({
   server: {
-    host: "0.0.0.0",
     port: 5173,
+    strictPort: false,
+    host: true,
+  },
+  preview: {
+    port: 8080,
     strictPort: true,
+    host: true,
   },
   plugins: [react()],
   resolve: {

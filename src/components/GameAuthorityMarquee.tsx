@@ -1,25 +1,37 @@
 import React from "react";
+import SmartImage from "@/components/common/SmartImage";
 
-const TAGS: Array<[string, "pc"|"console"|"mobile"]> = [
-  ["GTA 6","pc"],["Minecraft","mobile"],["PUBG","console"],["Fortnite","pc"],
-  ["Cyberpunk 2077","pc"],["EA FC 25","console"],["Call of Duty","pc"],
-  ["Elden Ring","console"],["Valorant","pc"],["Helldivers 2","console"]
+type Row = { tag: string; icon: string; platform: "PC"|"PS"|"Xbox"|"Mobile" };
+
+const ITEMS: Row[] = [
+  { tag: "GTA6",      icon: "/icons/gta.svg",        platform: "PC" },
+  { tag: "Minecraft", icon: "/icons/minecraft.svg",  platform: "Mobile" },
+  { tag: "PUBG",      icon: "/icons/pubg.svg",       platform: "Xbox" },
+  { tag: "Fortnite",  icon: "/icons/fortnite.svg",   platform: "PC" },
+  { tag: "Valorant",  icon: "/icons/valorant.svg",   platform: "PC" },
+  { tag: "EldenRing", icon: "/icons/eldenring.svg",  platform: "PS" },
 ];
 
-const Icon = ({kind}:{kind:"pc"|"console"|"mobile"}) => {
-  const c = {pc:"#58e0ff", console:"#b3ff4c", mobile:"#ff58b3"}[kind];
-  return <svg width="14" height="14"><circle cx="7" cy="7" r="6" fill={c}/></svg>;
+const Plat = ({p}:{p:Row["platform"]}) => {
+  const color = {PC:"#58e0ff", PS:"#8f7dff", Xbox:"#b3ff4c", Mobile:"#ff58b3"}[p];
+  return <span aria-label={p} title={p} style={{
+    display:"inline-block", width:10, height:10, borderRadius:9999,
+    background: color, boxShadow:`0 0 10px ${color}80`
+  }}/>
 };
 
 export default function GameAuthorityMarquee(){
+  const twice = [...ITEMS, ...ITEMS];
   return (
     <div className="marquee" aria-hidden>
       <div className="marquee__inner">
-        {[...TAGS, ...TAGS].map(([t,k],i)=> (
-          <span key={i} className="tag"><Icon kind={k as any}/>#{t}</span>
+        {twice.map((it, i) => (
+          <a key={i} href={`/news/tag/${encodeURIComponent(it.tag.toLowerCase())}`} className="tag">
+            <SmartImage src={it.icon} alt={`${it.tag} icon`} style={{width:18,height:18}}/>
+            #{it.tag} <Plat p={it.platform}/>
+          </a>
         ))}
       </div>
     </div>
   );
 }
-

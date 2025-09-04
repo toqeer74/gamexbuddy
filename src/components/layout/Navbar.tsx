@@ -1,39 +1,60 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Menu, Gamepad2, ChevronDown, Monitor, Gamepad, Smartphone, Apple } from "lucide-react";
 import AuthWidget from "@/components/AuthWidget";
+import SearchBox from "@/components/SearchBox";
 
 const Navbar = () => {
   const neonHoverClasses = "hover:text-cyan-300 hover:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] transition-all duration-300";
   const iconNeonClasses = "group-hover:text-cyan-300 group-hover:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] transition-all duration-300";
+  const [open, setOpen] = useState(false);
+  const loc = useLocation();
+  useEffect(()=>{ setOpen(false); }, [loc.pathname]);
+  const isActive = (to:string) => loc.pathname === to;
+
+  const mainNavLinks = [
+    { to: "/gta6", label: "GTA6 Hub" },
+    { to: "/news", label: "News" },
+    { to: "/guides", label: "Guides" },
+  ];
+
+  const platformNavLinks = [
+    { to: "/pc-hub", label: "PC Hub", icon: Monitor },
+    { to: "/playstation-hub", label: "PlayStation Hub", icon: Gamepad },
+    { to: "/xbox-hub", label: "Xbox Hub", icon: Gamepad },
+    { to: "/android-hub", label: "Android Hub", icon: Smartphone },
+    { to: "/ios-hub", label: "iOS Hub", icon: Apple },
+  ];
+
+  const secondaryNavLinks = [
+    { to: "/community", label: "Community" },
+    { to: "/tools", label: "Tools" },
+    { to: "/about", label: "About" },
+  ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center justify-between">
+      <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center space-x-2 group">
           <img
-            src="/Gamexbuddy-logo-transparent.png"
+            src="/Gamexbuddy-logo-v2-transparent.png"
             alt="GamexBuddy Logo"
-            className="h-8"
+            className="h-7"
+            width={112}
+            height={28}
             onError={(e) => {
               const t = e.currentTarget as HTMLImageElement;
-              if (t.src.endsWith("Gamexbuddy-logo-transparent.png")) t.src = "/placeholder.svg";
+              if (t.src.endsWith("Gamexbuddy-logo-v2-transparent.png")) t.src = "/placeholder.svg";
             }}
           />
         </Link>
         <nav className="hidden md:flex items-center space-x-4">
-          <Link to="/gta6" className={`text-sm font-medium text-white ${neonHoverClasses}`}>GTA6 Hub</Link>
-          <Link to="/news" className={`text-sm font-medium text-white ${neonHoverClasses}`}>News</Link>
-          <Link to="/guides" className={`text-sm font-medium text-white ${neonHoverClasses}`}>Guides</Link>
-          <Link to="/news" className={`text-sm font-medium text-white ${neonHoverClasses}`}>
-            News
-          </Link>
-          <Link to="/guides" className={`text-sm font-medium text-white ${neonHoverClasses}`}>
-            Guides
-          </Link>
+          {mainNavLinks.map(i => (
+            <Link key={i.to} to={i.to} className={`navlink text-sm font-medium text-white ${neonHoverClasses} ${isActive(i.to) ? 'navlink--active' : ''}`}>{i.label}</Link>
+          ))}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className={`flex items-center gap-1 text-sm font-medium text-white ${neonHoverClasses} group`}>
@@ -41,48 +62,25 @@ const Navbar = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-48 bg-gray-800 border-white/20 text-white">
-              <DropdownMenuItem asChild>
-                <Link to="/pc-hub" className={`flex items-center gap-2 ${neonHoverClasses}`}>
-                  <Monitor className="h-4 w-4" /> PC Hub
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/playstation-hub" className={`flex items-center gap-2 ${neonHoverClasses}`}>
-                  <Gamepad className="h-4 w-4" /> PlayStation Hub
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/xbox-hub" className={`flex items-center gap-2 ${neonHoverClasses}`}>
-                  <Gamepad className="h-4 w-4" /> Xbox Hub
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/android-hub" className={`flex items-center gap-2 ${neonHoverClasses}`}>
-                  <Smartphone className="h-4 w-4" /> Android Hub
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/ios-hub" className={`flex items-center gap-2 ${neonHoverClasses}`}>
-                  <Apple className="h-4 w-4" /> iOS Hub
-                </Link>
-              </DropdownMenuItem>
+              {platformNavLinks.map(i => (
+                <DropdownMenuItem key={i.to} asChild>
+                  <Link to={i.to} className={`flex items-center gap-2 ${neonHoverClasses}`}>
+                    <i.icon className="h-4 w-4" /> {i.label}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Link to="/community" className={`text-sm font-medium text-white ${neonHoverClasses}`}>
-            Community
-          </Link>
-          <Link to="/tools" className={`text-sm font-medium text-white ${neonHoverClasses}`}>
-            Tools
-          </Link>
-          <Link to="/about" className={`text-sm font-medium text-white ${neonHoverClasses}`}>
-            About
-          </Link>
+          {secondaryNavLinks.map(i => (
+            <Link key={i.to} to={i.to} className={`navlink text-sm font-medium text-white ${neonHoverClasses} ${isActive(i.to) ? 'navlink--active' : ''}`}>{i.label}</Link>
+          ))}
         </nav>
         <div className="hidden md:flex items-center space-x-2">
+          <SearchBox />
           <AuthWidget />
         </div>
         <div className="md:hidden">
-          <Sheet>
+          <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="text-white">
                 <Menu className="h-6 w-6" />
@@ -91,36 +89,20 @@ const Navbar = () => {
             </SheetTrigger>
             <SheetContent side="right" className="bg-gray-900 border-white/10 text-white">
               <nav className="flex flex-col space-y-4 pt-6">
-                <Link to="/gta6-hub" className={`text-lg font-medium ${neonHoverClasses}`}>
-                  GTA6 Hub
-                </Link>
+                {mainNavLinks.map(i => (
+                  <Link key={i.to} to={i.to} className={`text-lg font-medium ${neonHoverClasses}`} onClick={()=>setOpen(false)}>{i.label}</Link>
+                ))}
                 <div className="flex flex-col space-y-2 pl-4">
                   <span className="text-lg font-medium text-muted-foreground">Platforms</span>
-                  <Link to="/pc-hub" className={`text-base font-medium ${neonHoverClasses} pl-2`}>
-                    PC Hub
-                  </Link>
-                  <Link to="/playstation-hub" className={`text-base font-medium ${neonHoverClasses} pl-2`}>
-                    PlayStation Hub
-                  </Link>
-                  <Link to="/xbox-hub" className={`text-base font-medium ${neonHoverClasses} pl-2`}>
-                    Xbox Hub
-                  </Link>
-                  <Link to="/android-hub" className={`text-base font-medium ${neonHoverClasses} pl-2`}>
-                    Android Hub
-                  </Link>
-                <Link to="/ios-hub" className={`text-base font-medium ${neonHoverClasses} pl-2`}>iOS Hub</Link>
-              </div>
-              <Link to="/news" className={`text-lg font-medium ${neonHoverClasses}`}>News</Link>
-              <Link to="/guides" className={`text-lg font-medium ${neonHoverClasses}`}>Guides</Link>
-              <Link to="/community" className={`text-lg font-medium ${neonHoverClasses}`}>
-                Community
-              </Link>
-                <Link to="/tools" className={`text-lg font-medium ${neonHoverClasses}`}>
-                  Tools
-                </Link>
-                <Link to="/about" className={`text-lg font-medium ${neonHoverClasses}`}>
-                  About
-                </Link>
+                  {platformNavLinks.map(i => (
+                    <Link key={i.to} to={i.to} className={`text-base font-medium ${neonHoverClasses} pl-2`} onClick={()=>setOpen(false)}>
+                      {i.label}
+                    </Link>
+                  ))}
+                </div>
+                {secondaryNavLinks.map(i => (
+                  <Link key={i.to} to={i.to} className={`text-lg font-medium ${neonHoverClasses}`} onClick={()=>setOpen(false)}>{i.label}</Link>
+                ))}
               </nav>
             </SheetContent>
           </Sheet>

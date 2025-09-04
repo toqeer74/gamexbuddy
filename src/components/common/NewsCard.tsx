@@ -2,6 +2,7 @@ import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import RockstarBadge from "./RockstarBadge";
+import SmartImage from "@/components/SmartImage";
 
 interface NewsCardProps {
   title: string;
@@ -9,17 +10,18 @@ interface NewsCardProps {
   imageUrl?: string;
   link: string;
   isOfficial?: boolean;
+  isTrending?: boolean;
 }
 
-const NewsCard: React.FC<NewsCardProps> = ({ title, description, imageUrl, link, isOfficial = false }) => {
+const NewsCard: React.FC<NewsCardProps> = ({ title, description, imageUrl, link, isOfficial = false, isTrending = false }) => {
   return (
     <Card className="overflow-hidden relative group cursor-pointer rounded-lg shadow-lg
                    transition-all duration-300 ease-in-out
                    hover:ring-2 hover:ring-cyan-500 hover:ring-offset-2 hover:ring-offset-background
                    bg-card/50 backdrop-blur-sm border border-white/20">
-      <div className="relative w-full h-48 bg-gray-800">
+      <div className="relative w-full aspect-video bg-gray-800">
         {imageUrl && (
-          <img src={imageUrl} alt={title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+          <SmartImage src={imageUrl} alt={title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
         )}
         {/* Neon hover overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end p-4
@@ -30,12 +32,15 @@ const NewsCard: React.FC<NewsCardProps> = ({ title, description, imageUrl, link,
             </Link>
           </CardTitle>
         </div>
+        {isTrending && (
+          <span className="badge badge--trend absolute top-3 left-3">🔥 Trending</span>
+        )}
         {isOfficial && (
           <RockstarBadge isOfficial={isOfficial} />
         )}
       </div>
       <CardContent className="p-4">
-        <CardDescription className="text-sm text-muted-foreground line-clamp-2 mb-3">{description}</CardDescription>
+        <CardDescription className="text-sm text-muted-foreground line-clamp-3 mb-3 h-12">{description}</CardDescription>
         <Link to={link} className="text-sm text-primary hover:underline font-medium hover:text-cyan-300 transition-colors duration-200">
           Read More
         </Link>

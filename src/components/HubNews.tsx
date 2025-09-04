@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import data from "@/content/gta6/news.json";
+import SmartImage from "@/components/SmartImage";
 
 type Item = { id:string; title:string; date:string; url:string; excerpt:string; image?:string; official?:boolean; trending?:boolean; tags?:string[] };
 
@@ -20,13 +21,13 @@ export default function HubNews({ tags, title='Latest News' }:{ tags: string[]; 
             <article key={n.id} className="card parallax">
               {n.image && (
                 <a href={n.url} target="_blank" rel="noopener noreferrer">
-                  <img src={n.image} className="card__img" loading="lazy" alt="" />
+                  <SmartImage src={n.image} className="card__img" alt={n.title} />
                 </a>
               )}
               <div className="card__p">
                 <div className="feed__badges">
                   {n.official && <span className="badge badge--official">Official</span>}
-                  {n.trending && <span className="badge badge--trend">Trending</span>}
+                  {n.trending && <span className="badge badge--trend">🔥 Trending</span>}
                   <time className="feed__date">{fmt(n.date)}</time>
                 </div>
                 <div className="card__t">{n.title}</div>
@@ -42,4 +43,3 @@ export default function HubNews({ tags, title='Latest News' }:{ tags: string[]; 
     </section>
   );
 }
-

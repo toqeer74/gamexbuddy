@@ -1,7 +1,8 @@
 import React, { useMemo, useState, useEffect, Suspense } from "react";
 import { motion } from "framer-motion";
 import data from "@/content/gta6/trailers.json";
-import TrailerModal from "@/components/TrailerModal";
+import SmartImage from "@/components/SmartImage";
+import TrailerModal from "@/components/modals/TrailerModal";
 
 type Trailer = {
   id: string;
@@ -20,14 +21,14 @@ function fmt(d: string) {
 
 export default function TrailerWallPro() {
   const items = useMemo(() => (data as Trailer[]).sort((a, b) => +new Date(b.date) - +new Date(a.date)), []);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modal, setModal] = useState<{ id: string; title: string } | null>(null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setIsModalOpen(false);
+      if (e.key === "Escape") setModal(null);
     };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, []);
 
   return (
@@ -39,7 +40,8 @@ export default function TrailerWallPro() {
             <motion.button
               key={t.id}
               type="button"
-              onClick={() => setIsModalOpen(true)}
+              aria-label={`Play ${t.title}`}
+              onClick={() => setModal({ id: t.youtubeId || t.id, title: t.title })}
               className={`card parallax`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -47,8 +49,8 @@ export default function TrailerWallPro() {
               transition={{ delay: i * 0.04 }}
             >
               <div className="tcard__media">
-                <img className="card__img" src={t.image} alt="" loading="lazy" />
-                <div className="tcard__overlay">
+                <SmartImage className="card__img" src={t.image} alt={t.title} />
+                <div className="tcard__overlay" aria-hidden>
                   <div className="tcard__play">▶</div>
                 </div>
               </div>
@@ -66,11 +68,9 @@ export default function TrailerWallPro() {
           ))}
         </div>
       </div>
-      {isModalOpen && (
-        <Suspense fallback={null}>
-          <TrailerModal onClose={() => setIsModalOpen(false)} />
-        </Suspense>
-      )}
+      <Suspense fallback={null}>
+        <TrailerModal open={!!modal} onClose={() => setModal(null)} id={modal?.id || ""} title={modal?.title || "Trailer"} />
+      </Suspense>
     </section>
   );
 }

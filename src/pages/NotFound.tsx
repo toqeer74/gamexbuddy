@@ -1,27 +1,16 @@
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import React from "react";
+import { Helmet } from "react-helmet-async";
 
-const NotFound = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.error(
-      "404 Error: User attempted to access non-existent route:",
-      location.pathname,
-    );
-  }, [location.pathname]);
-
+export default function NotFound(){
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 hover:text-blue-700 underline">
-          Return to Home
-        </a>
+    <div className="wrap" style={{ padding:"64px 20px", textAlign:"center" }}>
+      <Helmet><title>404 | GameXBuddy</title></Helmet>
+      <h1 className="title-xl">Lost in the neon?</h1>
+      <p style={{ opacity:.85, marginTop:10 }}>That page doesn’t exist. Let’s get you back to the action.</p>
+      <div style={{ marginTop:16 }}>
+        <a className="btn" href="/">Go Home</a>
+        <a className="btn btn--soft" href="/news" style={{ marginLeft:8 }}>Latest News</a>
       </div>
     </div>
   );
-};
-
-export default NotFound;
+}

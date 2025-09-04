@@ -1,4 +1,7 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
+import { canonical } from "@/lib/seo";
+import data from "@/content/gta6/news.json";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 
@@ -13,6 +16,22 @@ const tabs = [
 const Gta6Layout: React.FC = () => {
   return (
     <div className="container py-8">
+      <Helmet>
+        <title>GTA 6 Hub | GameXBuddy</title>
+        <link rel="canonical" href={canonical("/gta6")} />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context":"https://schema.org",
+          "@type":"CollectionPage",
+          "name":"GTA 6 Hub",
+          "url": canonical("/gta6"),
+          "mainEntity": {
+            "@type":"ItemList",
+            "itemListElement": (data as any[]).filter(n=>n.official).slice(0,10).map((n:any,idx:number)=>({
+              "@type":"ListItem","position":idx+1,"url":n.url,"name":n.title
+            }))
+          }
+        })}</script>
+      </Helmet>
       <div className="flex items-center justify-between gap-4 mb-6">
         <h1 className="text-3xl md:text-4xl font-bold">GTA6 Hub</h1>
         <Link to="/" className="text-sm text-primary hover:underline">Back to Home</Link>
@@ -45,4 +64,3 @@ const Gta6Layout: React.FC = () => {
 };
 
 export default Gta6Layout;
-

@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import SmartImage from "@/components/SmartImage";
 
 type Guide = { title: string; sub: string; image: string; href: string };
 
@@ -38,7 +39,7 @@ export default function AffiliateGuidesRow(){
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }} transition={{ delay: i * 0.05 }}
             >
-              <img className="card__img" src={g.image} alt="" loading="lazy" />
+              <SmartImage className="card__img" src={g.image} alt={g.title} />
               <div className="card__p">
                 <div className="card__t">{g.title}</div>
                 <div className="card__sub">{g.sub}</div>
@@ -53,4 +54,3 @@ export default function AffiliateGuidesRow(){
     </section>
   );
 }
-

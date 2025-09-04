@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import GuideCard from "./GuideCard";
 import GuideCarouselSkeleton from "./GuideCarouselSkeleton";
+import SmartImage from "@/components/SmartImage";
 
 const GUIDES = [
   { title:"Best Controllers for GTA & PC", sub:"Top picks with back buttons and low-latency wireless.", href:"/guides/best-controllers", image:"https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1600&auto=format&fit=crop", sponsored:true },
@@ -36,4 +37,3 @@ export default function GuideCarousel() {
     </section>
   );
 }
-

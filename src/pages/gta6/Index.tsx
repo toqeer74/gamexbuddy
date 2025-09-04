@@ -1,4 +1,7 @@
-import React from "react";
+﻿import React from "react";
+import { Helmet } from "react-helmet-async";
+import { canonical } from "@/lib/seo";
+import data from "@/content/gta6/news.json";
 import CountdownTimer from "@/components/common/CountdownTimer";
 import TrailerEmbed from "@/components/common/TrailerEmbed";
 import NewsCard from "@/components/common/NewsCard";
@@ -22,7 +25,14 @@ const Gta6Index: React.FC = () => {
   const gta6ReleaseDate = "2025-12-01T00:00:00Z";
 
   return (
-    <div className="space-y-8">
+    <>
+      <Helmet>
+        <title>GTA 6 Hub | GameXBuddy</title>
+        <link rel="canonical" href={canonical("/gta6")} />
+        <meta name="description" content="Countdown, trailers, and official GTA VI updates." />
+        <script type="application/ld+json">{JSON.stringify({"@context":"https://schema.org","@type":"CollectionPage","name":"GTA 6 Hub","url": canonical("/gta6"),"mainEntity":{"@type":"ItemList","itemListElement": ((data as any[]).filter(n=>n.official).slice(0,10)).map((n:any,idx:number)=>({"@type":"ListItem","position":idx+1,"url":n.url,"name":n.title}))}})}</script>
+      </Helmet>
+      <div className="space-y-8">
       <div className="text-center">
         <p className="text-muted-foreground">Countdown to GTA6</p>
         <CountdownTimer targetDate={gta6ReleaseDate} />
@@ -34,7 +44,15 @@ const Gta6Index: React.FC = () => {
 
       <RockstarFeed />
     </div>
+    </>
   );
 };
 
 export default Gta6Index;
+
+
+
+
+
+
+

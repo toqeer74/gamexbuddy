@@ -33,8 +33,20 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const GuideDetail = lazy(() => import("./pages/guides/GuideDetail"));
 const GuidesIndex = lazy(() => import("./pages/guides/GuidesIndex"));
 const NewsIndex = lazy(() => import("./pages/news/NewsIndex"));
+const NewsIndexDb = lazy(() => import("./pages/news/NewsIndexDb"));
 const NewsTag = lazy(() => import("./pages/news/NewsTag"));
+const NewsDetail = lazy(() => import("./pages/news/NewsDetail"));
+const GuideMDXDetail = lazy(() => import("./pages/guides/GuideMDXDetail"));
+const ModerationQueue = lazy(() => import("./pages/admin/ModerationQueue"));
+const PlusSuccess = lazy(() => import("./pages/PlusSuccess"));
+const Settings = lazy(() => import("./pages/Settings"));
+const ReviewDetail = lazy(() => import("./pages/reviews/ReviewDetail"));
+const Search = lazy(() => import("./pages/Search"));
+const Editor = lazy(() => import("./pages/admin/Editor"));
+const ProfilePage = lazy(() => import("./pages/profile/ProfilePage"));
 import NewsFeedSkeleton from "@/components/NewsFeedSkeleton";
+import GuideSkeleton from "@/components/GuideSkeleton";
+import { USE_DB_NEWS } from "@/config/flags";
 
 const queryClient = new QueryClient();
 
@@ -67,15 +79,25 @@ const App = () => (
             <Route path="/tools" element={<ToolsPage />} />
             <Route path="/tools/price-tracker" element={<PriceTracker />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/search" element={<Search />} />
             <Route path="/pc-hub" element={<PCHub />} />
             <Route path="/playstation-hub" element={<PlayStationHub />} />
             <Route path="/xbox-hub" element={<XboxHub />} />
             <Route path="/android-hub" element={<AndroidHub />} />
             <Route path="/ios-hub" element={<IosHub />} /> {/* Changed element from iOSHub to IosHub */}
-            <Route path="/news" element={<Suspense fallback={<NewsFeedSkeleton />}><NewsIndex /></Suspense>} />
+            <Route path="/news" element={<Suspense fallback={<NewsFeedSkeleton />}>{USE_DB_NEWS ? <NewsIndexDb /> : <NewsIndex />}</Suspense>} />
+            <Route path="/news/:slug" element={<Suspense fallback={<NewsFeedSkeleton />}><NewsDetail /></Suspense>} />
             <Route path="/news/tag/:tag" element={<Suspense fallback={<NewsFeedSkeleton />}><NewsTag /></Suspense>} />
-            <Route path="/guides" element={<GuidesIndex />} />
-            <Route path="/guides/:slug" element={<GuideDetail />} />
+            <Route path="/guides" element={<Suspense fallback={<GuideSkeleton />}><GuidesIndex /></Suspense>} />
+            <Route path="/guides/:slug" element={<Suspense fallback={<GuideSkeleton />}><GuideMDXDetail /></Suspense>} />
+            <Route path="/guides/json/:slug" element={<Suspense fallback={<GuideSkeleton />}><GuideDetail /></Suspense>} />
+            <Route path="/guides/mdx/:slug" element={<Suspense fallback={<GuideSkeleton />}><GuideMDXDetail /></Suspense>} />
+            <Route path="/admin/moderation" element={<ModerationQueue />} />
+            <Route path="/admin/editor" element={<Editor />} />
+            <Route path="/plus/success" element={<PlusSuccess />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/reviews/:slug" element={<ReviewDetail />} />
+            <Route path="/u/:username" element={<ProfilePage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

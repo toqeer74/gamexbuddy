@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { useTrack } from "@/hooks/useTrack";
 import { addXp } from "@/lib/xp";
 
 export default function NewsletterGlow() {
@@ -8,6 +9,7 @@ export default function NewsletterGlow() {
   const [err, setErr] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const { trackNewsletterSubmit } = useAnalytics();
+  const { newsletterSignup } = useTrack();
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -21,7 +23,9 @@ export default function NewsletterGlow() {
     await new Promise((r) => setTimeout(r, 700));
     setLoading(false);
     setOk(true);
+    try { localStorage.setItem('gx_subscribed', '1'); } catch {}
     trackNewsletterSubmit(email, "NewsletterGlow");
+    newsletterSignup(email);
     try { await addXp(50); } catch {}
   }
 

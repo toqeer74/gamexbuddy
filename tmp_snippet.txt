@@ -1,0 +1,9 @@
+      ref={closeBtnRef}
+            className="navlink"
+            aria-label="Close trailer modal"
+            onClick={onClose}
+          >
+            ×
+          </button>
+        </div>
+       

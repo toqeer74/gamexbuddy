@@ -1,4 +1,5 @@
 import React from "react";
+import SmartImage from "@/components/SmartImage";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -20,7 +21,7 @@ const AffiliateCard: React.FC<AffiliateCardProps> = ({
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
       {imageUrl && (
-        <img src={imageUrl} alt={title} className="w-full h-48 object-cover" />
+        <SmartImage src={imageUrl} alt={title} className="w-full h-48 object-cover" />
       )}
       <CardHeader>
         <CardTitle>{title}</CardTitle>

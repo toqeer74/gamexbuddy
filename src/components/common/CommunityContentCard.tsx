@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { UserCircle2, Flame } from "lucide-react"; // Import icons
+import { UserCircle2 } from "lucide-react"; // Import icons
+import SmartImage from "@/components/SmartImage";
 
 interface CommunityContentCardProps {
   title: string;
@@ -34,17 +35,14 @@ const CommunityContentCard: React.FC<CommunityContentCardProps> = ({
                    hover:ring-2 hover:ring-purple-500 hover:ring-offset-2 hover:ring-offset-background
                    drop-shadow-[0_0_10px_rgba(168,85,247,0.5)] hover:drop-shadow-[0_0_20px_rgba(168,85,247,0.9)]">
       {isTrending && (
-        <Badge className="absolute top-3 left-3 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-semibold shadow-md flex items-center gap-1 z-10
-                          drop-shadow-[0_0_8px_rgba(249,115,22,0.7)]">
-          <Flame className="h-3 w-3" /> Trending
-        </Badge>
+        <span className="badge badge--trend absolute top-3 left-3">🔥 Trending</span>
       )}
       {imageUrl && (
-        <img src={imageUrl} alt={title} className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" />
+        <SmartImage src={imageUrl} alt={title} className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105" />
       )}
       <CardHeader className="flex flex-row items-center gap-3 p-4 pb-2">
         {authorAvatarUrl ? (
-          <img src={authorAvatarUrl} alt={authorName} className="w-8 h-8 rounded-full object-cover" />
+          <SmartImage src={authorAvatarUrl} alt={authorName} className="w-8 h-8 rounded-full object-cover" />
         ) : (
           <UserCircle2 className="h-8 w-8 text-muted-foreground" />
         )}

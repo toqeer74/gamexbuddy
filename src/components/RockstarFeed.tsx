@@ -1,4 +1,5 @@
 import React from "react";
+import SmartImage from "@/components/SmartImage";
 import data from "@/content/gta6/news.json";
 
 type NewsItem = {
@@ -44,7 +45,7 @@ export default function RockstarFeed() {
                   rel="noopener noreferrer"
                   className="gx-imgwrap"
                 >
-                  <img src={n.image} loading="lazy" alt="" />
+                  <SmartImage src={n.image} alt={n.title} />
                 </a>
               )}
 
@@ -86,4 +87,3 @@ export default function RockstarFeed() {
     </section>
   );
 }
-

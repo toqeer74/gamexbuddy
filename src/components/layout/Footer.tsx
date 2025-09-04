@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { MessageSquare, Twitter, Send, Youtube } from "lucide-react";
+import NewsletterGlow from "@/components/NewsletterGlow";
 
 const Footer = () => {
   const neonLinkClasses = "hover:text-cyan-300 transition-colors duration-300";
@@ -12,20 +13,14 @@ const Footer = () => {
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500
                       bg-[length:200%_auto] animate-synthwave-pulse"></div>
 
-      <div className="container flex flex-col md:flex-row items-center justify-between gap-8">
-        <div className="text-center md:text-left">
-          <img
-            src="/Gamexbuddy-logo-transparent.png"
-            alt="GamexBuddy Logo"
-            className="h-8"
-            onError={(e) => {
-              const t = e.currentTarget as HTMLImageElement;
-              if (t.src.endsWith("Gamexbuddy-logo-transparent.png")) t.src = "/placeholder.svg";
-            }}
-          />
-          <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} All rights reserved.
-          </p>
+      <div className="container flex flex-col gap-8">
+        <div className="text-center">
+          <img src="/Gamexbuddy-logo-v2-transparent.png" alt="GamexBuddy Logo" className="h-8 mx-auto" onError={(e)=>{ const t=e.currentTarget as HTMLImageElement; if(t.src.endsWith('v2-transparent.png')) t.src='/placeholder.svg'; }} />
+          <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} All rights reserved.</p>
+        </div>
+
+        <div>
+          <NewsletterGlow />
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-4 text-sm font-medium text-center md:text-left">
@@ -66,7 +61,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex space-x-6 mt-6 md:mt-0">
+        <div className="flex space-x-6 justify-center">
           <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className={`${neonIconClasses} hover:text-blue-500 drop-shadow-[0_0_8px_rgba(59,130,246,0.7)] hover:drop-shadow-[0_0_15px_rgba(59,130,246,1)]`}>
             <MessageSquare size={24} />
           </a>

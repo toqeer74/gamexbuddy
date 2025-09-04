@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import data from "@/content/wallpapers.json";
+import SmartImage from "@/components/SmartImage";
 
 type W = { id:string; title:string; url:string; tags?:string[] };
 
@@ -41,7 +42,7 @@ export default function WallpaperGrid(){
           {filtered.map(w=> (
             <label key={w.id} className="wall-card card-glass" style={{position:'relative', cursor:'pointer'}}>
               <input type="checkbox" checked={!!selected[w.id]} onChange={()=>toggle(w.id)} style={{position:'absolute', top:10, left:10}}/>
-              <img src={w.url} alt={w.title} style={{width:"100%", height:140, objectFit:"cover"}}/>
+              <SmartImage src={w.url} alt={w.title} style={{width:"100%", height:140, objectFit:"cover"}}/>
               <div className="p" style={{display:"flex",justifyContent:"space-between", padding:10}}>
                 <div>{w.title}</div>
                 <a className="badge" href={w.url} download onClick={e=>e.stopPropagation()}>Download</a>

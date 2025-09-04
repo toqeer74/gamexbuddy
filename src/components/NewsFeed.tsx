@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import NewsTagChips from "@/components/NewsTagChips";
 import data from "@/content/gta6/news.json";
+import SmartImage from "@/components/SmartImage";
 
 type Item = {
   id: string; title: string; date: string; url: string; excerpt: string;
@@ -31,13 +32,13 @@ export default function NewsFeed(){
             <article key={n.id} className="nf__card reveal">
               {n.image && (
                 <a href={n.url} target="_blank" rel="noopener noreferrer">
-                  <img src={n.image} className="nf__img" alt={n.title}/>
+                  <SmartImage src={n.image} className="nf__img" alt={n.title} />
                 </a>
               )}
               <div className="nf__overlay">
                 <div className="nf__badges">
                   {n.official && <span className="badge badge--official">Official</span>}
-                  {n.trending && <span className="badge badge--trend">Trending</span>}
+                  {n.trending && <span className="badge badge--trend">🔥 Trending</span>}
                   <time className="nf__date">{fmt(n.date)}</time>
                 </div>
                 <div className="nf__title">{n.title}</div>
@@ -51,3 +52,4 @@ export default function NewsFeed(){
     </section>
   );
 }
+

@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet-async';
 const RouteHandler: React.FC = () => {
   const location = useLocation();
   const url = `https://gamexbuddy.com${location.pathname}`;
-  const image = "https://gamexbuddy.com/Gamexbuddy-logo-v2-transparent.png";
+  const image = "https://gamexbuddy.com/Gamexbuddy-logo-v2-neon-transparent.png";
 
   return (
     <>

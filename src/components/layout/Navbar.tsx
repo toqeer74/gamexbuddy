@@ -39,7 +39,7 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <a href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-          <img src="/logo.svg" alt="GamexBuddy" width={154} height={36} style={{ objectFit: "contain" }} />
+          <img src="/Gamexbuddy-logo-v2-neon-transparent.png" alt="GamexBuddy" width={184} height={44} style={{ objectFit: "contain" }} />
         </a>
         <nav className="hidden md:flex items-center space-x-4">
           {mainNavLinks.map(i => (

@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { prefetchOnIdle } from "@/lib/prefetch";
 import { canonical } from "@/lib/seo";
 
-import HeroWall from "@/components/HeroWall";
+import Hero from "@/components/Hero";
 import GameAuthorityMarquee from "@/components/GameAuthorityMarquee";
 import RecommendedGames from "@/components/RecommendedGames";
 import NewsFeed from "@/components/NewsFeed";
@@ -143,7 +143,7 @@ export default function HomePage() {
         </script>
       </Helmet>
 
-      <HeroWall />
+      <Hero />
       <GameAuthorityMarquee />
       <TrendingStrip />
       <RecommendedGames />

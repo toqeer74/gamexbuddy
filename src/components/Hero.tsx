@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import HeroCountdownPro from "@/components/HeroCountdownPro";
+import TrailerModal from "@/components/modals/TrailerModal";
+import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 // GTA 6 release target: May 26, 2026 (source: pcgamesn.com)
 const GTA6_TARGET_ISO = "2026-05-26T00:00:00-05:00";
 
 export default function Hero() {
+  const reduced = usePrefersReducedMotion();
+  const [modal, setModal] = useState<{ id: string; title: string } | null>(null);
+  const trailer = useMemo(() => ({ id: "QdBZY2fkU-0", title: "GTA VI - Trailer 1" }), []);
+
   return (
     <section
       className="relative overflow-hidden"
@@ -78,15 +84,65 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: Countdown */}
-          <div className="w-full md:w-1/2 flex items-center justify-center relative">
+          {/* Right: Countdown + Video Tile with neon hover/click */}
+          <div className="w-full md:w-1/2 flex flex-col items-center justify-center gap-6 relative">
             <div className="relative z-[1]">
               <HeroCountdownPro targetISO={GTA6_TARGET_ISO} />
             </div>
+
+            <motion.button
+              type="button"
+              onClick={() => setModal(trailer)}
+              aria-label={`Play ${trailer.title}`}
+              className="w-full max-w-xl rounded-xl overflow-hidden"
+              initial={reduced ? false : { opacity: 0, y: 10 }}
+              animate={reduced ? {} : { opacity: 1, y: 0 }}
+              transition={{ duration: reduced ? 0 : 0.4, delay: 0.05 }}
+              whileHover={reduced ? {} : { boxShadow: "0 0 0 1px rgba(88,224,255,.35), 0 0 28px rgba(88,224,255,.35)" }}
+              whileTap={reduced ? {} : { scale: 0.98 }}
+              style={{ position: "relative" }}
+            >
+              <img
+                src={`https://i.ytimg.com/vi/${trailer.id}/maxresdefault.jpg`}
+                alt={trailer.title}
+                style={{ width: "100%", height: 240, objectFit: "cover", display: "block" }}
+                loading="lazy"
+              />
+              {/* Neon overlay */}
+              <span
+                aria-hidden
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 12,
+                  color: "#fff",
+                  background: "linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.35))",
+                }}
+              >
+                <span style={{ fontSize: 26, lineHeight: 1, filter: "drop-shadow(0 0 10px rgba(88,224,255,.7))" }}>▶</span>
+                <span
+                  style={{
+                    padding: "8px 12px",
+                    borderRadius: 999,
+                    border: "1px solid rgba(255,255,255,.25)",
+                    background: "rgba(0,0,0,.35)",
+                    boxShadow: "0 0 18px rgba(88,224,255,.35)",
+                    fontWeight: 700,
+                  }}
+                >
+                  Play Trailer
+                </span>
+              </span>
+            </motion.button>
           </div>
         </div>
       </div>
+      {modal && (
+        <TrailerModal open={!!modal} onClose={() => setModal(null)} id={modal.id} title={modal.title} />
+      )}
     </section>
   );
 }
-

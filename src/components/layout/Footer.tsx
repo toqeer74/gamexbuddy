@@ -15,7 +15,7 @@ const Footer = () => {
 
       <div className="container flex flex-col gap-8">
         <div className="text-center">
-          <img src="/Gamexbuddy-logo-v2-neon-transparent.png" alt="GamexBuddy Logo" className="h-11 mx-auto" onError={(e)=>{ const t=e.currentTarget as HTMLImageElement; if(t.src.endsWith('v2-neon-transparent.png')) t.src='/placeholder.svg'; }} />
+          <img src="/Gamexbuddy-logo-v2-neon-transparent.png" alt="GamexBuddy Logo" className="h-12 mx-auto" onError={(e)=>{ const t=e.currentTarget as HTMLImageElement; if(t.src.endsWith('v2-neon-transparent.png')) t.src='/placeholder.svg'; }} />
           <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} All rights reserved.</p>
         </div>
 

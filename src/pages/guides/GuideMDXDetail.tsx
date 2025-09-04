@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { canonical } from "@/lib/seo";
 import { sb } from "@/lib/supabase";
+import { getSignedUrl } from "@/lib/signedImage";
 
 // Note: Avoid top-level imports of @mdx-js to prevent build failure
 // when deps are not installed. We lazy-load at runtime.
@@ -51,7 +52,6 @@ export default function GuideMDXDetail(){
       </Helmet>
       <h1 className="title-xl">{g.title}</h1>
       {coverUrl && (
-import { getSignedUrl } from "@/lib/signedImage";
         <img src={coverUrl} alt="" style={{ width:"100%", maxHeight:420, objectFit:"cover", borderRadius:12, margin:"12px 0" }} />
       )}
       {mdxError && <p style={{ color:"#c00" }}>{mdxError}</p>}

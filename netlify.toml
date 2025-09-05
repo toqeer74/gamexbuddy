@@ -4,7 +4,7 @@
 
 [[redirects]]
   from = "/functions/*"
-  to = "https://YOUR-PROJECT.functions.supabase.co/:splat"
+  to = "https://gpcxxatgsxisukznygkc.functions.supabase.co/:splat"
   status = 200
   force = true
 

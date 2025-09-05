@@ -6,6 +6,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Menu, Gamepad2, ChevronDown, Monitor, Gamepad, Smartphone, Apple } from "lucide-react";
 import AuthWidget from "@/components/AuthWidget";
 import SearchBox from "@/components/SearchBox";
+import XPBadge from "@/components/nav/XPBadge";
 
 const Navbar = () => {
   const neonHoverClasses = "hover:text-cyan-300 hover:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] transition-all duration-300";
@@ -32,6 +33,7 @@ const Navbar = () => {
   const secondaryNavLinks = [
     { to: "/community", label: "Community" },
     { to: "/tools", label: "Tools" },
+    { to: "/deals", label: "Deals" },
     { to: "/about", label: "About" },
   ];
 
@@ -65,8 +67,9 @@ const Navbar = () => {
             <Link key={i.to} to={i.to} className={`navlink text-sm font-medium text-white ${neonHoverClasses} ${isActive(i.to) ? 'navlink--active' : ''}`}>{i.label}</Link>
           ))}
         </nav>
-        <div className="hidden md:flex items-center space-x-2">
+        <div className="hidden md:flex items-center space-x-3">
           <SearchBox />
+          <XPBadge />
           <AuthWidget />
         </div>
         <div className="md:hidden">

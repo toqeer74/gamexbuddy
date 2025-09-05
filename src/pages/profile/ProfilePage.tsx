@@ -6,20 +6,24 @@ import { sb } from "@/lib/supabase";
 import { getAvatarUrl } from "@/lib/signedImage";
 import ProfileBadgeRack from "@/components/profile/ProfileBadgeRack";
 
-type Prof = { id: string; username?: string|null; bio?: string|null; avatar_url?: string|null; xp_total?: number|null; rank?: string|null; is_premium?: boolean|null };
+type Prof = { id: string; username?: string|null; bio?: string|null; avatar_url?: string|null; is_premium?: boolean|null };
+type Stats = { xp: number; level: number };
 
 export default function ProfilePage(){
   const { username = "" } = useParams();
   const [p, setP] = useState<Prof | null>(null);
   const [avatar, setAvatar] = useState<string | undefined>(undefined);
   const [posts, setPosts] = useState<any[]>([]);
+  const [stats, setStats] = useState<Stats | null>(null);
 
   useEffect(()=>{ (async () => {
     if (!username) return;
-    const { data: prof } = await sb.from("profiles").select("id, username, bio, avatar_url, xp_total, rank, is_premium").eq("username", username).single();
+    const { data: prof } = await sb.from("profiles").select("id, username, bio, avatar_url, is_premium").eq("username", username).single();
     if (prof) {
       setP(prof as any);
       if ((prof as any).avatar_url) setAvatar(await getAvatarUrl((prof as any).avatar_url));
+      const { data: s } = await sb.from('user_stats').select('xp, level').eq('user_id', (prof as any).id).maybeSingle();
+      setStats((s as any) || null);
       const { data: ps } = await sb.from("posts").select("id, type, title, created_at, tags").eq("author_id", (prof as any).id).order("created_at", { ascending: false } as any).limit(50);
       setPosts(ps || []);
     }
@@ -38,12 +42,12 @@ export default function ProfilePage(){
         {avatar ? (
           <img src={avatar} alt={`${p.username}'s avatar`} style={{ width:72, height:72, borderRadius:'50%', objectFit:'cover' }} />
         ) : (
-          <div style={{ width:72, height:72, borderRadius:'50%', background:'#222', display:'grid', placeItems:'center' }}>🙂</div>
+          <div style={{ width:72, height:72, borderRadius:'50%', background:'#222', display:'grid', placeItems:'center' }}>👤</div>
         )}
         <div style={{ flex:1 }}>
           <div className="h3" style={{ margin:0 }}>{p.username || 'User'}</div>
           <div style={{ opacity:.8, fontSize:14 }}>{p.bio || ''}</div>
-          <div style={{ marginTop:6, fontSize:13, opacity:.85 }}>Rank: {p.rank || 'rookie'} • XP: {p.xp_total ?? 0} {p.is_premium ? '• ⭐ Premium' : ''}</div>
+          <div style={{ marginTop:6, fontSize:13, opacity:.85 }}>Level: {stats?.level ?? 1} • XP: {stats?.xp ?? 0} {p.is_premium ? '• ⭐ Premium' : ''}</div>
         </div>
       </div>
 

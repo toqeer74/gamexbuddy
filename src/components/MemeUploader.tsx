@@ -19,7 +19,8 @@ export default function MemeUploader(){
     if (!uid || !file) return;
     setBusy(true);
     try {
-      const up = await uploadMeme(file, uid);
+      const processed = await compressImage(file, 1600, 0.82);
+      const up = await uploadMeme(processed || file, uid);
       if ((up as any).error) throw (up as any).error;
       const url = (up as any).url as string;
       const { error } = await createPost({ type: "meme", title: file.name, image_url: url } as any);
@@ -33,6 +34,28 @@ export default function MemeUploader(){
     } finally { setBusy(false); }
   }
 
+  async function compressImage(file: File, maxWidth = 1600, quality = 0.85): Promise<File | null> {
+    try {
+      const img = await new Promise<HTMLImageElement>((res, rej) => {
+        const i = new Image();
+        i.onload = () => res(i);
+        i.onerror = rej;
+        i.src = URL.createObjectURL(file);
+      });
+      const scale = Math.min(1, maxWidth / img.width);
+      const w = Math.round(img.width * scale);
+      const h = Math.round(img.height * scale);
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return null;
+      ctx.drawImage(img, 0, 0, w, h);
+      const blob: Blob | null = await new Promise((res) => canvas.toBlob(res, 'image/jpeg', quality));
+      if (!blob) return null;
+      return new File([blob], file.name.replace(/\.(png|webp|gif)$/i, '.jpg'), { type: 'image/jpeg' });
+    } catch { return null; }
+  }
+
   return (
     <form onSubmit={onSubmit} className="card-glass" style={{ padding: 12, display: "flex", gap: 8, alignItems: "center", marginBottom: 12 }}>
       <input type="file" accept="image/*" onChange={(e)=>setFile(e.target.files?.[0] || null)} aria-label="Choose meme image" disabled={!uid || busy} />
@@ -43,4 +66,3 @@ export default function MemeUploader(){
     </form>
   );
 }
-

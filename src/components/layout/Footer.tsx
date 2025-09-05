@@ -1,83 +1,98 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { MessageSquare, Twitter, Send, Youtube } from "lucide-react";
-import NewsletterGlow from "@/components/NewsletterGlow";
+// src/components/layout/Footer.tsx
+import { Youtube, Facebook, Instagram, Twitch, Twitter, Github } from "lucide-react";
 
-const Footer = () => {
-  const neonLinkClasses = "hover:text-cyan-300 transition-colors duration-300";
-  const neonIconClasses = "text-gray-400 hover:text-cyan-300 transition-colors drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] hover:drop-shadow-[0_0_15px_rgba(0,255,255,1)]";
+// If you have a shared Logo component from the header, use that instead:
+// import Logo from "@/components/branding/Logo";
 
+const socials = [
+  { name: "YouTube",  href: "https://youtube.com/@gamexbuddy",  color: "#FF0000", Icon: Youtube },
+  { name: "TikTok",   href: "https://tiktok.com/@gamexbuddy",   color: "#000000" }, // fallback letter
+  { name: "Facebook", href: "https://facebook.com/gamexbuddy",  color: "#1877F2", Icon: Facebook },
+  { name: "Instagram",href: "https://instagram.com/gamexbuddy", color: "#E1306C", Icon: Instagram },
+  { name: "Reddit",   href: "https://reddit.com/r/gamexbuddy",  color: "#FF4500" },
+  { name: "X",        href: "https://x.com/gamexbuddy",         color: "#000000", Icon: Twitter },
+  { name: "Twitch",   href: "https://twitch.tv/gamexbuddy",     color: "#9146FF", Icon: Twitch },
+  { name: "GitHub",   href: "https://github.com/toqeer74",      color: "#ffffff", Icon: Github },
+];
+
+export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-8">
-      {/* Animated Gradient Bar */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500
-                      bg-[length:200%_auto] animate-synthwave-pulse"></div>
+    <footer className="gx-footer mt-16">
+      {/* moving neon rail (subtle) */}
+      <div className="gx-footer-rail" />
 
-      <div className="container flex flex-col gap-8">
-        <div className="text-center">
-          <img src="/Gamexbuddy-logo-v2-neon-transparent.png" alt="GamexBuddy Logo" className="h-12 mx-auto" onError={(e)=>{ const t=e.currentTarget as HTMLImageElement; if(t.src.endsWith('v2-neon-transparent.png')) t.src='/placeholder.svg'; }} />
-          <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} All rights reserved.</p>
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        {/* 3 columns */}
+        <div className="grid gap-10 md:grid-cols-3">
+          {/* Col 1: Brand */}
+          <div className="space-y-4">
+            {/* Use your exact header logo here */}
+            {/* <Logo className="h-10" /> */}
+            <img src="/Gamexbuddy-logo-v2-neon-transparent.png" alt="GameXBuddy" className="h-10 object-contain" />
+            <p className="text-sm text-white/75 max-w-sm">
+              The ultimate gaming hub with guides, deals, earning modules, and community tools.
+            </p>
+
+            <a href="/newsletter" className="inline-flex gx-btn px-5 py-2 rounded-xl">
+              Join Newsletter
+            </a>
+          </div>
+
+          {/* Col 2: Explore */}
+          <div>
+            <h4 className="text-lg font-extrabold mb-3">Explore</h4>
+            <ul className="grid gap-2 text-sm">
+              <li><a className="gx-link" href="/gta6">GTA6 Hub</a></li>
+              <li><a className="gx-link" href="/earn">Earn Points</a></li>
+              <li><a className="gx-link" href="/news">Gaming News</a></li>
+              <li><a className="gx-link" href="/community">Community</a></li>
+              <li><a className="gx-link" href="/guides">Guides & Tips</a></li>
+            </ul>
+          </div>
+
+          {/* Col 3: Tools + Socials */}
+          <div>
+            <h4 className="text-lg font-extrabold mb-3">Tools</h4>
+            <ul className="grid gap-2 text-sm mb-5">
+              <li><a className="gx-link" href="/tools/price-tracker">Price Tracker</a></li>
+              <li><a className="gx-link" href="/tools/pc-requirements">PC Requirements</a></li>
+              <li><a className="gx-link" href="/deals">Game Deals</a></li>
+              <li><a className="gx-link" href="/meme-wall">Meme Wall</a></li>
+              <li><a className="gx-link" href="/wallpapers">Wallpapers</a></li>
+            </ul>
+
+            <h4 className="text-lg font-extrabold mb-3">Connect</h4>
+            <div className="flex flex-wrap items-center gap-3">
+              {socials.map(({ name, href, color, Icon }) => (
+                <a
+                  key={name}
+                  href={href}
+                  aria-label={name}
+                  className="gx-social"
+                  style={{ ["--_brand" as any]: color }}
+                  rel="noopener"
+                  target="_blank"
+                  title={name}
+                >
+                  {Icon ? <Icon size={18}/> : <span className="font-bold text-xs">{name[0]}</span>}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div>
-          <NewsletterGlow />
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-4 text-sm font-medium text-center md:text-left">
-          <div>
-            <h3 className="font-bold text-primary mb-2">Explore Hubs</h3>
-            <ul className="space-y-1">
-              <li><Link to="/gta6-hub" className={neonLinkClasses}>GTA6 Hub</Link></li>
-              <li><Link to="/pc-hub" className={neonLinkClasses}>PC Hub</Link></li>
-              <li><Link to="/playstation-hub" className={neonLinkClasses}>PlayStation Hub</Link></li>
-              <li><Link to="/xbox-hub" className={neonLinkClasses}>Xbox Hub</Link></li>
-              <li><Link to="/android-hub" className={neonLinkClasses}>Android Hub</Link></li>
-              <li><Link to="/ios-hub" className={neonLinkClasses}>iOS Hub</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-bold text-primary mb-2">Community</h3>
-            <ul className="space-y-1">
-              <li><Link to="/community" className={neonLinkClasses}>Forums</Link></li>
-              <li><a href="https://discord.com" target="_blank" rel="noopener noreferrer" className={neonLinkClasses}>Discord</a></li>
-              <li><a href="https://telegram.org" target="_blank" rel="noopener noreferrer" className={neonLinkClasses}>Telegram</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-bold text-primary mb-2">Resources</h3>
-            <ul className="space-y-1">
-              <li><Link to="/tools" className={neonLinkClasses}>Tools</Link></li>
-              <li><Link to="/news" className={neonLinkClasses}>News</Link></li>
-              <li><Link to="/guides" className={neonLinkClasses}>Guides</Link></li>
-              <li><a href="#" className={neonLinkClasses}>Blog</a></li> {/* Placeholder */}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-bold text-primary mb-2">About</h3>
-            <ul className="space-y-1">
-              <li><Link to="/about" className={neonLinkClasses}>About GamexBuddy</Link></li>
-              <li><a href="#" className={neonLinkClasses}>Contact</a></li> {/* Placeholder */}
-            </ul>
-          </div>
-        </div>
-
-        <div className="flex space-x-6 justify-center">
-          <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className={`${neonIconClasses} hover:text-blue-500 drop-shadow-[0_0_8px_rgba(59,130,246,0.7)] hover:drop-shadow-[0_0_15px_rgba(59,130,246,1)]`}>
-            <MessageSquare size={24} />
-          </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className={`${neonIconClasses} hover:text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.7)] hover:drop-shadow-[0_0_15px_rgba(34,211,238,1)]`}>
-            <Twitter size={24} />
-          </a>
-          <a href="https://telegram.org" target="_blank" rel="noopener noreferrer" className={`${neonIconClasses} hover:text-sky-500 drop-shadow-[0_0_8px_rgba(14,165,233,0.7)] hover:drop-shadow-[0_0_15px_rgba(14,165,233,1)]`}>
-            <Send size={24} />
-          </a>
-          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className={`${neonIconClasses} hover:text-red-600 drop-shadow-[0_0_8px_rgba(220,38,38,0.7)] hover:drop-shadow-[0_0_15px_rgba(220,38,38,1)]`}>
-            <Youtube size={24} />
-          </a>
+        {/* legal row */}
+        <div className="gx-footer-legal mt-10 flex flex-wrap items-center justify-between gap-3 text-xs text-white/60">
+          <span>© {new Date().getFullYear()} GameXBuddy. All rights reserved.</span>
+          <nav className="flex items-center gap-4">
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
+            <a href="/contact">Contact</a>
+            <a href="/about">About</a>
+          </nav>
         </div>
       </div>
     </footer>
   );
-};
+}
 
-export default Footer;

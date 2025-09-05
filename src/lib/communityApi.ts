@@ -82,3 +82,32 @@ export async function getThreadsWithCounts() {
     .select("*")
     .order("created_at", { ascending: false });
 }
+
+export async function getThreadsTrending() {
+  return sb
+    .from("thread_posts_scores")
+    .select("*")
+    .order("score", { ascending: false })
+    .order("created_at", { ascending: false });
+}
+
+export async function voteThread(postId: string, value: 1 | -1, userId: string) {
+  // Upsert by unique (post_id,user_id)
+  const payload: any = { post_id: postId, user_id: userId, value };
+  const { data: existing } = await sb.from("post_votes").select("id, value").eq("post_id", postId).eq("user_id", userId).maybeSingle();
+  if (existing && (existing as any).value === value) {
+    // toggle off
+    return sb.from("post_votes").delete().eq("id", (existing as any).id);
+  }
+  if (existing) return sb.from("post_votes").update({ value }).eq("id", (existing as any).id);
+  return sb.from("post_votes").insert(payload);
+}
+
+export async function voteReply(replyId: string, value: 1 | -1, userId: string) {
+  const { data: existing } = await sb.from("reply_votes").select("id, value").eq("reply_id", replyId).eq("user_id", userId).maybeSingle();
+  if (existing && (existing as any).value === value) {
+    return sb.from("reply_votes").delete().eq("id", (existing as any).id);
+  }
+  if (existing) return sb.from("reply_votes").update({ value }).eq("id", (existing as any).id);
+  return sb.from("reply_votes").insert({ reply_id: replyId, user_id: userId, value });
+}

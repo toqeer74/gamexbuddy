@@ -1,18 +1,41 @@
-import React, { useState } from "react";
-import { sb } from "@/lib/supabase";
+import { useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
 
-export default function ReportButton({ postId, userId }: { postId: string; userId?: string }){
+interface ReportButtonProps {
+  commentId: number;
+}
+
+export default function ReportButton({ commentId }: ReportButtonProps) {
   const [busy, setBusy] = useState(false);
-  async function onReport(e: React.MouseEvent){
-    e.stopPropagation();
-    if (!userId) { alert("Sign in to report."); return; }
+
+  async function onReport() {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      alert("Sign in to report.");
+      return;
+    }
+
     setBusy(true);
-    const { error } = await sb.from("moderation_flags").insert({ post_id: postId, reporter_id: userId, reason: "user_report" });
+    const { error } = await supabase.from("comment_reports").insert({
+      reporter_id: user.id,
+      comment_id: commentId,
+      reason: "abuse"
+    });
+
     setBusy(false);
-    if (error) alert("Failed to report"); else alert("Thanks — we’ll review this.");
+    if (error) {
+      alert("Failed to report");
+    } else {
+      alert("Thanks — we'll review this.");
+    }
   }
+
   return (
-    <button className="gx-btn gx-btn--soft" onClick={onReport} disabled={busy} aria-label="Report this post">
+    <button
+      className="text-xs opacity-70 hover:opacity-100 transition-opacity disabled:opacity-50"
+      onClick={onReport}
+      disabled={busy}
+    >
       {busy ? "Reporting…" : "Report"}
     </button>
   );

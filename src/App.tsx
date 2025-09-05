@@ -3,11 +3,13 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import Layout from "./components/layout/Layout";
 import { AuthProvider } from "@/lib/AuthProvider";
 import Analytics from "@/components/Analytics";
 import RouteHandler from "@/components/RouteHandler";
+import { usePerformanceTracker } from "@/hooks/usePerformanceTracker";
+import SEOHead from "@/components/SEOHead";
 const Index = lazy(() => import("./pages/Index"));
 const Gta6Hub = lazy(() => import("./pages/Gta6Hub"));
 const Gta6Layout = lazy(() => import("./pages/gta6/Gta6Layout"));
@@ -24,6 +26,8 @@ const FortniteHub = lazy(() => import("./pages/FortniteHub"));
 const CommunityPage = lazy(() => import("./pages/CommunityPage"));
 const ToolsPage = lazy(() => import("./pages/ToolsPage"));
 const PriceTracker = lazy(() => import("./pages/tools/PriceTracker"));
+const PCChecker = lazy(() => import("./pages/tools/PCChecker"));
+const MemesPage = lazy(() => import("./pages/Memes"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const PCHub = lazy(() => import("./pages/PCHub"));
 const PlayStationHub = lazy(() => import("./pages/PlayStationHub"));
@@ -47,6 +51,7 @@ const ReviewDetail = lazy(() => import("./pages/reviews/ReviewDetail"));
 const Search = lazy(() => import("./pages/Search"));
 const Editor = lazy(() => import("./pages/admin/Editor"));
 const AdminPicks = lazy(() => import("./pages/admin/Picks"));
+const GuidesUpload = lazy(() => import("./pages/admin/GuidesUpload"));
 import AdminGuard from "@/pages/admin/Guard";
 const ProfilePage = lazy(() => import("./pages/profile/ProfilePage"));
 import NewsFeedSkeleton from "@/components/NewsFeedSkeleton";
@@ -54,6 +59,12 @@ import GuideSkeleton from "@/components/GuideSkeleton";
 import { USE_DB_NEWS } from "@/config/flags";
 const GameList = lazy(() => import("./pages/games/GameList"));
 const GameDetail = lazy(() => import("./pages/games/GameDetail"));
+const WallpaperGrid = lazy(() => import("@/components/WallpaperGrid"));
+const QuizPlay = lazy(() => import("./pages/quiz/Play"));
+const HubDetail = lazy(() => import("./pages/hubs/HubDetail"));
+const EarnPage = lazy(() => import("./pages/Earn"));
+const Deals = lazy(() => import("./pages/Deals"));
+const AdminGrowth = lazy(() => import("./pages/admin/Growth"));
 
 const queryClient = new QueryClient();
 
@@ -88,6 +99,8 @@ const App = () => (
             <Route path="/community" element={<CommunityPage />} />
             <Route path="/tools" element={<ToolsPage />} />
             <Route path="/tools/price-tracker" element={<PriceTracker />} />
+            <Route path="/tools/pc-checker" element={<PCChecker />} />
+            <Route path="/wallpapers" element={<Suspense fallback={<div style={{padding:20}}>Loading…</div>}><WallpaperGrid /></Suspense>} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/search" element={<Search />} />
             <Route path="/pc-hub" element={<PCHub />} />
@@ -104,9 +117,16 @@ const App = () => (
             <Route path="/guides/mdx/:slug" element={<Suspense fallback={<GuideSkeleton />}><GuideMDXDetail /></Suspense>} />
             <Route path="/games" element={<GameList />} />
             <Route path="/games/:slug" element={<GameDetail />} />
+            <Route path="/memes" element={<MemesPage />} />
+            <Route path="/earn" element={<EarnPage />} />
+            <Route path="/deals" element={<Deals />} />
+            <Route path="/quiz/:slug" element={<QuizPlay />} />
+            <Route path="/hubs/:slug" element={<HubDetail />} />
             <Route path="/admin/moderation" element={<ModerationQueue />} />
             <Route path="/admin/editor" element={<Editor />} />
+            <Route path="/admin/growth" element={<Suspense fallback={<div style={{padding:20}}>Loading...</div>}><AdminGuard><AdminGrowth /></AdminGuard></Suspense>} />
             <Route path="/admin/picks" element={<Suspense fallback={<div style={{padding:20}}>Loading...</div>}><AdminGuard><AdminPicks /></AdminGuard></Suspense>} />
+            <Route path="/admin/guides-upload" element={<Suspense fallback={<div style={{padding:20}}>Loading...</div>}><AdminGuard><GuidesUpload /></AdminGuard></Suspense>} />
             <Route path="/plus/success" element={<PlusSuccess />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/reviews/:slug" element={<ReviewDetail />} />

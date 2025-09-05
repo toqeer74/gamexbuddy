@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { createClient } from "@supabase/supabase-js";
 const SITE = process.env.VITE_SITE_URL || "https://gamexbuddy.com";
 
 const routes = [
@@ -13,9 +14,28 @@ try {
 } catch {}
 
 const guideSlugs = (guides.length ? guides : []).map(g => `/guides/${g.slug}`);
+
+async function fetchDbPaths(){
+  try {
+    const url = process.env.VITE_SUPABASE_URL;
+    const key = process.env.SUPABASE_SERVICE_ROLE || process.env.VITE_SUPABASE_ANON_KEY;
+    if (!url || !key) return { guides: [], hubs: [] };
+    const sb = createClient(url, key, { auth: { persistSession: false } });
+    const { data: gRows } = await sb.from('guides').select('slug').limit(200);
+    const { data: games } = await sb.from('games').select('slug').limit(200);
+    return {
+      guides: (gRows || []).map(g=>`/guides/${g.slug}`),
+      hubs: (games || []).map(g=>`/hubs/${g.slug}`)
+    };
+  } catch { return { guides: [], hubs: [] }; }
+}
+
+const db = await fetchDbPaths();
 const dynamic = [
   ...news.map(n => `/news#${encodeURIComponent(n.id)}`),
-  ...guideSlugs
+  ...guideSlugs,
+  ...db.guides,
+  ...db.hubs,
 ];
 
 const urls = [...routes, ...dynamic];

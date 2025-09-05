@@ -1,0 +1,73 @@
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { canonical } from "@/lib/seo";
+import { sb } from "@/lib/supabase";
+import { getAvatarUrl } from "@/lib/signedImage";
+import ProfileBadgeRack from "@/components/profile/ProfileBadgeRack";
+
+type Prof = { id: string; username?: string|null; bio?: string|null; avatar_url?: string|null; xp_total?: number|null; rank?: string|null; is_premium?: boolean|null };
+
+export default function ProfilePage(){
+  const { username = "" } = useParams();
+  const [p, setP] = useState<Prof | null>(null);
+  const [avatar, setAvatar] = useState<string | undefined>(undefined);
+  const [posts, setPosts] = useState<any[]>([]);
+
+  useEffect(()=>{ (async () => {
+    if (!username) return;
+    const { data: prof } = await sb.from("profiles").select("id, username, bio, avatar_url, xp_total, rank, is_premium").eq("username", username).single();
+    if (prof) {
+      setP(prof as any);
+      if ((prof as any).avatar_url) setAvatar(await getAvatarUrl((prof as any).avatar_url));
+      const { data: ps } = await sb.from("posts").select("id, type, title, created_at, tags").eq("author_id", (prof as any).id).order("created_at", { ascending: false } as any).limit(50);
+      setPosts(ps || []);
+    }
+  })(); }, [username]);
+
+  if (!p) return <div className="wrap">Loading…</div>;
+
+  return (
+    <div className="wrap" style={{ padding: 20 }}>
+      <Helmet>
+        <title>{p.username || 'User'} | Profile | GamexBuddy</title>
+        <link rel="canonical" href={canonical(`/u/${username}`)} />
+      </Helmet>
+
+      <div className="card-glass" style={{ padding: 16, display:'flex', gap:12, alignItems:'center' }}>
+        {avatar ? (
+          <img src={avatar} alt={`${p.username}'s avatar`} style={{ width:72, height:72, borderRadius:'50%', objectFit:'cover' }} />
+        ) : (
+          <div style={{ width:72, height:72, borderRadius:'50%', background:'#222', display:'grid', placeItems:'center' }}>🙂</div>
+        )}
+        <div style={{ flex:1 }}>
+          <div className="h3" style={{ margin:0 }}>{p.username || 'User'}</div>
+          <div style={{ opacity:.8, fontSize:14 }}>{p.bio || ''}</div>
+          <div style={{ marginTop:6, fontSize:13, opacity:.85 }}>Rank: {p.rank || 'rookie'} • XP: {p.xp_total ?? 0} {p.is_premium ? '• ⭐ Premium' : ''}</div>
+        </div>
+      </div>
+
+      <div style={{ marginTop: 12 }}>
+        <ProfileBadgeRack userId={p.id} />
+      </div>
+
+      <section style={{ marginTop: 16 }}>
+        <h2 className="h3">Recent Activity</h2>
+        <div style={{ display:'grid', gap:8 }}>
+          {posts.map((x:any) => (
+            <div key={x.id} className="card-glass" style={{ padding: 12 }}>
+              <div style={{ fontSize:12, opacity:.7 }}>{new Date(x.created_at).toLocaleString()} • {x.type}</div>
+              <div style={{ fontWeight:700 }}>{x.title || '[No title]'}</div>
+              {Array.isArray(x.tags) && x.tags.length ? (
+                <div style={{ fontSize:12, opacity:.8, marginTop:4 }}>Tags: {x.tags.join(', ')}</div>
+              ) : null}
+            </div>
+          ))}
+          {!posts.length && <div className="card-glass" style={{ padding: 12 }}>No recent posts yet.</div>}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+

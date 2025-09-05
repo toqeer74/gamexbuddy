@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams, Link } from "react-router-dom";
 import guides from "@/content/guides.json";
@@ -6,6 +6,7 @@ import SmartImage from "@/components/SmartImage";
 import normalizeText from "@/lib/normalizeText";
 import AffiliateLink from "@/components/AffiliateLink";
 import SeoBreadcrumbs from "@/components/SeoBreadcrumbs";
+import { useEarnOnRead } from "@/hooks/useEarnOnRead";
 import { canonical } from "@/lib/seo";
 
 type Guide = {
@@ -27,11 +28,15 @@ export default function GuideDetail(){
   const { slug } = useParams<{ slug: string }>();
   const all = guides as Guide[];
   const g = all.find(x => x.slug === slug);
+  // Award once per guide read (slug as event_ref)
+  useEarnOnRead(g?.slug || "", { dwellMs: 40_000, scrollPct: 0.7, points: 10 });
+  // Award once per guide read (slug as event_ref)
+  useEarnOnRead(g?.slug || "", { dwellMs: 40_000, scrollPct: 0.7, points: 10 });
 
   if (!g) return (
     <div className="wrap" style={{ padding: '40px 0' }}>
       <h1 className="h2">Guide not found</h1>
-      <p>We couldnâ€™t find this guide. See all on the homepage or <Link to="/">go back</Link>.</p>
+      <p>We couldn’t find this guide. See all on the homepage or <Link to="/">go back</Link>.</p>
     </div>
   );
 
@@ -46,7 +51,7 @@ export default function GuideDetail(){
   return (
     <div className="section">
       <Helmet>
-        <title>{g.title} â€“ Guides | GameXBuddy</title>
+        <title>{g.title} – Guides | GameXBuddy</title>
         <meta name="description" content={normalizeText(g.intro)} />
       </Helmet>
 
@@ -125,4 +130,10 @@ export default function GuideDetail(){
   );
 }
 
+
+  // Award once per guide read (slug as event_ref)
+  if (g?.slug) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEarnOnRead(g.slug, { dwellMs: 40_000, scrollPct: 0.7, points: 10 });
+  }
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { sb } from "@/lib/supabase";
-import { getThreadsWithCounts, getReplies, createReply, createThread, incrementXP } from "@/lib/communityApi";
+import { getThreadsWithCounts, getThreadsTrending, getReplies, createReply, createThread, incrementXP, voteThread, voteReply } from "@/lib/communityApi";
+import { addXp } from "@/lib/xp";
 
 type Post = {
   id: string;
@@ -28,6 +29,8 @@ export default function ThreadsPreview() {
   const [newTitle, setNewTitle] = useState("");
   const [newBody, setNewBody] = useState("");
   const [creating, setCreating] = useState(false);
+  const [sort, setSort] = useState<'latest'|'trending'>('latest');
+  const [scores, setScores] = useState<Record<string, number>>({});
   const listRef = useRef<HTMLDivElement>(null);
 
   // auth
@@ -47,14 +50,17 @@ export default function ThreadsPreview() {
   // initial load
   useEffect(() => {
     (async () => {
-      const { data, error } = await getThreadsWithCounts();
+      const fetcher = sort === 'trending' ? getThreadsTrending : getThreadsWithCounts;
+      const { data, error } = await fetcher();
       if (!error && data) {
         setThreads(data as any);
-        const map = Object.fromEntries(((data as any[]) || []).map((t: any) => [t.id, t.reply_count ?? 0]));
-        setReplyCount(map);
+        const rc = Object.fromEntries(((data as any[]) || []).map((t: any) => [t.id, t.reply_count ?? 0]));
+        setReplyCount(rc);
+        const sc = Object.fromEntries(((data as any[]) || []).map((t: any) => [t.id, t.score ?? 0]));
+        setScores(sc);
       }
     })();
-  }, []);
+  }, [sort]);
 
   // realtime: threads
   useEffect(() => {
@@ -137,10 +143,28 @@ export default function ThreadsPreview() {
     } finally { setCreating(false); }
   }
 
+  async function onVote(postId: string, val: 1 | -1) {
+    if (!me?.id) return alert('Sign in to vote');
+    const cur = scores[postId] || 0;
+    // Optimistic toggle: if already voted same direction, undo; else apply delta +/-1 or +/-2
+    const key = `${postId}:${me.id}:${val}`;
+    setScores((m) => ({ ...m, [postId]: cur + 1 }));
+    try { await voteThread(postId, val, me.id); if (val === 1) { try { await addXp(1); } catch {} } } catch {}
+  }
+
   return (
     <section className="section" aria-labelledby="threads-heading">
       <div className="wrap">
-        <h3 id="threads-heading" className="h2">Latest Discussions</h3>
+        <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:12 }}>
+          <h3 id="threads-heading" className="h2">Community Threads</h3>
+          <div style={{ display:'flex', alignItems:'center', gap:8 }}>
+            <label className="text-sm">Sort</label>
+            <select value={sort} onChange={e=>setSort(e.target.value as any)} className="nl__input">
+              <option value="latest">Latest</option>
+              <option value="trending">Trending</option>
+            </select>
+          </div>
+        </div>
 
         {/* New Thread Composer */}
         <form onSubmit={onCreateThread} aria-label="Create new thread" style={{ display: "grid", gap: 8, marginBottom: 12 }}>
@@ -191,6 +215,11 @@ export default function ThreadsPreview() {
                   <h4 id={`thread-title-${t.id}`} style={{ fontWeight: 700, flex: 1, margin: 0 }}>
                     {t.title || (t.body ? (t.body.length > 60 ? t.body.slice(0, 57) + "…" : t.body) : "Untitled thread")}
                   </h4>
+                  <div aria-label="Score" className="badge">{(scores[t.id] ?? 0) >= 0 ? '+' : ''}{scores[t.id] ?? 0}</div>
+                  <div style={{ display:'flex', gap:6 }}>
+                    <button className="gx-btn gx-btn--soft" onClick={(e)=>{ e.stopPropagation(); onVote(t.id, 1); }} aria-label="Upvote">▲</button>
+                    <button className="gx-btn gx-btn--soft" onClick={(e)=>{ e.stopPropagation(); onVote(t.id, -1); }} aria-label="Downvote">▼</button>
+                  </div>
                   <div className="reply-chip" aria-label={`${count} replies`}>💬 {count}</div>
                   <button className="gx-btn gx-btn--soft" aria-expanded={openThis} aria-controls={`thread-panel-${t.id}`}>
                     {openThis ? "Hide" : "Open"}
@@ -222,7 +251,13 @@ export default function ThreadsPreview() {
                           <div style={{ fontSize: 12, opacity: 0.75 }}>
                             {new Date(r.created_at).toLocaleString()}
                           </div>
-                          <div>{r.body}</div>
+                          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', gap:8 }}>
+                            <div>{r.body}</div>
+                            <div style={{ display:'flex', gap:6 }}>
+                              <button className="gx-btn gx-btn--soft" onClick={(e)=>{ e.stopPropagation(); if(!me) return alert('Sign in'); voteReply(r.id, 1, me!.id); }} aria-label="Upvote reply">▲</button>
+                              <button className="gx-btn gx-btn--soft" onClick={(e)=>{ e.stopPropagation(); if(!me) return alert('Sign in'); voteReply(r.id, -1, me!.id); }} aria-label="Downvote reply">▼</button>
+                            </div>
+                          </div>
                         </div>
                       ))}
                     </div>

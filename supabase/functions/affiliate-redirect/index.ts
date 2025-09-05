@@ -11,16 +11,28 @@ serve(async (req) => {
   const label = u.searchParams.get("label") || "";
   const sku   = u.searchParams.get("sku") || "";
   const ref   = u.searchParams.get("ref") || "gamexbuddy";
+  const ip    = (req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "").split(",")[0];
+  const ua    = req.headers.get("user-agent") || "";
 
-  // store click (best-effort; don’t block redirect on failure)
+  // Try to identify user from Authorization Bearer
+  let userId: string | null = null;
+  const authHeader = req.headers.get("authorization") || req.headers.get("Authorization") || "";
+  const token = authHeader.replace(/^Bearer\s+/i, "");
+  if (token) {
+    try {
+      const { data: { user } } = await sb.auth.getUser(token);
+      userId = user?.id ?? null;
+    } catch {}
+  }
+
   try {
-    await sb.from("affiliate_links").insert({
-      merchant: label || "unknown",
-      sku,
-      url: target,
-      clicks: 1
-    });
+    await sb.from("affiliate_clicks").insert({ user_id: userId, url: target, label, sku, ref, ip, ua });
   } catch (_e) {}
+
+  // Idempotent award per SKU via RPC + unique key on ledger
+  if (userId && sku) {
+    try { await sb.rpc("award_points", { p_event_type: "affiliate_click", p_event_ref: sku, p_delta: 5 }); } catch {}
+  }
 
   const redirectTo = target + (target.includes("?") ? "&" : "?") + `ref=${encodeURIComponent(ref)}`;
   return new Response(null, { status: 302, headers: { Location: redirectTo } });

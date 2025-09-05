@@ -1,0 +1,139 @@
+:root {
+  /* Core brand (edit to your logo’s exact hex) */
+  --gx-pink:   #ff2bd6;
+  --gx-cyan:   #29f0ff;
+  --gx-violet: #7c3aed;
+  --gx-blue:   #2563eb;
+  --gx-lime:   #a3ff12;
+  --gx-bg:     #0b0b12;
+  --gx-card:   #121224;
+  --gx-text:   #e6e9ff;
+  --gx-muted:  #9aa4c7;
+
+  /* Neon/glow system */
+  --gx-glow-soft: 0 0 12px rgb(255 43 214 / .5);
+  --gx-glow-hard: 0 0 36px rgb(41 240 255 / .7);
+  --gx-border: linear-gradient(to right, var(--gx-pink), var(--gx-cyan));
+}
+
+/* Theme modifiers (swap on <html> or a wrapper) */
+.theme-pink  { --gx-accent: var(--gx-pink); }
+.theme-cyan  { --gx-accent: var(--gx-cyan); }
+.theme-violet{ --gx-accent: var(--gx-violet); }
+.theme-blue  { --gx-accent: var(--gx-blue); }
+.theme-lime  { --gx-accent: var(--gx-lime); }
+
+/* Base */
+body { background: var(--gx-bg); color: var(--gx-text); }
+.gx-card {
+  background: radial-gradient(120% 120% at 10% 10%, #151530 0%, #0b0b12 60%);
+  border: 1px solid rgb(255 255 255 / .06);
+  border-radius: 16px;
+}
+
+/* Button core with dual-neon states */
+.gx-btn {
+  --_accent: var(--gx-accent, var(--gx-pink));
+  display:inline-flex; align-items:center; justify-content:center; gap:.6rem;
+  padding:.9rem 1.25rem; border-radius:12px; font-weight:700; letter-spacing:.2px;
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.0));
+  border:1px solid color-mix(in oklab, var(--_accent) 40%, white 0%);
+  color: var(--gx-text); position:relative; overflow:hidden;
+  box-shadow: 0 0 0 transparent, var(--gx-glow-soft);
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.gx-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 transparent, 0 0 18px color-mix(in oklab, var(--_accent) 60%, white 0%);
+}
+.gx-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 0 0 transparent, 0 0 26px color-mix(in oklab, var(--_accent) 80%, white 0%);
+}
+/* Click-state “secondary neon” (swap via data-clickneon attr) */
+.gx-btn[data-clickneon="cyan"]   { --_accent: var(--gx-cyan); }
+.gx-btn[data-clickneon="violet"] { --_accent: var(--gx-violet); }
+.gx-btn[data-clickneon="lime"]   { --_accent: var(--gx-lime); }
+.gx-btn[data-clickneon="blue"]   { --_accent: var(--gx-blue); }
+.gx-btn[data-clickneon="pink"]   { --_accent: var(--gx-pink); }
+
+/* Link neon underline */
+.gx-link {
+  color: var(--gx-text); text-decoration: none; position: relative; font-weight:600;
+}
+.gx-link::after {
+  content: ""; position: absolute; left: 0; bottom: -2px; height: 2px; width: 100%;
+  background: linear-gradient(90deg, var(--gx-pink), var(--gx-cyan), var(--gx-violet), var(--gx-blue), var(--gx-pink));
+  background-size: 300% 100%;
+  transform: scaleX(.2); transform-origin:left;
+  transition: transform .25s ease;
+}
+.gx-link:hover::after { transform: scaleX(1); animation: gx-neon-pan 8s linear infinite; }
+
+/* --- Footer neon rail (subtle, no blink) --- */
+@keyframes gx-neon-pan {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.gx-footer {
+  background: radial-gradient(120% 120% at 10% 10%, #121224 0%, #0b0b12 60%);
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.gx-footer-rail {
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg,
+    var(--gx-pink), var(--gx-cyan), var(--gx-violet), var(--gx-blue), var(--gx-pink)
+  );
+  background-size: 300% 100%;
+  animation: gx-neon-pan 14s linear infinite;
+  opacity: .65;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .gx-footer-rail { animation: none !important; }
+}
+
+/* Social icon pills (brand color on hover with neon glow) */
+.gx-social {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+  color: var(--gx-text);
+}
+.gx-social:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, var(--_brand, #fff) 50%, white 0%);
+  box-shadow: 0 0 18px color-mix(in oklab, var(--_brand, #fff) 60%, white 0%);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
+}
+
+/* small legal row */
+.gx-footer-legal a { color: #aab2d9; }
+.gx-footer-legal a:hover { color: var(--gx-text); }
+
+/* Optional: theme-specific rail intensity */
+.theme-cyan .gx-footer-rail { opacity: .7; }
+.theme-violet .gx-footer-rail { opacity: .7; }
+
+/* Creative: animate a thin neon rail on gx-btn hover using same keyframes */
+.gx-btn::before {
+  content: ""; position:absolute; left:0; right:0; bottom:0; height:2px;
+  background: linear-gradient(90deg, var(--gx-pink), var(--gx-cyan), var(--gx-violet), var(--gx-blue), var(--gx-pink));
+  background-size:300% 100%; transform: translateY(2px); opacity:.0;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.gx-btn:hover::before, .gx-btn:focus-visible::before {
+  opacity: .9; transform: translateY(0);
+  animation: gx-neon-pan 10s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gx-link:hover::after { animation: none; }
+  .gx-btn:hover::before, .gx-btn:focus-visible::before { animation: none; }
+}

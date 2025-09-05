@@ -1,0 +1,39 @@
+import { useState } from 'react'
+
+# Getting Started with GameXBuddy Guides
+
+Welcome to your first MDX guide. This page is rendered from a `.mdx` file stored in Supabase Storage and parsed at runtime.
+
+![Placeholder](/placeholder.svg)
+
+## What You Can Do
+
+- Write headings, paragraphs, and lists
+- Add links like [GameXBuddy](https://gamexbuddy.com)
+- Include images from `/public` or signed Storage URLs
+- Add syntax-highlighted code blocks
+
+## Code Sample (TSX)
+
+```tsx
+import React, { useState } from 'react'
+
+export function Counter() {
+  const [n, setN] = useState(0)
+  return (
+    <div>
+      <button onClick={() => setN(n + 1)}>Increment</button>
+      <span style={{ marginLeft: 8 }}>Value: {n}</span>
+    </div>
+  )
+}
+```
+
+## Tips
+
+- Use fenced code blocks like ```` ```tsx ```` to enable highlighting.
+- Keep metadata (title, description, tags) in the database; the renderer uses the DB row for SEO title/description.
+- For a cover image, upload an asset to your `media` bucket and set `cover_path` in the `guides` table.
+
+Happy writing!
+

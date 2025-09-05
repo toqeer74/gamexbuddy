@@ -4,6 +4,8 @@ import { canonical } from "@/lib/seo";
 import { sb } from "@/lib/supabase";
 import { getSignedUrls } from "@/lib/signedImage";
 import NewsCard from "@/components/common/NewsCard";
+import AdSlot from "@/components/ads/AdSlot";
+import { usePremium } from "@/hooks/usePremium";
 
 type Row = {
   slug: string;
@@ -19,6 +21,7 @@ export default function NewsIndexDb(){
   const [rows, setRows] = useState<Row[]>([]);
   const [covers, setCovers] = useState<Record<string, string | undefined>>({});
   const [loading, setLoading] = useState(true);
+  const { isPremium } = usePremium();
 
   useEffect(() => {
     (async () => {
@@ -51,6 +54,11 @@ export default function NewsIndexDb(){
       </Helmet>
       <div className="wrap">
         <h1>News</h1>
+        {!isPremium && (
+          <div style={{ margin: '12px 0 16px' }}>
+            <AdSlot placement="news_top" size="728x90" />
+          </div>
+        )}
         {loading ? (
           <div>Loading…</div>
         ) : (
@@ -66,8 +74,12 @@ export default function NewsIndexDb(){
             ))}
           </div>
         )}
+        {!isPremium && (
+          <div style={{ margin: '16px 0' }}>
+            <AdSlot placement="news_bottom" size="728x90" />
+          </div>
+        )}
       </div>
     </>
   );
 }
-

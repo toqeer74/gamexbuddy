@@ -18,6 +18,8 @@ import QuizStarter from "@/components/QuizStarter";
 import trending from "@/content/gta6/news.json";
 import newsData from "@/content/gta6/news.json";
 import WallpaperSkeleton from "@/components/WallpaperSkeleton";
+import AdSlot from "@/components/ads/AdSlot";
+import { usePremium } from "@/hooks/usePremium";
 
 const WallpaperGrid = lazy(() => import("@/components/WallpaperGrid"));
 const GuideCarousel = lazy(() => import("@/components/GuideCarousel"));
@@ -53,6 +55,7 @@ export default function HomePage() {
   useEffect(() => {
     prefetchOnIdle(["/news", "/guides", "/tools", "/community"]);
   }, []);
+  const { isPremium } = usePremium();
 
   // Try fetch live news from an optional same-origin endpoint
   useEffect(() => {
@@ -147,6 +150,13 @@ export default function HomePage() {
       <GameAuthorityMarquee />
       <TrendingStrip />
       <RecommendedGames />
+      {!isPremium && (
+        <section className="section">
+          <div className="wrap">
+            <AdSlot placement="home_mid" size="728x90" />
+          </div>
+        </section>
+      )}
       <NewsFeed />
       <MagazineGrid />
 

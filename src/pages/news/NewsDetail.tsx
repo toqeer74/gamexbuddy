@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { canonical } from "@/lib/seo";
 import { sb } from "@/lib/supabase";
 import { getSignedUrl } from "@/lib/signedImage";
+import { useEarnOnRead } from "@/hooks/useEarnOnRead";
 
 export default function NewsDetail(){
   const { slug = "" } = useParams();
@@ -24,6 +25,9 @@ export default function NewsDetail(){
     });
     return () => { active = false; };
   }, [slug]);
+
+  // Award once when user actually reads (uses slug as event_ref)
+  useEarnOnRead(slug || "");
 
   if (!n) return <div className="wrap">Loading…</div>;
   return (

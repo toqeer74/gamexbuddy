@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { addXp } from "@/lib/xp";
 
 type Req = {
   name: string;
@@ -22,19 +23,20 @@ export default function PCCheckerCard(){
 
   function scoreTier(val: 'low'|'mid'|'high'){ return val === 'low' ? 1 : val === 'mid' ? 2 : 3; }
 
-  function check(e: React.FormEvent){
+  async function check(e: React.FormEvent){
     e.preventDefault();
     const okCpu = scoreTier(cpu) >= scoreTier(req.min.cpuTier);
     const okGpu = scoreTier(gpu) >= scoreTier(req.min.gpuTier);
     const okRam = ram >= req.min.ramGB;
     const okStorage = storage >= req.min.storageGB;
     const passed = okCpu && okGpu && okRam && okStorage;
-    setResult(passed ? 'Your PC meets the minimum requirements ✅' : 'Your PC does not meet the minimum requirements ❌');
+    setResult(passed ? 'Your PC meets the minimum requirements ✅.' : 'Your PC does not meet the minimum requirements ❌');
+    try { await addXp(passed ? 5 : 2); } catch {}
   }
 
   return (
     <div className="card-glass" style={{padding:18}}>
-      <div className="badge">Tool</div>
+      <div className="badge" style={{ background: 'rgba(0,255,234,.12)', border: '1px solid rgba(0,255,234,.3)' }}>Tool</div>
       <h3 style={{fontWeight:800, marginTop:6}}>PC Checker</h3>
       <p style={{opacity:.85}}>Compare your rig against minimum PC requirements.</p>
       <form onSubmit={check} style={{display:'grid', gap:8, marginTop:8}}>
@@ -79,3 +81,4 @@ export default function PCCheckerCard(){
     </div>
   );
 }
+

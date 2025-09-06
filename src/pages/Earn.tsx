@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import DailyCheckinCard from "@/components/earnings/DailyCheckinCard";
 import EarningsPanel from "@/components/earnings/EarningsPanel";
+import AffiliateStores from "@/components/AffiliateStores";
 
 export default function EarnPage() {
   const [ready, setReady] = useState(false);
@@ -34,9 +35,12 @@ export default function EarnPage() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10 space-y-6">
-      <DailyCheckinCard />
-      <EarningsPanel />
+    <div className="space-y-6">
+      <div className="max-w-5xl mx-auto px-4 py-10 space-y-6">
+        <DailyCheckinCard />
+        <EarningsPanel />
+      </div>
+      <AffiliateStores />
     </div>
   );
 }

@@ -8,6 +8,28 @@
     ]
   },
   {
+    "slug": "gaming-milestones",
+    "title": "Gaming Milestones Quiz",
+    "questions": [
+      { "q": "What year was the first PlayStation released?", "options": ["1994", "1993", "1995"], "a": 0 },
+      { "q": "Which game was the best-selling game of all time (as of 2023)?", "options": ["Minecraft", "Tetris", "GTA V"], "a": 0 },
+      { "q": "What is the name of the main character in The Legend of Zelda series?", "options": ["Mario", "Link", "Sonic"], "a": 1 },
+      { "q": "Which company developed Halo?", "options": ["EA", "Bungie", "Valve"], "a": 1 },
+      { "q": "What is the highest-selling video game genre?", "options": ["Racing", "Action-adventure", "Puzzle"], "a": 1 }
+    ]
+  },
+  {
+    "slug": "console-history",
+    "title": "Console History Quiz",
+    "questions": [
+      { "q": "What was the first home video game console?", "options": ["Atari 2600", "Magnavox Odyssey", "NES"], "a": 1 },
+      { "q": "Which console was released in 2006 by Sony?", "options": ["PlayStation 3", "PlayStation 2", "PlayStation Portable"], "a": 0 },
+      { "q": "What does 'PS' stand for in PlayStation?", "options": ["PlayStation", "Personal Station", "Private System"], "a": 2 },
+      { "q": "Which Nintendo console introduced motion controls?", "options": ["GameCube", "Wii", "Nintendo 64"], "a": 1 },
+      { "q": "What is the latest Xbox console (as of 2023)?", "options": ["Xbox One", "Xbox Series X/S", "Xbox 360"], "a": 1 }
+    ]
+  },
+  {
     "slug": "pc-hardware",
     "title": "PC Hardware 101",
     "questions": [
@@ -16,4 +38,3 @@
     ]
   }
 ]
-

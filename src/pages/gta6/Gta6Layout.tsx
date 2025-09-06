@@ -11,6 +11,7 @@ const tabs = [
   { to: "/gta6/map", label: "Map & Setting" },
   { to: "/gta6/characters", label: "Characters" },
   { to: "/gta6/faqs", label: "FAQs" },
+  { to: "/gta6/cheats", label: "Cheats" },
 ];
 
 const Gta6Layout: React.FC = () => {

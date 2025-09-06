@@ -13,6 +13,7 @@ interface LeaderboardEntry {
 export default function Leaderboards() {
   const [topStreaks, setTopStreaks] = useState<LeaderboardEntry[]>([]);
   const [topWeekly, setTopWeekly] = useState<LeaderboardEntry[]>([]);
+  const [quizChampions, setQuizChampions] = useState<LeaderboardEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -52,6 +53,14 @@ export default function Leaderboards() {
       { username: "XPCollector", points: 445, streak_days: 18 },
       { username: "DailyGrind", points: 432, streak_days: 14 },
       { username: "PointMaster", points: 415, streak_days: 16 }
+    ]);
+
+    setQuizChampions([
+      { username: "TriviaMaster", points: 820, streak_days: 10 },
+      { username: "KnowledgeWizard", points: 795, streak_days: 8 },
+      { username: "FunFactFan", points: 765, streak_days: 12 },
+      { username: "GameScholar", points: 740, streak_days: 7 },
+      { username: "QuizWhiz", points: 710, streak_days: 9 }
     ]);
   }
 
@@ -136,7 +145,7 @@ export default function Leaderboards() {
         <p className="text-white/70">See who's leading the gaming community!</p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <LeaderboardTable
           title="Longest Streaks"
           icon={Flame}
@@ -151,6 +160,14 @@ export default function Leaderboards() {
           data={topWeekly}
           field="points"
           color="primary"
+        />
+
+        <LeaderboardTable
+          title="Quiz Champions"
+          icon={Trophy}
+          data={quizChampions}
+          field="points"
+          color="yellow-500"
         />
       </div>
 

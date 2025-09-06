@@ -20,6 +20,7 @@ const Editions = lazy(() => import("./pages/gta6/Editions"));
 const MapPage = lazy(() => import("./pages/gta6/Map"));
 const Characters = lazy(() => import("./pages/gta6/Characters"));
 const FAQs = lazy(() => import("./pages/gta6/FAQs"));
+const Cheats = lazy(() => import("./pages/gta6/Cheats"));
 const MinecraftHub = lazy(() => import("./pages/MinecraftHub"));
 const PubgHub = lazy(() => import("./pages/PubgHub"));
 const FortniteHub = lazy(() => import("./pages/FortniteHub"));
@@ -63,7 +64,16 @@ const WallpaperGrid = lazy(() => import("@/components/WallpaperGrid"));
 const QuizPlay = lazy(() => import("./pages/quiz/Play"));
 const HubDetail = lazy(() => import("./pages/hubs/HubDetail"));
 const EarnPage = lazy(() => import("./pages/Earn"));
+const ForumPage = lazy(() => import("./pages/ForumPage"));
 const Deals = lazy(() => import("./pages/Deals"));
+const GamesPage = lazy(() => import("./pages/GamesPage"));
+const NewsFeedPage = lazy(() => import("./pages/NewsFeedPage"));
+const ClansHub = lazy(() => import("./components/groups/ClansHub"));
+const Marketplace = lazy(() => import("./components/marketplace/Marketplace"));
+const StreamWall = lazy(() => import("./components/streaming/StreamWall"));
+const TournamentHub = lazy(() => import("./components/tournaments/TournamentHub"));
+const AIToolsHub = lazy(() => import("./components/ai/AIToolsHub"));
+const ApiStatusPage = lazy(() => import("./pages/ApiStatus"));
 const AdminGrowth = lazy(() => import("./pages/admin/Growth"));
 
 const queryClient = new QueryClient();
@@ -91,12 +101,23 @@ const App = () => (
               <Route path="map" element={<MapPage />} />
               <Route path="characters" element={<Characters />} />
               <Route path="faqs" element={<FAQs />} />
+              <Route path="cheats" element={<Cheats />} />
               <Route path="news/:slug" element={<NewsMirror />} />
             </Route>
             <Route path="/minecraft-hub" element={<MinecraftHub />} />
             <Route path="/pubg-hub" element={<PubgHub />} />
             <Route path="/fortnite-hub" element={<FortniteHub />} />
             <Route path="/community" element={<CommunityPage />} />
+            <Route path="/forum" element={<ForumPage />} />
+           <Route path="/clans" element={<ClansHub />} />
+           <Route path="/marketplace" element={<Marketplace />} />
+           <Route path="/news-feed" element={<NewsFeedPage />} />
+           <Route path="/games-database" element={<GamesPage />} />
+           <Route path="/deals-database" element={<Deals />} />
+            <Route path="/streams" element={<StreamWall />} />
+            <Route path="/tournaments" element={<TournamentHub />} />
+            <Route path="/ai-tools" element={<AIToolsHub />} />
+            <Route path="/api-status" element={<ApiStatusPage />} />
             <Route path="/tools" element={<ToolsPage />} />
             <Route path="/tools/price-tracker" element={<PriceTracker />} />
             <Route path="/tools/pc-checker" element={<PCChecker />} />
@@ -116,10 +137,11 @@ const App = () => (
             <Route path="/guides/json/:slug" element={<Suspense fallback={<GuideSkeleton />}><GuideDetail /></Suspense>} />
             <Route path="/guides/mdx/:slug" element={<Suspense fallback={<GuideSkeleton />}><GuideMDXDetail /></Suspense>} />
             <Route path="/games" element={<GameList />} />
+            <Route path="/games-database" element={<GamesPage />} />
             <Route path="/games/:slug" element={<GameDetail />} />
             <Route path="/memes" element={<MemesPage />} />
             <Route path="/earn" element={<EarnPage />} />
-            <Route path="/deals" element={<Deals />} />
+            <Route path="/deals-database" element={<Deals />} />
             <Route path="/quiz/:slug" element={<QuizPlay />} />
             <Route path="/hubs/:slug" element={<HubDetail />} />
             <Route path="/admin/moderation" element={<ModerationQueue />} />

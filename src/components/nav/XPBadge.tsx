@@ -45,17 +45,31 @@ export function XPBadge() {
     };
   }, [controls]);
 
+  const level = Math.floor(xp / 100) + 1;
+  const xpInLevel = xp % 100;
+  const progressPercent = (xpInLevel / 100) * 100;
+
   return (
     <motion.span
       animate={controls}
-      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl text-xs font-bold border border-white/10"
+      className="inline-flex flex-col items-start gap-1 px-2.5 py-1 rounded-xl text-xs font-bold border border-white/10 relative"
       style={{
         background: "linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0))",
       }}
-      title="Your XP"
+      title={`Level ${level}: ${xp} XP`}
     >
-      <span className="opacity-80">XP</span>
-      <span className="tabular-nums">{xp}</span>
+      <div className="flex items-center gap-1">
+        <span className="opacity-80">Lv.{level}</span>
+        <span className="tabular-nums">{xp}</span>
+      </div>
+      <div className="w-12 h-0.5 bg-white/10 rounded-full overflow-hidden">
+        <motion.div
+          className="h-full bg-gradient-to-r from-blue-400 to-cyan-400"
+          initial={{ width: 0 }}
+          animate={{ width: `${progressPercent}%` }}
+          transition={{ duration: 0.5 }}
+        />
+      </div>
     </motion.span>
   );
 }

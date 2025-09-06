@@ -27,7 +27,11 @@ export default function QuizStarter(){
           {ALL.map(qz => <option key={qz.slug} value={qz.slug}>{qz.title}</option>)}
         </select>
       </div>
-      Score: {score} XP
+      <div>Score: {score} XP</div>
+      <div style={{marginTop:12, display:'flex', gap:8}}>
+        <a href={`https://twitter.com/intent/tweet?text=I scored ${score} XP on ${current?.title || 'this quiz'}! Play now at gamexbuddy.com&url=https://gamexbuddy.com`} target="_blank" rel="noopener noreferrer" className="gx-btn gx-btn--soft" style={{padding:8}}>Share on Twitter</a>
+        <a href={`https://www.facebook.com/sharer/sharer.php?u=https://gamexbuddy.com`} target="_blank" rel="noopener noreferrer" className="gx-btn gx-btn--soft" style={{padding:8}}>Share on Facebook</a>
+      </div>
     </div>
   );
   return (

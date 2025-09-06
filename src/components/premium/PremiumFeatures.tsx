@@ -85,27 +85,21 @@ export default function PremiumFeatures() {
   };
 
   const purchasePremium = async (tier: PremiumTier) => {
-    // In a real implementation, this would integrate with Stripe
-    alert(`Redirecting to purchase ${tier.name} tier for $${tier.price}/month`);
-
-    // Mock implementation
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
 
-    // Add feature (normally done through webhook)
-    const featureType = tier.name === "VIP" ? "posts_highlight" :
-                        tier.name === "Elite" ? "featured_profile" : "custom_badge";
+    // Use Stripe checkout for real payments
+    const { data, error } = await supabase.functions.invoke('create-checkout', {
+      body: { user_id: user.id, email: user.email }
+    });
 
-    await supabase
-      .from("premium_features")
-      .insert({
-        user_id: user.id,
-        feature_type: featureType,
-        is_active: true,
-        expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() // 30 days
-      });
+    if (error) {
+      alert('Payment setup failed. Please try again.');
+      return;
+    }
 
-    loadUserPremiumFeatures();
+    // Redirect to Stripe checkout
+    window.location.href = data.url;
   };
 
   const getFeatureIcon = (type: string) => {

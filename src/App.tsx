@@ -4,7 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { Suspense, lazy, useEffect } from "react";
-import Layout from "./components/layout/Layout";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import { AuthProvider } from "@/lib/AuthProvider";
 import Analytics from "@/components/Analytics";
 import RouteHandler from "@/components/RouteHandler";
@@ -78,18 +79,29 @@ const AdminGrowth = lazy(() => import("./pages/admin/Growth"));
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <AuthProvider>
-        <Analytics />
-        <Layout>
-          <Suspense fallback={<div style={{padding:20}}>Loading…</div>}>
-          <RouteHandler />
-          <Routes>
+export default function App(){
+  const handleLogin = ()=>{
+    // Single, working auth entry point. Adjust to your stack.
+    // NextAuth: router.push('/api/auth/signin');
+    // Supabase: supabase.auth.signInWithOAuth({provider:'github'});
+    // Firebase: open login modal.
+    console.log('login clicked');
+  }
+  const isAuthed=false; // wire from your auth store
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <AuthProvider>
+          <Analytics />
+          <div className="min-h-screen bg-[var(--gx-bg)] text-white">
+            <Header onLogin={handleLogin} isAuthed={isAuthed}/>
+            <main className="mx-auto max-w-7xl px-4 py-10">
+              <Suspense fallback={<div style={{padding:20}}>Loading…</div>}>
+                <RouteHandler />
+                <Routes>
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/callback" element={<Callback />} />
             <Route path="/" element={<Index />} />
@@ -153,15 +165,17 @@ const App = () => (
             <Route path="/settings" element={<Settings />} />
             <Route path="/reviews/:slug" element={<ReviewDetail />} />
             <Route path="/u/:username" element={<ProfilePage />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          </Suspense>
-        </Layout>
-        </AuthProvider>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
-
-export default App;
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              </Suspense>
+            )
+          </main>
+          <Footer/>
+        </div>
+      </AuthProvider>
+    </BrowserRouter>
+  </TooltipProvider>
+</QueryClientProvider>
+  );
+}

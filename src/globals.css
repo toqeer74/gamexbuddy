@@ -2,6 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+/* --- Neon Theme Tokens --- */
+:root{
+  --gx-neon:#7CF9FF;            /* primary neon of your old logo */
+  --gx-neon-2:#B57CFF;          /* secondary neon (purple) */
+  --gx-bg:#0A0D14;              /* page background */
+  --gx-card:#0f1421;            /* card/nav bg */
+}
+
+/* --- Cursor-follow hover trail effect (for buttons/links/cards) --- */
+/* Usage: add class="neon-follow" and attach the mousemove handler (see React util) */
+.neon-follow{ position:relative; overflow:hidden; isolation:isolate; }
+.neon-follow::before{
+  content:""; position:absolute; inset:-2px; pointer-events:none; z-index:1;
+  background: radial-gradient(18rem 18rem at var(--mx,50%) var(--my,50%),
+              color-mix(in oklab, var(--gx-neon) 80%, transparent), transparent 35%);
+  opacity:0; transition:opacity .25s ease;
+}
+.neon-follow:hover::before{ opacity:.9; }
+/* slim neon edge that sweeps where the mouse moves */
+.neon-follow::after{
+  content:""; position:absolute; inset:0; pointer-events:none; z-index:2;
+  background:
+    conic-gradient(from 180deg at var(--mx,50%) var(--my,50%),
+      color-mix(in oklab, var(--gx-neon) 85%, transparent) 0 2%,
+      transparent 2% 98%,
+      color-mix(in oklab, var(--gx-neon-2) 75%, transparent) 98%);
+  -webkit-mask:linear-gradient(#000,#000) content-box,linear-gradient(#000,#000);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  padding:1px; border-radius:inherit; opacity:0; transition:opacity .25s ease;
+}
+.neon-follow:hover::after{ opacity:1; }
+
+/* Social icon hover (icon-only, brand color glow) */
+.icon-hover{ position:relative; display:inline-flex; }
+.icon-hover svg{ filter:drop-shadow(0 0 .3rem currentColor); transition:transform .2s ease; }
+.icon-hover:hover svg{ transform:translateY(-1px) scale(1.05); }
+
+/* Basic layout helpers */
+.nav-blur{ background:rgba(10,13,20,.6); backdrop-filter:saturate(140%) blur(12px); }
+.card{ background:var(--gx-card); border:1px solid rgba(255,255,255,.06); border-radius:16px; }
+
 @layer base {
   :root {
     --background: 0 0% 100%;
